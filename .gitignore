@@ -1,0 +1,34 @@
+.cambc/
+bots/*/.cambc/
+matches/
+replays/
+bots/*/build/
+bots/*/target/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Build outputs
+build/
+dist/
+target/
+*.o
+*.obj
+
+# Generated analysis results
+results/
+logs/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+
+# OS files
+.DS_Store
+Thumbs.db

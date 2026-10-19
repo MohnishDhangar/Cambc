@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+project_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+export CAMBC_CACHE="${CAMBC_CACHE:-$project_dir/.cambc/cache}"
+exec "$project_dir/.cambc/client/cambc" "$@"

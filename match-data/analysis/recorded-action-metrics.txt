@@ -1,0 +1,45 @@
+match-1- team-Forged-Tokens 01 round 568
+ team 0 {'turns': 1701, 'fuel_exhaustions': 0, 'idle_turns': 335, 'move': 1020, 'attack_champion': 0, 'attack_camp': 381, 'cast': 133, 'recall': 16, 'tribute': 25, 'buy_consumable': 3}
+ team 1 {'turns': 2269, 'fuel_exhaustions': 2, 'idle_turns': 353, 'move': 1423, 'attack_champion': 0, 'attack_camp': 441, 'cast': 154, 'recall': 17, 'tribute': 27, 'buy_consumable': 3}
+match-1- team-Forged-Tokens 02 round 429
+ team 0 {'turns': 1713, 'fuel_exhaustions': 0, 'idle_turns': 374, 'move': 992, 'attack_champion': 0, 'attack_camp': 381, 'cast': 121, 'recall': 11, 'tribute': 8, 'buy_consumable': 3}
+ team 1 {'turns': 2140, 'fuel_exhaustions': 0, 'idle_turns': 360, 'move': 1213, 'attack_champion': 0, 'attack_camp': 555, 'cast': 150, 'recall': 17, 'tribute': 16, 'buy_consumable': 0}
+match-1- team-Forged-Tokens 03 round 748
+ team 0 {'turns': 2991, 'fuel_exhaustions': 0, 'idle_turns': 1658, 'move': 909, 'attack_champion': 92, 'attack_camp': 362, 'cast': 174, 'recall': 10, 'tribute': 13, 'buy_consumable': 4}
+ team 1 {'turns': 3738, 'fuel_exhaustions': 0, 'idle_turns': 533, 'move': 2556, 'attack_champion': 178, 'attack_camp': 411, 'cast': 260, 'recall': 29, 'tribute': 32, 'buy_consumable': 5}
+match-1- team-Forged-Tokens 04 round 571
+ team 0 {'turns': 2852, 'fuel_exhaustions': 0, 'idle_turns': 1346, 'move': 1005, 'attack_champion': 52, 'attack_camp': 492, 'cast': 215, 'recall': 17, 'tribute': 21, 'buy_consumable': 5}
+ team 1 {'turns': 3421, 'fuel_exhaustions': 0, 'idle_turns': 569, 'move': 2117, 'attack_champion': 124, 'attack_camp': 544, 'cast': 271, 'recall': 46, 'tribute': 24, 'buy_consumable': 4}
+match-1- team-Forged-Tokens 05 round 453
+ team 0 {'turns': 2262, 'fuel_exhaustions': 0, 'idle_turns': 992, 'move': 846, 'attack_champion': 41, 'attack_camp': 413, 'cast': 159, 'recall': 16, 'tribute': 17, 'buy_consumable': 4}
+ team 1 {'turns': 2713, 'fuel_exhaustions': 6, 'idle_turns': 377, 'move': 1675, 'attack_champion': 78, 'attack_camp': 567, 'cast': 202, 'recall': 24, 'tribute': 31, 'buy_consumable': 0}
+match-2-team-lll 01 round 800
+ team 0 {'turns': 3996, 'fuel_exhaustions': 0, 'idle_turns': 1414, 'move': 2177, 'attack_champion': 39, 'attack_camp': 424, 'cast': 234, 'recall': 15, 'tribute': 3, 'buy_consumable': 5}
+ team 1 {'turns': 4795, 'fuel_exhaustions': 6, 'idle_turns': 528, 'move': 3710, 'attack_champion': 127, 'attack_camp': 421, 'cast': 336, 'recall': 26, 'tribute': 16, 'buy_consumable': 6}
+match-2-team-lll 02 round 1931
+ team 0 {'turns': 9653, 'fuel_exhaustions': 0, 'idle_turns': 5874, 'move': 3133, 'attack_champion': 174, 'attack_camp': 583, 'cast': 368, 'recall': 27, 'tribute': 0, 'buy_consumable': 5}
+ team 1 {'turns': 9652, 'fuel_exhaustions': 0, 'idle_turns': 1848, 'move': 6351, 'attack_champion': 231, 'attack_camp': 962, 'cast': 717, 'recall': 88, 'tribute': 5, 'buy_consumable': 7}
+match-2-team-lll 03 round 568
+ team 0 {'turns': 1701, 'fuel_exhaustions': 0, 'idle_turns': 335, 'move': 1020, 'attack_champion': 0, 'attack_camp': 381, 'cast': 133, 'recall': 16, 'tribute': 25, 'buy_consumable': 3}
+ team 1 {'turns': 2269, 'fuel_exhaustions': 0, 'idle_turns': 331, 'move': 1449, 'attack_champion': 0, 'attack_camp': 521, 'cast': 172, 'recall': 26, 'tribute': 27, 'buy_consumable': 3}
+match-2-team-lll 04 round 464
+ team 0 {'turns': 2318, 'fuel_exhaustions': 0, 'idle_turns': 447, 'move': 1259, 'attack_champion': 0, 'attack_camp': 650, 'cast': 216, 'recall': 19, 'tribute': 41, 'buy_consumable': 4}
+ team 1 {'turns': 2781, 'fuel_exhaustions': 8, 'idle_turns': 522, 'move': 1543, 'attack_champion': 0, 'attack_camp': 778, 'cast': 255, 'recall': 26, 'tribute': 42, 'buy_consumable': 0}
+match-2-team-lll 05 round 475
+ team 0 {'turns': 1425, 'fuel_exhaustions': 0, 'idle_turns': 649, 'move': 514, 'attack_champion': 21, 'attack_camp': 287, 'cast': 105, 'recall': 12, 'tribute': 12, 'buy_consumable': 2}
+ team 1 {'turns': 1898, 'fuel_exhaustions': 0, 'idle_turns': 400, 'move': 982, 'attack_champion': 42, 'attack_camp': 477, 'cast': 225, 'recall': 20, 'tribute': 23, 'buy_consumable': 4}
+match-3-team-know 01 round 568
+ team 0 {'turns': 1701, 'fuel_exhaustions': 0, 'idle_turns': 335, 'move': 1020, 'attack_champion': 0, 'attack_camp': 381, 'cast': 133, 'recall': 16, 'tribute': 25, 'buy_consumable': 3}
+ team 1 {'turns': 2269, 'fuel_exhaustions': 9, 'idle_turns': 9, 'move': 1267, 'attack_champion': 0, 'attack_camp': 739, 'cast': 252, 'recall': 17, 'tribute': 21, 'buy_consumable': 0}
+match-3-team-know 02 round 653
+ team 0 {'turns': 2610, 'fuel_exhaustions': 0, 'idle_turns': 981, 'move': 1285, 'attack_champion': 16, 'attack_camp': 360, 'cast': 130, 'recall': 10, 'tribute': 7, 'buy_consumable': 4}
+ team 1 {'turns': 3261, 'fuel_exhaustions': 0, 'idle_turns': 0, 'move': 2084, 'attack_champion': 1, 'attack_camp': 758, 'cast': 311, 'recall': 27, 'tribute': 24, 'buy_consumable': 5}
+match-3-team-know 03 round 541
+ team 0 {'turns': 2701, 'fuel_exhaustions': 0, 'idle_turns': 744, 'move': 1374, 'attack_champion': 44, 'attack_camp': 559, 'cast': 219, 'recall': 23, 'tribute': 32, 'buy_consumable': 5}
+ team 1 {'turns': 3241, 'fuel_exhaustions': 1, 'idle_turns': 1, 'move': 1750, 'attack_champion': 87, 'attack_camp': 719, 'cast': 334, 'recall': 27, 'tribute': 30, 'buy_consumable': 5}
+match-3-team-know 04 round 700
+ team 0 {'turns': 3499, 'fuel_exhaustions': 0, 'idle_turns': 1476, 'move': 1362, 'attack_champion': 127, 'attack_camp': 559, 'cast': 279, 'recall': 30, 'tribute': 24, 'buy_consumable': 5}
+ team 1 {'turns': 4199, 'fuel_exhaustions': 0, 'idle_turns': 0, 'move': 1913, 'attack_champion': 179, 'attack_camp': 410, 'cast': 323, 'recall': 60, 'tribute': 26, 'buy_consumable': 5}
+match-3-team-know 05 round 971
+ team 0 {'turns': 4852, 'fuel_exhaustions': 0, 'idle_turns': 812, 'move': 3311, 'attack_champion': 110, 'attack_camp': 692, 'cast': 371, 'recall': 34, 'tribute': 13, 'buy_consumable': 5}
+ team 1 {'turns': 5822, 'fuel_exhaustions': 3, 'idle_turns': 3, 'move': 3872, 'attack_champion': 93, 'attack_camp': 434, 'cast': 359, 'recall': 54, 'tribute': 13, 'buy_consumable': 5}

@@ -1,0 +1,253 @@
+{
+  "recordings": 50,
+  "distinctReplayHashes": 34,
+  "matchedMapHashes": 17,
+  "nativeEngine": "0.0.3",
+  "allComplete": true,
+  "replayErrors": 0,
+  "checks": [
+    "Original SHA-256 unchanged",
+    "Native final statistics agree with full snapshot",
+    "Champion submitted totals equal final score",
+    "Native turn counts and round sequences equal raw input parser",
+    "Gems collected minus submitted minus carried equal death losses",
+    "Capture positions identify instantiated engine camp groups",
+    "Opponent drafts match within every map pair"
+  ],
+  "duplicates": [
+    {
+      "version": "v1",
+      "sha256": "b09963abc1eade1cc624b8fc99f54dca7c76ab0186b99592cd0f56b3dcc8bb23",
+      "recordings": [
+        {
+          "series": "team-lll-match1",
+          "game": "01",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match1/01-29da5493-0bc3-40cd-9194-d5a4687eb30b/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match5",
+          "game": "01",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match5/01-a3aeded1-a38d-4ba2-97e8-bac8129a6010/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v1",
+      "sha256": "dfa0caa3589fc1c9f933ef94be9ab9d5f40d20423a39ddb6babf065e9e59530f",
+      "recordings": [
+        {
+          "series": "team-lll-match1",
+          "game": "02",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match1/02-e282bcc2-6110-4646-bb18-d8b7644b9c8b/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match4",
+          "game": "02",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match4/02-a5deaf1e-6b7a-4f1d-a130-47c109738b65/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v1",
+      "sha256": "85b374a3d460ccd94ba6bcb7c49d2f1fcae032efdc7c2fcedef9b367a282e8ef",
+      "recordings": [
+        {
+          "series": "team-lll-match1",
+          "game": "03",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match1/03-ee84c31a-3b62-4321-ada3-027445d63acf/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match4",
+          "game": "01",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match4/01-1e58f951-81ef-4efd-8a7b-c7f8394bb741/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v1",
+      "sha256": "6a6aa675e225b65ae92d3103550944f000dbb8607dcbe116c34dd3e3b127b3bb",
+      "recordings": [
+        {
+          "series": "team-lll-match1",
+          "game": "04",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match1/04-bca9c3e8-4504-4417-bc8c-cad86adb0e63/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match5",
+          "game": "02",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match5/02-21358aab-bba4-42cd-add9-18dd9a646f1d/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v1",
+      "sha256": "4a8be3ad21f0bba40d0b78304f49d287dd65ce515cc2a282d1ee34fe1d3fc5a7",
+      "recordings": [
+        {
+          "series": "team-lll-match1",
+          "game": "05",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match1/05-f1c3b28f-a75e-4a1c-8ca7-7f5b78eddfd7/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match3",
+          "game": "02",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match3/02-329c4ab0-b3a6-4ce9-8d0c-c39a404cf3ae/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v1",
+      "sha256": "4dc6eefd52fafa7a8099f8c1d7ec878d8cecfd47a8beeb8f3f1cbeb4ec827886",
+      "recordings": [
+        {
+          "series": "team-lll-match2",
+          "game": "01",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match2/01-de34398b-d2b9-4d7c-8924-9ea6bd2afa4e/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match5",
+          "game": "04",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match5/04-82e13fd0-fea1-4038-b162-0634279c9b91/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v1",
+      "sha256": "f1a3678c14abbc061fde5016685dd0d39fcd5333b9b8c5d27e97de5dd1b2f2f0",
+      "recordings": [
+        {
+          "series": "team-lll-match2",
+          "game": "03",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match2/03-43f34223-3b8f-4195-8755-b01bc68593a7/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match5",
+          "game": "05",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match5/05-984700ea-4a4c-4dc4-990b-b530b1ab7801/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v1",
+      "sha256": "892ad1e89f9b2294b9e232d9193e6719f2312731858b1a2c436ad91f0328db25",
+      "recordings": [
+        {
+          "series": "team-lll-match3",
+          "game": "03",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match3/03-7a1d57c6-4124-4697-beb8-56eb448089da/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match5",
+          "game": "03",
+          "source": "/home/mohnish/Y/match-data/v1/team-lll-match5/03-d32987c8-cb10-41f5-9d7a-ee8af8c8f339/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v3",
+      "sha256": "9341ec98d1914bf67781731ce9bb0b28920d1a2ad0c40d9a8bb7532bc4670e64",
+      "recordings": [
+        {
+          "series": "team-lll-match1",
+          "game": "01",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match1/01-7a6c4f0a-0667-4f1c-9aff-a1a26732a001/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match4",
+          "game": "04",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match4/04-637afacb-b351-4135-a63e-89a8d9a0407c/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match5",
+          "game": "03",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match5/03-5ab38223-0113-4b05-a97d-252ea7942f9a/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v3",
+      "sha256": "2a974bdf7530ff23c2a7017bc98cc4e6b153b11c61eaf4e4b60ce37eda99d14c",
+      "recordings": [
+        {
+          "series": "team-lll-match1",
+          "game": "02",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match1/02-41dde95d-3bc8-4e69-b7cb-11dc725d983a/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match2",
+          "game": "03",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match2/03-f980403c-d987-41b8-af4d-6ee21b4cf2da/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match5",
+          "game": "02",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match5/02-fd2ea630-820e-452a-b404-b2be5ddcbf21/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v3",
+      "sha256": "38a03db3dd93ed4c7360ef04329bca600850f58d3ef02a2c99c418b7936c3cac",
+      "recordings": [
+        {
+          "series": "team-lll-match1",
+          "game": "03",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match1/03-2482258e-478f-414d-bccd-908a53fa4683/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match2",
+          "game": "04",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match2/04-1c33d116-ee48-4e4b-860e-007220cb6254/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v3",
+      "sha256": "f67a0934e930c0f4e9e1e7e7bd33901935a4abaaed04e0f0f13ad52e83c8a563",
+      "recordings": [
+        {
+          "series": "team-lll-match1",
+          "game": "04",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match1/04-8d31ab74-b930-46de-a185-f8a38e87db82/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match2",
+          "game": "02",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match2/02-d1650936-3d43-4bd4-b932-e0091341688b/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v3",
+      "sha256": "bf0d54f7568917c4a43657973aecc1462595c077c6494039d4d59a7c87997b4e",
+      "recordings": [
+        {
+          "series": "team-lll-match1",
+          "game": "05",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match1/05-f31db407-4b80-4670-be00-cc5f93407e98/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match2",
+          "game": "05",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match2/05-c0daa96d-5622-4641-bf2b-0d90a47097f1/replay.repl26a"
+        }
+      ]
+    },
+    {
+      "version": "v3",
+      "sha256": "0abf80bc297cd95c37a2fa88be4865e3a9c1888f84b63f6a7ae19881cb0a0fe2",
+      "recordings": [
+        {
+          "series": "team-lll-match2",
+          "game": "01",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match2/01-e075cc2d-0e9a-41a7-98ed-ab506d2b31bc/replay.repl26a"
+        },
+        {
+          "series": "team-lll-match5",
+          "game": "01",
+          "source": "/home/mohnish/Y/match-data/v3/team-lll-match5/01-584f1c2f-7fd0-4b61-8ede-d89be3179ec8/replay.repl26a"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2781 @@
+{
+  "version": "v3",
+  "series": "team-lll-match3",
+  "game": "05",
+  "source": "/home/mohnish/Y/match-data/v3/team-lll-match3/05-f2a1444b-94a6-4bcd-986a-60294e39210c/replay.repl26a",
+  "sha256": "97e18a6d30f65faa6be49095861d90121414eb58e1158556816d4c817a1e03ba",
+  "mapHash": "9696d12821252abe17668f012ad17d66eaaf6708b5abf39230463ae1eaaf603e",
+  "width": 30,
+  "height": 30,
+  "round": 588,
+  "score": [
+    322,
+    1048
+  ],
+  "outcome": 2,
+  "drafts": [
+    [
+      10,
+      9,
+      2,
+      -1,
+      -1
+    ],
+    [
+      3,
+      8,
+      4,
+      -1,
+      -1
+    ]
+  ],
+  "teams": [
+    {
+      "kills": 0,
+      "deaths": 3,
+      "earnedGold": 1875,
+      "spentGold": 1710,
+      "collectedGems": 344,
+      "submittedGems": 322,
+      "gems": 22,
+      "lostGems": 0,
+      "bodies": 3,
+      "actions": {
+        "turns": 1762,
+        "fuel_exhaustions": 0,
+        "move": 1097,
+        "attack_camp": 313,
+        "attack_champion": 7,
+        "cast": 136,
+        "recall": 5,
+        "tribute": 15,
+        "buy_consumable": 0,
+        "use_consumable_0": 0,
+        "use_consumable_1": 0,
+        "use_consumable_2": 0,
+        "use_consumable_3": 0
+      },
+      "activity": {
+        "other_without_move_attack_cast": 71,
+        "move_without_gems": 676,
+        "attack_or_cast": 352,
+        "on_camp_tile_without_action": 80,
+        "move_with_gems": 334,
+        "tribute_channel": 44,
+        "recall_channel": 25,
+        "dead": 180
+      },
+      "firstCapture": 48,
+      "firstTribute": 63,
+      "meanBagDuration": 25.5625,
+      "meanTributeSize": 21.466666666666665
+    },
+    {
+      "kills": 3,
+      "deaths": 0,
+      "earnedGold": 5275,
+      "spentGold": 4850,
+      "collectedGems": 1070,
+      "submittedGems": 1048,
+      "gems": 22,
+      "lostGems": 0,
+      "bodies": 4,
+      "actions": {
+        "turns": 2349,
+        "fuel_exhaustions": 2,
+        "move": 1319,
+        "attack_camp": 529,
+        "attack_champion": 12,
+        "cast": 252,
+        "recall": 38,
+        "tribute": 29,
+        "buy_consumable": 8,
+        "use_consumable_0": 0,
+        "use_consumable_1": 0,
+        "use_consumable_2": 6,
+        "use_consumable_3": 0
+      },
+      "activity": {
+        "move_without_gems": 943,
+        "attack_or_cast": 641,
+        "other_without_move_attack_cast": 128,
+        "recall_channel": 190,
+        "on_camp_tile_without_action": 92,
+        "move_with_gems": 233,
+        "tribute_channel": 122
+      },
+      "firstCapture": 21,
+      "firstTribute": 34,
+      "meanBagDuration": 14.482758620689655,
+      "meanTributeSize": 37.42857142857143
+    }
+  ],
+  "checkpoints": [
+    {
+      "round": 50,
+      "score": [
+        0,
+        22
+      ],
+      "teams": [
+        {
+          "earnedGold": 125,
+          "unspentGold": 5,
+          "gems": 22,
+          "strength": 175,
+          "focus": 300,
+          "deaths": 0
+        },
+        {
+          "earnedGold": 250,
+          "unspentGold": 10,
+          "gems": 22,
+          "strength": 164,
+          "focus": 410,
+          "deaths": 0
+        }
+      ]
+    },
+    {
+      "round": 100,
+      "score": [
+        80,
+        102
+      ],
+      "teams": [
+        {
+          "earnedGold": 500,
+          "unspentGold": 20,
+          "gems": 22,
+          "strength": 235,
+          "focus": 300,
+          "deaths": 0
+        },
+        {
+          "earnedGold": 625,
+          "unspentGold": 145,
+          "gems": 22,
+          "strength": 211.5,
+          "focus": 410,
+          "deaths": 0
+        }
+      ]
+    },
+    {
+      "round": 150,
+      "score": [
+        124,
+        146
+      ],
+      "teams": [
+        {
+          "earnedGold": 625,
+          "unspentGold": 145,
+          "gems": 0,
+          "strength": 235,
+          "focus": 300,
+          "deaths": 1
+        },
+        {
+          "earnedGold": 800,
+          "unspentGold": 320,
+          "gems": 0,
+          "strength": 211.5,
+          "focus": 410,
+          "deaths": 0
+        }
+      ]
+    },
+    {
+      "round": 200,
+      "score": [
+        124,
+        226
+      ],
+      "teams": [
+        {
+          "earnedGold": 750,
+          "unspentGold": 30,
+          "gems": 22,
+          "strength": 255,
+          "focus": 320,
+          "deaths": 1
+        },
+        {
+          "earnedGold": 1300,
+          "unspentGold": 40,
+          "gems": 22,
+          "strength": 254.25,
+          "focus": 555,
+          "deaths": 0
+        }
+      ]
+    },
+    {
+      "round": 300,
+      "score": [
+        168,
+        408
+      ],
+      "teams": [
+        {
+          "earnedGold": 1125,
+          "unspentGold": 285,
+          "gems": 44,
+          "strength": 265,
+          "focus": 320,
+          "deaths": 1
+        },
+        {
+          "earnedGold": 2300,
+          "unspentGold": 60,
+          "gems": 58,
+          "strength": 344.5,
+          "focus": 770,
+          "deaths": 0
+        }
+      ]
+    },
+    {
+      "round": 400,
+      "score": [
+        212,
+        626
+      ],
+      "teams": [
+        {
+          "earnedGold": 1375,
+          "unspentGold": 235,
+          "gems": 44,
+          "strength": 300,
+          "focus": 360,
+          "deaths": 1
+        },
+        {
+          "earnedGold": 3175,
+          "unspentGold": 55,
+          "gems": 22,
+          "strength": 439.5,
+          "focus": 870,
+          "deaths": 0
+        }
+      ]
+    },
+    {
+      "round": 500,
+      "score": [
+        278,
+        830
+      ],
+      "teams": [
+        {
+          "earnedGold": 1500,
+          "unspentGold": 180,
+          "gems": 0,
+          "strength": 310,
+          "focus": 360,
+          "deaths": 2
+        },
+        {
+          "earnedGold": 4350,
+          "unspentGold": 440,
+          "gems": 58,
+          "strength": 529.75,
+          "focus": 985,
+          "deaths": 0
+        }
+      ]
+    }
+  ],
+  "champions": [
+    {
+      "id": 0,
+      "team": 0,
+      "type": 11,
+      "name": "Tavi",
+      "kills": 0,
+      "deaths": 1,
+      "assists": 0,
+      "earnedGold": 750,
+      "collectedGems": 132,
+      "submittedGems": 110,
+      "spentGold": 750,
+      "gold": 0,
+      "gems": 22,
+      "metrics": {
+        "priority": 1,
+        "turns": 588,
+        "move": 355,
+        "cast": 30,
+        "cast_slot_1": 17,
+        "cast_slot_0": 13,
+        "attack": 109,
+        "attack_camp": 103,
+        "buy_item": 25,
+        "shards_bought": 25,
+        "tribute": 5,
+        "recall": 1,
+        "ward": 1,
+        "attack_lock": 6,
+        "idle_turns": 123,
+        "moving_turns": 355,
+        "combat_turns": 108
+      },
+      "activity": {
+        "other_without_move_attack_cast": 20,
+        "move_without_gems": 210,
+        "attack_or_cast": 108,
+        "on_camp_tile_without_action": 30,
+        "move_with_gems": 140,
+        "tribute_channel": 15,
+        "recall_channel": 5,
+        "dead": 60
+      },
+      "equipmentProgression": [
+        {
+          "round": 48,
+          "gold": 5,
+          "health": 730,
+          "strength": 55,
+          "focus": 100,
+          "items": {
+            "Monster Strength shard": 4
+          }
+        },
+        {
+          "round": 80,
+          "gold": 10,
+          "health": 730,
+          "strength": 75,
+          "focus": 100,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Jungle Strength shard": 3
+          }
+        },
+        {
+          "round": 191,
+          "gold": 15,
+          "health": 470,
+          "strength": 85,
+          "focus": 120,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Power Focus shard": 2,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 374,
+          "gold": 20,
+          "health": 568,
+          "strength": 90,
+          "focus": 160,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Power Strength shard": 1,
+            "Power Focus emblem": 1,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 516,
+          "gold": 25,
+          "health": 624,
+          "strength": 115,
+          "focus": 160,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Power Strength emblem": 1,
+            "Power Focus emblem": 1,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 582,
+          "gold": 0,
+          "health": 512,
+          "strength": 145,
+          "focus": 160,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Power Strength emblem": 2,
+            "Power Focus emblem": 1,
+            "Jungle Strength emblem": 1
+          }
+        }
+      ],
+      "captures": [
+        {
+          "round": 48,
+          "id": 0,
+          "team": 0,
+          "group": 4,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 80,
+          "id": 0,
+          "team": 0,
+          "group": 2,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 191,
+          "id": 0,
+          "team": 0,
+          "group": 4,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 374,
+          "id": 0,
+          "team": 0,
+          "group": 2,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 516,
+          "id": 0,
+          "team": 0,
+          "group": 4,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 582,
+          "id": 0,
+          "team": 0,
+          "group": 4,
+          "gems": 22,
+          "gold": 125
+        }
+      ],
+      "submissions": [
+        {
+          "round": 63,
+          "team": 0,
+          "id": 0,
+          "gems": 22
+        },
+        {
+          "round": 121,
+          "team": 0,
+          "id": 0,
+          "gems": 22
+        },
+        {
+          "round": 206,
+          "team": 0,
+          "id": 0,
+          "gems": 22
+        },
+        {
+          "round": 420,
+          "team": 0,
+          "id": 0,
+          "gems": 22
+        },
+        {
+          "round": 554,
+          "team": 0,
+          "id": 0,
+          "gems": 22
+        }
+      ],
+      "bagIntervals": [
+        {
+          "start": 48,
+          "end": 62,
+          "maxGems": 22,
+          "duration": 15
+        },
+        {
+          "start": 80,
+          "end": 120,
+          "maxGems": 22,
+          "duration": 41
+        },
+        {
+          "start": 191,
+          "end": 205,
+          "maxGems": 22,
+          "duration": 15
+        },
+        {
+          "start": 374,
+          "end": 419,
+          "maxGems": 22,
+          "duration": 46
+        },
+        {
+          "start": 516,
+          "end": 553,
+          "maxGems": 22,
+          "duration": 38
+        },
+        {
+          "start": 582,
+          "end": 588,
+          "maxGems": 22,
+          "duration": 7
+        }
+      ],
+      "stationaryCarriers": []
+    },
+    {
+      "id": 1,
+      "team": 0,
+      "type": 10,
+      "name": "Varg",
+      "kills": 0,
+      "deaths": 0,
+      "assists": 0,
+      "earnedGold": 751,
+      "collectedGems": 146,
+      "submittedGems": 146,
+      "spentGold": 600,
+      "gold": 151,
+      "gems": 0,
+      "metrics": {
+        "priority": 1,
+        "turns": 587,
+        "move": 410,
+        "ward": 32,
+        "attack": 128,
+        "attack_camp": 120,
+        "cast": 47,
+        "cast_slot_0": 20,
+        "cast_slot_1": 27,
+        "tribute": 6,
+        "recall": 2,
+        "buy_item": 20,
+        "shards_bought": 20,
+        "attack_lock": 3,
+        "attack_champion": 5,
+        "idle_turns": 76,
+        "moving_turns": 410,
+        "combat_turns": 122
+      },
+      "activity": {
+        "other_without_move_attack_cast": 27,
+        "move_without_gems": 266,
+        "attack_or_cast": 122,
+        "on_camp_tile_without_action": 30,
+        "move_with_gems": 113,
+        "tribute_channel": 19,
+        "recall_channel": 10
+      },
+      "equipmentProgression": [
+        {
+          "round": 96,
+          "gold": 10,
+          "health": 1000,
+          "strength": 90,
+          "focus": 100,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Jungle Strength shard": 3
+          }
+        },
+        {
+          "round": 182,
+          "gold": 15,
+          "health": 1200,
+          "strength": 100,
+          "focus": 100,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Durability Health shard": 2,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 283,
+          "gold": 18,
+          "health": 1400,
+          "strength": 100,
+          "focus": 100,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Durability Health shard": 4,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 413,
+          "gold": 26,
+          "health": 1744,
+          "strength": 110,
+          "focus": 100,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Power Strength shard": 2,
+            "Power Health shard": 3,
+            "Durability Health emblem": 1,
+            "Jungle Strength emblem": 1
+          }
+        }
+      ],
+      "captures": [
+        {
+          "round": 77,
+          "id": 1,
+          "team": 0,
+          "group": 0,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 118,
+          "id": 1,
+          "team": 0,
+          "group": 4,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 218,
+          "id": 1,
+          "team": 0,
+          "group": 2,
+          "gems": 11,
+          "gold": 63
+        },
+        {
+          "round": 298,
+          "id": 1,
+          "team": 0,
+          "group": 4,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 370,
+          "id": 1,
+          "team": 0,
+          "group": 4,
+          "gems": 11,
+          "gold": 63
+        },
+        {
+          "round": 545,
+          "id": 1,
+          "team": 0,
+          "group": 2,
+          "gems": 22,
+          "gold": 125
+        }
+      ],
+      "submissions": [
+        {
+          "round": 91,
+          "team": 0,
+          "id": 1,
+          "gems": 58
+        },
+        {
+          "round": 146,
+          "team": 0,
+          "id": 1,
+          "gems": 22
+        },
+        {
+          "round": 249,
+          "team": 0,
+          "id": 1,
+          "gems": 11
+        },
+        {
+          "round": 315,
+          "team": 0,
+          "id": 1,
+          "gems": 22
+        },
+        {
+          "round": 403,
+          "team": 0,
+          "id": 1,
+          "gems": 11
+        },
+        {
+          "round": 560,
+          "team": 0,
+          "id": 1,
+          "gems": 22
+        }
+      ],
+      "bagIntervals": [
+        {
+          "start": 77,
+          "end": 90,
+          "maxGems": 58,
+          "duration": 14
+        },
+        {
+          "start": 118,
+          "end": 145,
+          "maxGems": 22,
+          "duration": 28
+        },
+        {
+          "start": 218,
+          "end": 248,
+          "maxGems": 11,
+          "duration": 31
+        },
+        {
+          "start": 298,
+          "end": 314,
+          "maxGems": 22,
+          "duration": 17
+        },
+        {
+          "start": 370,
+          "end": 402,
+          "maxGems": 11,
+          "duration": 33
+        },
+        {
+          "start": 545,
+          "end": 559,
+          "maxGems": 22,
+          "duration": 15
+        }
+      ],
+      "stationaryCarriers": []
+    },
+    {
+      "id": 2,
+      "team": 0,
+      "type": 2,
+      "name": "Vendetta",
+      "kills": 0,
+      "deaths": 2,
+      "assists": 0,
+      "earnedGold": 374,
+      "collectedGems": 66,
+      "submittedGems": 66,
+      "spentGold": 360,
+      "gold": 14,
+      "gems": 0,
+      "metrics": {
+        "priority": 1,
+        "turns": 587,
+        "cast": 59,
+        "cast_slot_1": 43,
+        "move": 332,
+        "ward": 8,
+        "attack": 95,
+        "attack_camp": 90,
+        "cast_slot_0": 16,
+        "recall": 2,
+        "attack_champion": 2,
+        "attack_lock": 3,
+        "buy_item": 12,
+        "shards_bought": 12,
+        "tribute": 4,
+        "idle_turns": 175,
+        "moving_turns": 332,
+        "combat_turns": 122
+      },
+      "activity": {
+        "other_without_move_attack_cast": 24,
+        "attack_or_cast": 122,
+        "move_without_gems": 200,
+        "recall_channel": 10,
+        "dead": 120,
+        "on_camp_tile_without_action": 20,
+        "move_with_gems": 81,
+        "tribute_channel": 10
+      },
+      "equipmentProgression": [
+        {
+          "round": 249,
+          "gold": 2,
+          "health": 800,
+          "strength": 80,
+          "focus": 100,
+          "items": {
+            "Monster Strength shard": 2
+          }
+        },
+        {
+          "round": 319,
+          "gold": 7,
+          "health": 400,
+          "strength": 100,
+          "focus": 100,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Jungle Strength shard": 1
+          }
+        },
+        {
+          "round": 376,
+          "gold": 9,
+          "health": 800,
+          "strength": 110,
+          "focus": 100,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Jungle Strength shard": 3
+          }
+        },
+        {
+          "round": 515,
+          "gold": 14,
+          "health": 0,
+          "strength": 120,
+          "focus": 100,
+          "items": {
+            "Monster Strength emblem": 1,
+            "Durability Health shard": 2,
+            "Jungle Strength emblem": 1
+          }
+        }
+      ],
+      "captures": [
+        {
+          "round": 218,
+          "id": 2,
+          "team": 0,
+          "group": 2,
+          "gems": 11,
+          "gold": 62
+        },
+        {
+          "round": 295,
+          "id": 2,
+          "team": 0,
+          "group": 2,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 370,
+          "id": 2,
+          "team": 0,
+          "group": 4,
+          "gems": 11,
+          "gold": 62
+        },
+        {
+          "round": 480,
+          "id": 2,
+          "team": 0,
+          "group": 2,
+          "gems": 22,
+          "gold": 125
+        }
+      ],
+      "submissions": [
+        {
+          "round": 260,
+          "team": 0,
+          "id": 2,
+          "gems": 11
+        },
+        {
+          "round": 314,
+          "team": 0,
+          "id": 2,
+          "gems": 22
+        },
+        {
+          "round": 406,
+          "team": 0,
+          "id": 2,
+          "gems": 11
+        },
+        {
+          "round": 492,
+          "team": 0,
+          "id": 2,
+          "gems": 22
+        }
+      ],
+      "bagIntervals": [
+        {
+          "start": 218,
+          "end": 259,
+          "maxGems": 11,
+          "duration": 42
+        },
+        {
+          "start": 295,
+          "end": 313,
+          "maxGems": 22,
+          "duration": 19
+        },
+        {
+          "start": 370,
+          "end": 405,
+          "maxGems": 11,
+          "duration": 36
+        },
+        {
+          "start": 480,
+          "end": 491,
+          "maxGems": 22,
+          "duration": 12
+        }
+      ],
+      "stationaryCarriers": []
+    },
+    {
+      "id": 3,
+      "team": 1,
+      "type": 3,
+      "name": "Cassi",
+      "kills": 1,
+      "deaths": 0,
+      "assists": 2,
+      "earnedGold": 425,
+      "collectedGems": 66,
+      "submittedGems": 66,
+      "spentGold": 400,
+      "gold": 25,
+      "gems": 0,
+      "metrics": {
+        "move": 359,
+        "turns": 588,
+        "cast": 51,
+        "cast_slot_0": 28,
+        "attack": 124,
+        "attack_camp": 122,
+        "cast_slot_1": 23,
+        "recall": 5,
+        "cast_champion_target": 6,
+        "attack_champion": 2,
+        "buy_item": 13,
+        "shards_bought": 13,
+        "buy_consumable": 1,
+        "tribute": 3,
+        "idle_turns": 90,
+        "moving_turns": 359,
+        "combat_turns": 134
+      },
+      "activity": {
+        "move_without_gems": 317,
+        "attack_or_cast": 134,
+        "other_without_move_attack_cast": 51,
+        "recall_channel": 25,
+        "on_camp_tile_without_action": 15,
+        "move_with_gems": 37,
+        "tribute_channel": 9
+      },
+      "equipmentProgression": [
+        {
+          "round": 166,
+          "gold": 10,
+          "health": 220,
+          "strength": 30,
+          "focus": 85,
+          "items": {
+            "Power Focus shard": 1
+          }
+        },
+        {
+          "round": 286,
+          "gold": 15,
+          "health": 640,
+          "strength": 30,
+          "focus": 160,
+          "items": {
+            "Power Focus emblem": 1
+          }
+        },
+        {
+          "round": 357,
+          "gold": 20,
+          "health": 745,
+          "strength": 30,
+          "focus": 160,
+          "items": {
+            "Power Focus emblem": 1,
+            "Durability Health shard": 4
+          }
+        },
+        {
+          "round": 494,
+          "gold": 25,
+          "health": 556.25,
+          "strength": 30,
+          "focus": 205,
+          "items": {
+            "Power Focus shard": 3,
+            "Power Focus emblem": 1,
+            "Durability Health emblem": 1
+          }
+        }
+      ],
+      "captures": [
+        {
+          "round": 263,
+          "id": 3,
+          "team": 1,
+          "group": 5,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 337,
+          "id": 3,
+          "team": 1,
+          "group": 5,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 414,
+          "id": 3,
+          "team": 1,
+          "group": 3,
+          "gems": 22,
+          "gold": 125
+        }
+      ],
+      "submissions": [
+        {
+          "round": 281,
+          "team": 1,
+          "id": 3,
+          "gems": 22
+        },
+        {
+          "round": 352,
+          "team": 1,
+          "id": 3,
+          "gems": 22
+        },
+        {
+          "round": 427,
+          "team": 1,
+          "id": 3,
+          "gems": 22
+        }
+      ],
+      "bagIntervals": [
+        {
+          "start": 263,
+          "end": 280,
+          "maxGems": 22,
+          "duration": 18
+        },
+        {
+          "start": 337,
+          "end": 351,
+          "maxGems": 22,
+          "duration": 15
+        },
+        {
+          "start": 414,
+          "end": 426,
+          "maxGems": 22,
+          "duration": 13
+        }
+      ],
+      "stationaryCarriers": []
+    },
+    {
+      "id": 4,
+      "team": 1,
+      "type": 4,
+      "name": "Issac",
+      "kills": 0,
+      "deaths": 0,
+      "assists": 1,
+      "earnedGold": 2875,
+      "collectedGems": 646,
+      "submittedGems": 646,
+      "spentGold": 2620,
+      "gold": 255,
+      "gems": 0,
+      "metrics": {
+        "turns": 587,
+        "fuel_exhaustions": 1,
+        "cast": 58,
+        "cast_slot_1": 38,
+        "move": 319,
+        "attack": 127,
+        "attack_camp": 124,
+        "cast_slot_0": 20,
+        "recall": 16,
+        "buy_item": 86,
+        "shards_bought": 86,
+        "tribute": 13,
+        "attack_champion": 3,
+        "buy_consumable": 4,
+        "use_consumable": 4,
+        "use_consumable_2": 4,
+        "idle_turns": 159,
+        "moving_turns": 317,
+        "combat_turns": 145
+      },
+      "activity": {
+        "other_without_move_attack_cast": 13,
+        "attack_or_cast": 142,
+        "move_without_gems": 157,
+        "on_camp_tile_without_action": 35,
+        "recall_channel": 80,
+        "move_with_gems": 91,
+        "tribute_channel": 69
+      },
+      "equipmentProgression": [
+        {
+          "round": 37,
+          "gold": 5,
+          "health": 480,
+          "strength": 59,
+          "focus": 100,
+          "items": {
+            "Power Strength shard": 4
+          }
+        },
+        {
+          "round": 90,
+          "gold": 15,
+          "health": 900,
+          "strength": 106.5,
+          "focus": 100,
+          "items": {
+            "Power Strength emblem": 2,
+            "Jungle Strength shard": 2
+          }
+        },
+        {
+          "round": 153,
+          "gold": 10,
+          "health": 240,
+          "strength": 125.5,
+          "focus": 100,
+          "items": {
+            "Power Strength shard": 1,
+            "Power Strength emblem": 2,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 197,
+          "gold": 15,
+          "health": 788,
+          "strength": 149.25,
+          "focus": 100,
+          "items": {
+            "Power Strength emblem": 3,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 246,
+          "gold": 15,
+          "health": 396,
+          "strength": 192,
+          "focus": 100,
+          "items": {
+            "Power Strength shard": 3,
+            "Power Strength emblem": 4,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 292,
+          "gold": 25,
+          "health": 620,
+          "strength": 239.5,
+          "focus": 100,
+          "items": {
+            "Power Strength shard": 1,
+            "Power Strength emblem": 6,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 343,
+          "gold": 5,
+          "health": 592,
+          "strength": 291.75,
+          "focus": 100,
+          "items": {
+            "Power Strength emblem": 8,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 371,
+          "gold": 5,
+          "health": 480,
+          "strength": 334.5,
+          "focus": 100,
+          "items": {
+            "Power Strength shard": 3,
+            "Power Strength emblem": 9,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 416,
+          "gold": 15,
+          "health": 438,
+          "strength": 382,
+          "focus": 100,
+          "items": {
+            "Power Strength shard": 1,
+            "Power Strength emblem": 11,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 467,
+          "gold": 25,
+          "health": 452,
+          "strength": 424.75,
+          "focus": 100,
+          "items": {
+            "Power Strength shard": 4,
+            "Power Strength emblem": 12,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 512,
+          "gold": 5,
+          "health": 900,
+          "strength": 477,
+          "focus": 100,
+          "items": {
+            "Power Strength shard": 3,
+            "Power Strength emblem": 14,
+            "Jungle Strength emblem": 1
+          }
+        },
+        {
+          "round": 542,
+          "gold": 5,
+          "health": 592,
+          "strength": 524.5,
+          "focus": 100,
+          "items": {
+            "Power Strength shard": 1,
+            "Power Strength emblem": 16,
+            "Jungle Strength emblem": 1
+          }
+        }
+      ],
+      "captures": [
+        {
+          "round": 36,
+          "id": 4,
+          "team": 1,
+          "group": 3,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 75,
+          "id": 4,
+          "team": 1,
+          "group": 1,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 110,
+          "id": 4,
+          "team": 1,
+          "group": 3,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 181,
+          "id": 4,
+          "team": 1,
+          "group": 5,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 246,
+          "id": 4,
+          "team": 1,
+          "group": 1,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 291,
+          "id": 4,
+          "team": 1,
+          "group": 0,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 328,
+          "id": 4,
+          "team": 1,
+          "group": 1,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 370,
+          "id": 4,
+          "team": 1,
+          "group": 0,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 416,
+          "id": 4,
+          "team": 1,
+          "group": 1,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 466,
+          "id": 4,
+          "team": 1,
+          "group": 0,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 497,
+          "id": 4,
+          "team": 1,
+          "group": 1,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 541,
+          "id": 4,
+          "team": 1,
+          "group": 0,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 571,
+          "id": 4,
+          "team": 1,
+          "group": 1,
+          "gems": 58,
+          "gold": 250
+        }
+      ],
+      "submissions": [
+        {
+          "round": 55,
+          "team": 1,
+          "id": 4,
+          "gems": 22
+        },
+        {
+          "round": 85,
+          "team": 1,
+          "id": 4,
+          "gems": 58
+        },
+        {
+          "round": 121,
+          "team": 1,
+          "id": 4,
+          "gems": 22
+        },
+        {
+          "round": 192,
+          "team": 1,
+          "id": 4,
+          "gems": 22
+        },
+        {
+          "round": 262,
+          "team": 1,
+          "id": 4,
+          "gems": 58
+        },
+        {
+          "round": 308,
+          "team": 1,
+          "id": 4,
+          "gems": 58
+        },
+        {
+          "round": 338,
+          "team": 1,
+          "id": 4,
+          "gems": 58
+        },
+        {
+          "round": 387,
+          "team": 1,
+          "id": 4,
+          "gems": 58
+        },
+        {
+          "round": 431,
+          "team": 1,
+          "id": 4,
+          "gems": 58
+        },
+        {
+          "round": 484,
+          "team": 1,
+          "id": 4,
+          "gems": 58
+        },
+        {
+          "round": 507,
+          "team": 1,
+          "id": 4,
+          "gems": 58
+        },
+        {
+          "round": 558,
+          "team": 1,
+          "id": 4,
+          "gems": 58
+        },
+        {
+          "round": 588,
+          "team": 1,
+          "id": 4,
+          "gems": 58
+        }
+      ],
+      "bagIntervals": [
+        {
+          "start": 36,
+          "end": 54,
+          "maxGems": 22,
+          "duration": 19
+        },
+        {
+          "start": 75,
+          "end": 84,
+          "maxGems": 58,
+          "duration": 10
+        },
+        {
+          "start": 110,
+          "end": 120,
+          "maxGems": 22,
+          "duration": 11
+        },
+        {
+          "start": 181,
+          "end": 191,
+          "maxGems": 22,
+          "duration": 11
+        },
+        {
+          "start": 246,
+          "end": 261,
+          "maxGems": 58,
+          "duration": 16
+        },
+        {
+          "start": 291,
+          "end": 307,
+          "maxGems": 58,
+          "duration": 17
+        },
+        {
+          "start": 328,
+          "end": 337,
+          "maxGems": 58,
+          "duration": 10
+        },
+        {
+          "start": 370,
+          "end": 386,
+          "maxGems": 58,
+          "duration": 17
+        },
+        {
+          "start": 416,
+          "end": 430,
+          "maxGems": 58,
+          "duration": 15
+        },
+        {
+          "start": 466,
+          "end": 483,
+          "maxGems": 58,
+          "duration": 18
+        },
+        {
+          "start": 497,
+          "end": 506,
+          "maxGems": 58,
+          "duration": 10
+        },
+        {
+          "start": 541,
+          "end": 557,
+          "maxGems": 58,
+          "duration": 17
+        },
+        {
+          "start": 571,
+          "end": 587,
+          "maxGems": 58,
+          "duration": 17
+        }
+      ],
+      "stationaryCarriers": []
+    },
+    {
+      "id": 5,
+      "team": 1,
+      "type": 9,
+      "name": "Ren",
+      "kills": 1,
+      "deaths": 0,
+      "assists": 1,
+      "earnedGold": 1425,
+      "collectedGems": 270,
+      "submittedGems": 270,
+      "spentGold": 1410,
+      "gold": 15,
+      "gems": 0,
+      "metrics": {
+        "turns": 587,
+        "fuel_exhaustions": 1,
+        "cast": 70,
+        "cast_slot_1": 40,
+        "move": 322,
+        "cast_slot_0": 30,
+        "attack": 122,
+        "attack_camp": 116,
+        "recall": 12,
+        "buy_item": 46,
+        "shards_bought": 46,
+        "tribute": 9,
+        "cast_champion_target": 7,
+        "buy_consumable": 3,
+        "use_consumable": 2,
+        "use_consumable_2": 2,
+        "attack_champion": 6,
+        "idle_turns": 124,
+        "moving_turns": 322,
+        "combat_turns": 179
+      },
+      "activity": {
+        "other_without_move_attack_cast": 28,
+        "attack_or_cast": 176,
+        "move_without_gems": 197,
+        "on_camp_tile_without_action": 30,
+        "recall_channel": 60,
+        "move_with_gems": 63,
+        "tribute_channel": 33
+      },
+      "equipmentProgression": [
+        {
+          "round": 22,
+          "gold": 5,
+          "health": 760,
+          "strength": 40,
+          "focus": 140,
+          "items": {
+            "Power Focus shard": 4
+          }
+        },
+        {
+          "round": 163,
+          "gold": 20,
+          "health": 800,
+          "strength": 40,
+          "focus": 230,
+          "items": {
+            "Power Focus shard": 1,
+            "Power Focus emblem": 2,
+            "Durability Health emblem": 1
+          }
+        },
+        {
+          "round": 224,
+          "gold": 20,
+          "health": 1292,
+          "strength": 40,
+          "focus": 320,
+          "items": {
+            "Power Focus shard": 4,
+            "Power Focus emblem": 3,
+            "Durability Health emblem": 1
+          }
+        },
+        {
+          "round": 272,
+          "gold": 15,
+          "health": 1148,
+          "strength": 40,
+          "focus": 370,
+          "items": {
+            "Power Focus shard": 3,
+            "Power Focus emblem": 4,
+            "Durability Health emblem": 1
+          }
+        },
+        {
+          "round": 360,
+          "gold": 20,
+          "health": 1238,
+          "strength": 40,
+          "focus": 420,
+          "items": {
+            "Power Focus shard": 2,
+            "Power Focus emblem": 5,
+            "Durability Health emblem": 1
+          }
+        },
+        {
+          "round": 400,
+          "gold": 25,
+          "health": 1130,
+          "strength": 40,
+          "focus": 470,
+          "items": {
+            "Power Focus shard": 1,
+            "Power Focus emblem": 6,
+            "Durability Health emblem": 1
+          }
+        },
+        {
+          "round": 454,
+          "gold": 10,
+          "health": 905,
+          "strength": 40,
+          "focus": 540,
+          "items": {
+            "Power Focus shard": 2,
+            "Power Focus emblem": 7,
+            "Durability Health emblem": 1
+          }
+        },
+        {
+          "round": 536,
+          "gold": 15,
+          "health": 824,
+          "strength": 40,
+          "focus": 590,
+          "items": {
+            "Power Focus shard": 1,
+            "Power Focus emblem": 8,
+            "Durability Health emblem": 1
+          }
+        }
+      ],
+      "captures": [
+        {
+          "round": 21,
+          "id": 5,
+          "team": 1,
+          "group": 5,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 96,
+          "id": 5,
+          "team": 1,
+          "group": 5,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 162,
+          "id": 5,
+          "team": 1,
+          "group": 1,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 208,
+          "id": 5,
+          "team": 1,
+          "group": 0,
+          "gems": 58,
+          "gold": 250
+        },
+        {
+          "round": 268,
+          "id": 5,
+          "team": 1,
+          "group": 3,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 344,
+          "id": 5,
+          "team": 1,
+          "group": 3,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 399,
+          "id": 5,
+          "team": 1,
+          "group": 5,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 448,
+          "id": 5,
+          "team": 1,
+          "group": 4,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 535,
+          "id": 5,
+          "team": 1,
+          "group": 5,
+          "gems": 22,
+          "gold": 125
+        }
+      ],
+      "submissions": [
+        {
+          "round": 34,
+          "team": 1,
+          "id": 5,
+          "gems": 22
+        },
+        {
+          "round": 107,
+          "team": 1,
+          "id": 5,
+          "gems": 22
+        },
+        {
+          "round": 178,
+          "team": 1,
+          "id": 5,
+          "gems": 58
+        },
+        {
+          "round": 219,
+          "team": 1,
+          "id": 5,
+          "gems": 58
+        },
+        {
+          "round": 284,
+          "team": 1,
+          "id": 5,
+          "gems": 22
+        },
+        {
+          "round": 355,
+          "team": 1,
+          "id": 5,
+          "gems": 22
+        },
+        {
+          "round": 413,
+          "team": 1,
+          "id": 5,
+          "gems": 22
+        },
+        {
+          "round": 468,
+          "team": 1,
+          "id": 5,
+          "gems": 22
+        },
+        {
+          "round": 549,
+          "team": 1,
+          "id": 5,
+          "gems": 22
+        }
+      ],
+      "bagIntervals": [
+        {
+          "start": 21,
+          "end": 33,
+          "maxGems": 22,
+          "duration": 13
+        },
+        {
+          "start": 96,
+          "end": 106,
+          "maxGems": 22,
+          "duration": 11
+        },
+        {
+          "start": 162,
+          "end": 177,
+          "maxGems": 58,
+          "duration": 16
+        },
+        {
+          "start": 208,
+          "end": 218,
+          "maxGems": 58,
+          "duration": 11
+        },
+        {
+          "start": 268,
+          "end": 283,
+          "maxGems": 22,
+          "duration": 16
+        },
+        {
+          "start": 344,
+          "end": 354,
+          "maxGems": 22,
+          "duration": 11
+        },
+        {
+          "start": 399,
+          "end": 412,
+          "maxGems": 22,
+          "duration": 14
+        },
+        {
+          "start": 448,
+          "end": 467,
+          "maxGems": 22,
+          "duration": 20
+        },
+        {
+          "start": 535,
+          "end": 548,
+          "maxGems": 22,
+          "duration": 14
+        }
+      ],
+      "stationaryCarriers": []
+    },
+    {
+      "id": 6,
+      "team": 1,
+      "type": 5,
+      "name": "Stellar",
+      "kills": 1,
+      "deaths": 0,
+      "assists": 2,
+      "earnedGold": 550,
+      "collectedGems": 88,
+      "submittedGems": 66,
+      "spentGold": 420,
+      "gold": 130,
+      "gems": 22,
+      "metrics": {
+        "move": 319,
+        "turns": 587,
+        "cast": 73,
+        "cast_slot_0": 38,
+        "cast_slot_1": 35,
+        "attack": 168,
+        "attack_camp": 167,
+        "recall": 5,
+        "cast_champion_target": 4,
+        "buy_item": 14,
+        "shards_bought": 14,
+        "tribute": 4,
+        "attack_champion": 1,
+        "idle_turns": 74,
+        "moving_turns": 318,
+        "combat_turns": 189
+      },
+      "activity": {
+        "move_without_gems": 272,
+        "attack_or_cast": 189,
+        "other_without_move_attack_cast": 36,
+        "recall_channel": 25,
+        "on_camp_tile_without_action": 12,
+        "move_with_gems": 42,
+        "tribute_channel": 11
+      },
+      "equipmentProgression": [
+        {
+          "round": 193,
+          "gold": 5,
+          "health": 370,
+          "strength": 35,
+          "focus": 140,
+          "items": {
+            "Power Focus shard": 4
+          }
+        },
+        {
+          "round": 507,
+          "gold": 15,
+          "health": 1125,
+          "strength": 35,
+          "focus": 180,
+          "items": {
+            "Power Focus shard": 2,
+            "Power Focus emblem": 1,
+            "Durability Health emblem": 1
+          }
+        },
+        {
+          "round": 528,
+          "gold": 5,
+          "health": 1125,
+          "strength": 35,
+          "focus": 200,
+          "items": {
+            "Power Focus shard": 4,
+            "Power Focus emblem": 1,
+            "Durability Health emblem": 1
+          }
+        }
+      ],
+      "captures": [
+        {
+          "round": 192,
+          "id": 6,
+          "team": 1,
+          "group": 3,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 466,
+          "id": 6,
+          "team": 1,
+          "group": 5,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 506,
+          "id": 6,
+          "team": 1,
+          "group": 3,
+          "gems": 22,
+          "gold": 125
+        },
+        {
+          "round": 574,
+          "id": 6,
+          "team": 1,
+          "group": 3,
+          "gems": 22,
+          "gold": 125
+        }
+      ],
+      "submissions": [
+        {
+          "round": 208,
+          "team": 1,
+          "id": 6,
+          "gems": 22
+        },
+        {
+          "round": 479,
+          "team": 1,
+          "id": 6,
+          "gems": 22
+        },
+        {
+          "round": 523,
+          "team": 1,
+          "id": 6,
+          "gems": 22
+        }
+      ],
+      "bagIntervals": [
+        {
+          "start": 192,
+          "end": 207,
+          "maxGems": 22,
+          "duration": 16
+        },
+        {
+          "start": 466,
+          "end": 478,
+          "maxGems": 22,
+          "duration": 13
+        },
+        {
+          "start": 506,
+          "end": 522,
+          "maxGems": 22,
+          "duration": 17
+        },
+        {
+          "start": 574,
+          "end": 587,
+          "maxGems": 22,
+          "duration": 14
+        }
+      ],
+      "stationaryCarriers": []
+    }
+  ],
+  "groups": [
+    {
+      "id": 0,
+      "engineGroup": 0,
+      "tiles": [
+        [
+          12,
+          15
+        ],
+        [
+          12,
+          16
+        ]
+      ],
+      "types": {
+        "Wolf": 1,
+        "Elk": 1
+      }
+    },
+    {
+      "id": 1,
+      "engineGroup": 1,
+      "tiles": [
+        [
+          17,
+          13
+        ],
+        [
+          17,
+          14
+        ]
+      ],
+      "types": {
+        "Wolf": 1,
+        "Elk": 1
+      }
+    },
+    {
+      "id": 2,
+      "engineGroup": 2,
+      "tiles": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      "types": {
+        "Wolf": 1,
+        "Gold": 1
+      }
+    },
+    {
+      "id": 3,
+      "engineGroup": 3,
+      "tiles": [
+        [
+          27,
+          24
+        ],
+        [
+          28,
+          24
+        ]
+      ],
+      "types": {
+        "Wolf": 1,
+        "Gold": 1
+      }
+    },
+    {
+      "id": 4,
+      "engineGroup": 4,
+      "tiles": [
+        [
+          1,
+          11
+        ],
+        [
+          2,
+          11
+        ]
+      ],
+      "types": {
+        "Wolf": 1,
+        "Gold": 1
+      }
+    },
+    {
+      "id": 5,
+      "engineGroup": 5,
+      "tiles": [
+        [
+          27,
+          18
+        ],
+        [
+          28,
+          18
+        ]
+      ],
+      "types": {
+        "Wolf": 1,
+        "Gold": 1
+      }
+    }
+  ],
+  "engagements": [
+    {
+      "round": 21,
+      "group": 5,
+      "capturers": [
+        5
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 5,
+      "spatialAttackCounts": {
+        "3": 14,
+        "5": 10,
+        "6": 9
+      }
+    },
+    {
+      "round": 36,
+      "group": 3,
+      "capturers": [
+        4
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 11,
+      "spatialAttackCounts": {
+        "4": 22,
+        "6": 12,
+        "3": 1
+      }
+    },
+    {
+      "round": 48,
+      "group": 4,
+      "capturers": [
+        0
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 5,
+      "spatialAttackCounts": {
+        "0": 32
+      }
+    },
+    {
+      "round": 75,
+      "group": 1,
+      "capturers": [
+        4
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 39,
+      "spatialAttackCounts": {
+        "5": 18,
+        "6": 32,
+        "3": 5
+      }
+    },
+    {
+      "round": 77,
+      "group": 0,
+      "capturers": [
+        1
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 10,
+      "spatialAttackCounts": {
+        "1": 36,
+        "2": 9
+      }
+    },
+    {
+      "round": 80,
+      "group": 2,
+      "capturers": [
+        0
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 18,
+      "spatialAttackCounts": {
+        "2": 25,
+        "0": 1
+      }
+    },
+    {
+      "round": 96,
+      "group": 5,
+      "capturers": [
+        5
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 73,
+      "spatialAttackCounts": {
+        "5": 19,
+        "3": 18
+      }
+    },
+    {
+      "round": 110,
+      "group": 3,
+      "capturers": [
+        4
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 86,
+      "spatialAttackCounts": {
+        "6": 15,
+        "2": 2,
+        "4": 6,
+        "3": 4
+      }
+    },
+    {
+      "round": 118,
+      "group": 4,
+      "capturers": [
+        1
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 101,
+      "spatialAttackCounts": {
+        "1": 14
+      }
+    },
+    {
+      "round": 162,
+      "group": 1,
+      "capturers": [
+        5
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 138,
+      "spatialAttackCounts": {
+        "4": 7,
+        "5": 18,
+        "6": 22,
+        "3": 14
+      }
+    },
+    {
+      "round": 181,
+      "group": 5,
+      "capturers": [
+        4
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 163,
+      "spatialAttackCounts": {
+        "4": 14,
+        "3": 6
+      }
+    },
+    {
+      "round": 191,
+      "group": 4,
+      "capturers": [
+        0
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 168,
+      "spatialAttackCounts": {
+        "0": 20
+      }
+    },
+    {
+      "round": 192,
+      "group": 3,
+      "capturers": [
+        6
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 168,
+      "spatialAttackCounts": {
+        "6": 20,
+        "3": 5
+      }
+    },
+    {
+      "round": 208,
+      "group": 0,
+      "capturers": [
+        5
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 137,
+      "spatialAttackCounts": {
+        "2": 2,
+        "1": 21,
+        "5": 3
+      }
+    },
+    {
+      "round": 218,
+      "group": 2,
+      "capturers": [
+        1,
+        2
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 143,
+      "spatialAttackCounts": {
+        "0": 15,
+        "2": 6,
+        "3": 1
+      }
+    },
+    {
+      "round": 246,
+      "group": 1,
+      "capturers": [
+        4
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 230,
+      "spatialAttackCounts": {
+        "3": 10,
+        "4": 11,
+        "6": 11,
+        "5": 9
+      }
+    },
+    {
+      "round": 263,
+      "group": 5,
+      "capturers": [
+        3
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 244,
+      "spatialAttackCounts": {
+        "6": 14,
+        "3": 3
+      }
+    },
+    {
+      "round": 268,
+      "group": 3,
+      "capturers": [
+        5
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 250,
+      "spatialAttackCounts": {
+        "5": 14,
+        "6": 6
+      }
+    },
+    {
+      "round": 291,
+      "group": 0,
+      "capturers": [
+        4
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 268,
+      "spatialAttackCounts": {
+        "1": 8,
+        "6": 8,
+        "4": 7
+      }
+    },
+    {
+      "round": 295,
+      "group": 2,
+      "capturers": [
+        2
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 269,
+      "spatialAttackCounts": {
+        "2": 24
+      }
+    },
+    {
+      "round": 298,
+      "group": 4,
+      "capturers": [
+        1
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 282,
+      "spatialAttackCounts": {
+        "0": 10,
+        "1": 6
+      }
+    },
+    {
+      "round": 328,
+      "group": 1,
+      "capturers": [
+        4
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 313,
+      "spatialAttackCounts": {
+        "4": 11,
+        "5": 7,
+        "6": 4
+      }
+    },
+    {
+      "round": 337,
+      "group": 5,
+      "capturers": [
+        3
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 313,
+      "spatialAttackCounts": {
+        "3": 21,
+        "6": 3
+      }
+    },
+    {
+      "round": 344,
+      "group": 3,
+      "capturers": [
+        5
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 330,
+      "spatialAttackCounts": {
+        "5": 8,
+        "6": 7
+      }
+    },
+    {
+      "round": 370,
+      "group": 0,
+      "capturers": [
+        4
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 352,
+      "spatialAttackCounts": {
+        "2": 3,
+        "6": 11,
+        "4": 9
+      }
+    },
+    {
+      "round": 370,
+      "group": 4,
+      "capturers": [
+        1,
+        2
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 355,
+      "spatialAttackCounts": {
+        "1": 11,
+        "2": 2
+      }
+    },
+    {
+      "round": 374,
+      "group": 2,
+      "capturers": [
+        0
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 351,
+      "spatialAttackCounts": {
+        "0": 17
+      }
+    },
+    {
+      "round": 399,
+      "group": 5,
+      "capturers": [
+        5
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 387,
+      "spatialAttackCounts": {
+        "5": 6,
+        "6": 8
+      }
+    },
+    {
+      "round": 414,
+      "group": 3,
+      "capturers": [
+        3
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 394,
+      "spatialAttackCounts": {
+        "6": 15,
+        "3": 9
+      }
+    },
+    {
+      "round": 416,
+      "group": 1,
+      "capturers": [
+        4
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 399,
+      "spatialAttackCounts": {
+        "4": 13
+      }
+    },
+    {
+      "round": 448,
+      "group": 4,
+      "capturers": [
+        5
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 420,
+      "spatialAttackCounts": {
+        "1": 12
+      }
+    },
+    {
+      "round": 466,
+      "group": 0,
+      "capturers": [
+        4
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 446,
+      "spatialAttackCounts": {
+        "4": 11
+      }
+    },
+    {
+      "round": 466,
+      "group": 5,
+      "capturers": [
+        6
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 449,
+      "spatialAttackCounts": {
+        "3": 11,
+        "6": 12
+      }
+    },
+    {
+      "round": 480,
+      "group": 2,
+      "capturers": [
+        2
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 461,
+      "spatialAttackCounts": {
+        "2": 17
+      }
+    },
+    {
+      "round": 497,
+      "group": 1,
+      "capturers": [
+        4
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 480,
+      "spatialAttackCounts": {
+        "5": 11,
+        "6": 5,
+        "4": 1
+      }
+    },
+    {
+      "round": 506,
+      "group": 3,
+      "capturers": [
+        6
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 472,
+      "spatialAttackCounts": {
+        "3": 21,
+        "6": 3
+      }
+    },
+    {
+      "round": 516,
+      "group": 4,
+      "capturers": [
+        0
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 498,
+      "spatialAttackCounts": {
+        "0": 14
+      }
+    },
+    {
+      "round": 535,
+      "group": 5,
+      "capturers": [
+        5
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 521,
+      "spatialAttackCounts": {
+        "3": 10,
+        "5": 6
+      }
+    },
+    {
+      "round": 541,
+      "group": 0,
+      "capturers": [
+        4
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 527,
+      "spatialAttackCounts": {
+        "4": 9
+      }
+    },
+    {
+      "round": 545,
+      "group": 2,
+      "capturers": [
+        1
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 530,
+      "spatialAttackCounts": {
+        "1": 12
+      }
+    },
+    {
+      "round": 571,
+      "group": 1,
+      "capturers": [
+        4
+      ],
+      "gemReward": 58,
+      "goldReward": 250,
+      "firstSpatialAttack": 558,
+      "spatialAttackCounts": {
+        "5": 7,
+        "3": 9,
+        "4": 3
+      }
+    },
+    {
+      "round": 574,
+      "group": 3,
+      "capturers": [
+        6
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 556,
+      "spatialAttackCounts": {
+        "6": 12
+      }
+    },
+    {
+      "round": 582,
+      "group": 4,
+      "capturers": [
+        0
+      ],
+      "gemReward": 22,
+      "goldReward": 125,
+      "firstSpatialAttack": 566,
+      "spatialAttackCounts": {
+        "0": 11
+      }
+    }
+  ],
+  "deaths": [
+    {
+      "round": 139,
+      "id": 2,
+      "team": 0,
+      "gems": 0,
+      "actor": {
+        "kind": 1,
+        "index": 3
+      },
+      "kind": 6
+    },
+    {
+      "round": 430,
+      "id": 0,
+      "team": 0,
+      "gems": 0,
+      "actor": {
+        "kind": 1,
+        "index": 5
+      },
+      "kind": 5
+    },
+    {
+      "round": 514,
+      "id": 2,
+      "team": 0,
+      "gems": 0,
+      "actor": {
+        "kind": 1,
+        "index": 6
+      },
+      "kind": 6
+    }
+  ],
+  "validated": true
+}

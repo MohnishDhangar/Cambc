@@ -1,0 +1,3624 @@
+{
+  "source": "/home/mohnish/Y/match-data/match-1- team-Forged-Tokens/03-9ebc9ba3-d05c-425d-87c1-91efe48eaaa0/replay.repl26a",
+  "sha256": "3615c56bd7f0cc9712d4227fc49cb7d75b8ef06bdcf394557cea565bd686e7df",
+  "conversion": {
+    "originalEngine": "0.0.3",
+    "simulationEngine": "0.0.1",
+    "mapBytes": 1596,
+    "originalCount": 13540,
+    "originalCounts": {
+      "4:1": 8,
+      "3:": 6737,
+      "0:0": 9,
+      "0:1": 3465,
+      "0:3": 434,
+      "0:2": 1045,
+      "0:10": 1620,
+      "0:6": 128,
+      "0:5": 45,
+      "0:8": 9,
+      "0:4": 39,
+      "0:9": 1
+    },
+    "convertedCount": 13532
+  },
+  "map": {
+    "width": 40,
+    "height": 40,
+    "serializedBytes": 1596,
+    "spawnA": {
+      "minX": 0,
+      "minY": 0,
+      "maxX": 3,
+      "maxY": 3
+    },
+    "camps": [
+      {
+        "handle": 0,
+        "type": 1,
+        "x": 28,
+        "y": 3
+      },
+      {
+        "handle": 65536,
+        "type": 1,
+        "x": 31,
+        "y": 10
+      },
+      {
+        "handle": 131072,
+        "type": 0,
+        "x": 5,
+        "y": 21
+      },
+      {
+        "handle": 196608,
+        "type": 3,
+        "x": 19,
+        "y": 2
+      },
+      {
+        "handle": 262144,
+        "type": 3,
+        "x": 19,
+        "y": 3
+      },
+      {
+        "handle": 327680,
+        "type": 3,
+        "x": 36,
+        "y": 2
+      },
+      {
+        "handle": 393216,
+        "type": 3,
+        "x": 36,
+        "y": 3
+      },
+      {
+        "handle": 458752,
+        "type": 0,
+        "x": 5,
+        "y": 8
+      },
+      {
+        "handle": 524288,
+        "type": 0,
+        "x": 5,
+        "y": 14
+      },
+      {
+        "handle": 589824,
+        "type": 1,
+        "x": 32,
+        "y": 10
+      },
+      {
+        "handle": 655360,
+        "type": 1,
+        "x": 29,
+        "y": 3
+      }
+    ],
+    "terrain": {
+      "bush": [
+        [
+          16,
+          7
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          18,
+          7
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          20,
+          7
+        ],
+        [
+          21,
+          7
+        ],
+        [
+          22,
+          7
+        ],
+        [
+          23,
+          7
+        ],
+        [
+          24,
+          7
+        ],
+        [
+          25,
+          7
+        ],
+        [
+          26,
+          13
+        ],
+        [
+          26,
+          14
+        ],
+        [
+          26,
+          15
+        ],
+        [
+          26,
+          16
+        ],
+        [
+          26,
+          17
+        ],
+        [
+          26,
+          18
+        ],
+        [
+          24,
+          19
+        ],
+        [
+          25,
+          19
+        ],
+        [
+          26,
+          19
+        ],
+        [
+          13,
+          20
+        ],
+        [
+          14,
+          20
+        ],
+        [
+          15,
+          20
+        ],
+        [
+          13,
+          21
+        ],
+        [
+          13,
+          22
+        ],
+        [
+          13,
+          23
+        ],
+        [
+          13,
+          24
+        ],
+        [
+          13,
+          25
+        ],
+        [
+          13,
+          26
+        ],
+        [
+          14,
+          32
+        ],
+        [
+          15,
+          32
+        ],
+        [
+          16,
+          32
+        ],
+        [
+          17,
+          32
+        ],
+        [
+          18,
+          32
+        ],
+        [
+          19,
+          32
+        ],
+        [
+          20,
+          32
+        ],
+        [
+          21,
+          32
+        ],
+        [
+          22,
+          32
+        ],
+        [
+          23,
+          32
+        ]
+      ],
+      "wall": [
+        [
+          32,
+          0
+        ],
+        [
+          32,
+          1
+        ],
+        [
+          32,
+          2
+        ],
+        [
+          32,
+          3
+        ],
+        [
+          32,
+          4
+        ],
+        [
+          32,
+          5
+        ],
+        [
+          32,
+          6
+        ],
+        [
+          15,
+          7
+        ],
+        [
+          26,
+          7
+        ],
+        [
+          27,
+          7
+        ],
+        [
+          28,
+          7
+        ],
+        [
+          29,
+          7
+        ],
+        [
+          30,
+          7
+        ],
+        [
+          31,
+          7
+        ],
+        [
+          32,
+          7
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          15,
+          9
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          15,
+          11
+        ],
+        [
+          15,
+          12
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          27,
+          13
+        ],
+        [
+          28,
+          13
+        ],
+        [
+          29,
+          13
+        ],
+        [
+          30,
+          13
+        ],
+        [
+          15,
+          14
+        ],
+        [
+          30,
+          14
+        ],
+        [
+          31,
+          14
+        ],
+        [
+          15,
+          15
+        ],
+        [
+          31,
+          15
+        ],
+        [
+          32,
+          15
+        ],
+        [
+          33,
+          15
+        ],
+        [
+          34,
+          15
+        ],
+        [
+          35,
+          15
+        ],
+        [
+          36,
+          15
+        ],
+        [
+          37,
+          15
+        ],
+        [
+          38,
+          15
+        ],
+        [
+          39,
+          15
+        ],
+        [
+          0,
+          24
+        ],
+        [
+          1,
+          24
+        ],
+        [
+          2,
+          24
+        ],
+        [
+          3,
+          24
+        ],
+        [
+          4,
+          24
+        ],
+        [
+          5,
+          24
+        ],
+        [
+          6,
+          24
+        ],
+        [
+          7,
+          24
+        ],
+        [
+          8,
+          24
+        ],
+        [
+          24,
+          24
+        ],
+        [
+          8,
+          25
+        ],
+        [
+          9,
+          25
+        ],
+        [
+          24,
+          25
+        ],
+        [
+          9,
+          26
+        ],
+        [
+          10,
+          26
+        ],
+        [
+          11,
+          26
+        ],
+        [
+          12,
+          26
+        ],
+        [
+          24,
+          26
+        ],
+        [
+          24,
+          27
+        ],
+        [
+          24,
+          28
+        ],
+        [
+          24,
+          29
+        ],
+        [
+          24,
+          30
+        ],
+        [
+          24,
+          31
+        ],
+        [
+          7,
+          32
+        ],
+        [
+          8,
+          32
+        ],
+        [
+          9,
+          32
+        ],
+        [
+          10,
+          32
+        ],
+        [
+          11,
+          32
+        ],
+        [
+          12,
+          32
+        ],
+        [
+          13,
+          32
+        ],
+        [
+          24,
+          32
+        ],
+        [
+          7,
+          33
+        ],
+        [
+          7,
+          34
+        ],
+        [
+          7,
+          35
+        ],
+        [
+          7,
+          36
+        ],
+        [
+          7,
+          37
+        ],
+        [
+          7,
+          38
+        ],
+        [
+          7,
+          39
+        ]
+      ],
+      "hole": [
+        [
+          16,
+          19
+        ],
+        [
+          17,
+          19
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          19,
+          19
+        ],
+        [
+          20,
+          19
+        ],
+        [
+          21,
+          19
+        ],
+        [
+          22,
+          19
+        ],
+        [
+          23,
+          19
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          17,
+          20
+        ],
+        [
+          18,
+          20
+        ],
+        [
+          19,
+          20
+        ],
+        [
+          20,
+          20
+        ],
+        [
+          21,
+          20
+        ],
+        [
+          22,
+          20
+        ],
+        [
+          23,
+          20
+        ]
+      ],
+      "altar": [
+        [
+          36,
+          12
+        ],
+        [
+          19,
+          16
+        ],
+        [
+          20,
+          23
+        ],
+        [
+          3,
+          27
+        ]
+      ]
+    }
+  },
+  "complete": false,
+  "round": 42,
+  "outcome": 0,
+  "score": [
+    0,
+    0
+  ],
+  "drafts": [
+    [
+      10,
+      9,
+      2,
+      0,
+      -1
+    ],
+    [
+      4,
+      9,
+      8,
+      3,
+      -1
+    ]
+  ],
+  "stats": [
+    {
+      "id": 0,
+      "team": 0,
+      "type": 11,
+      "name": "Tavi",
+      "kills": 0,
+      "deaths": 0,
+      "assists": 0,
+      "earnedGold": 90,
+      "gold": 0,
+      "gems": 22,
+      "partial": true
+    },
+    {
+      "id": 1,
+      "team": 0,
+      "type": 10,
+      "name": "Varg",
+      "kills": 0,
+      "deaths": 0,
+      "assists": 0,
+      "earnedGold": 0,
+      "gold": 0,
+      "gems": 0,
+      "partial": true
+    },
+    {
+      "id": 2,
+      "team": 0,
+      "type": 2,
+      "name": "Vendetta",
+      "kills": 0,
+      "deaths": 0,
+      "assists": 0,
+      "earnedGold": 90,
+      "gold": 90,
+      "gems": 22,
+      "partial": true
+    },
+    {
+      "id": 3,
+      "team": 0,
+      "type": 0,
+      "name": "Ryth",
+      "kills": 0,
+      "deaths": 1,
+      "assists": 0,
+      "earnedGold": 0,
+      "gold": 0,
+      "gems": 0,
+      "partial": true
+    },
+    {
+      "id": 4,
+      "team": 1,
+      "type": 5,
+      "name": "Stellar",
+      "kills": 1,
+      "deaths": 0,
+      "assists": 0,
+      "earnedGold": 50,
+      "gold": 50,
+      "gems": 0,
+      "partial": true
+    },
+    {
+      "id": 5,
+      "team": 1,
+      "type": 10,
+      "name": "Varg",
+      "kills": 0,
+      "deaths": 0,
+      "assists": 1,
+      "earnedGold": 90,
+      "gold": 90,
+      "gems": 22,
+      "partial": true
+    },
+    {
+      "id": 6,
+      "team": 1,
+      "type": 9,
+      "name": "Ren",
+      "kills": 0,
+      "deaths": 0,
+      "assists": 1,
+      "earnedGold": 90,
+      "gold": 90,
+      "gems": 22,
+      "partial": true
+    },
+    {
+      "id": 7,
+      "team": 1,
+      "type": 3,
+      "name": "Cassi",
+      "kills": 0,
+      "deaths": 0,
+      "assists": 1,
+      "earnedGold": 0,
+      "gold": 0,
+      "gems": 0,
+      "partial": true
+    },
+    {
+      "id": 8,
+      "team": 1,
+      "type": 4,
+      "name": "Issac",
+      "kills": 0,
+      "deaths": 0,
+      "assists": 1,
+      "earnedGold": 0,
+      "gold": 0,
+      "gems": 0,
+      "partial": true
+    }
+  ],
+  "final": {
+    "draftNumRounds": 4,
+    "draftCounts": [
+      4,
+      4
+    ],
+    "drafts": [
+      [
+        10,
+        9,
+        2,
+        0,
+        -1
+      ],
+      [
+        4,
+        9,
+        8,
+        3,
+        -1
+      ]
+    ],
+    "round": 42,
+    "turn": 4,
+    "team": 1,
+    "awaitingInput": true,
+    "phase": 10,
+    "outcome": 0,
+    "submittedGems": [
+      0,
+      0
+    ],
+    "timeline": 3,
+    "inputPosition": 814,
+    "currentChampion": 6,
+    "step": {
+      "phase": 10,
+      "kind": 7,
+      "actor": {
+        "kind": 1,
+        "index": 6
+      },
+      "from": {
+        "x": 0,
+        "y": 0
+      },
+      "to": {
+        "x": 0,
+        "y": 0
+      },
+      "round": 42,
+      "inputPosition": 0,
+      "substep": 0,
+      "priority": 0
+    },
+    "champions": [
+      {
+        "entity": {
+          "kind": 1,
+          "index": 0
+        },
+        "team": 0,
+        "type": 11,
+        "known": 15,
+        "position": {
+          "x": 15,
+          "y": 16
+        },
+        "health": 450,
+        "maxHealth": 750,
+        "roundFlags": 3124,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          1,
+          4
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 1,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 8,
+            "attributes": 0,
+            "enhancedAuto": false
+          },
+          {
+            "type": 4,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 3,
+            "attributes": 1,
+            "range": 4,
+            "modifier": 2.200000047683716,
+            "stunDuration": 1
+          }
+        ],
+        "focus": {
+          "base": 100,
+          "items": 0,
+          "bonus": 0,
+          "effective": 100
+        },
+        "strength": {
+          "base": 35,
+          "items": 15,
+          "bonus": 0,
+          "effective": 50
+        },
+        "alive": true,
+        "respawnTimer": 0,
+        "gems": 22,
+        "gold": 0,
+        "earnedGold": 90,
+        "treasureGold": 0,
+        "items": [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumables": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ward": {
+          "charges": 1,
+          "rechargeTimer": 0
+        },
+        "kda": [
+          0,
+          0,
+          0
+        ],
+        "submissionDuration": 0,
+        "channelTimer": 0,
+        "channelType": 0,
+        "priority": 100,
+        "nextPriority": 100,
+        "draftOrder": 0
+      },
+      {
+        "entity": {
+          "kind": 1,
+          "index": 1
+        },
+        "team": 0,
+        "type": 10,
+        "known": 15,
+        "position": {
+          "x": 5,
+          "y": 14
+        },
+        "health": 820,
+        "maxHealth": 1000,
+        "roundFlags": 1075,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          1
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          1,
+          7
+        ],
+        "attackRange": 1,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 1,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 8,
+            "attributes": 0,
+            "enhancedAuto": false
+          },
+          {
+            "type": 7,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 8,
+            "attributes": 0,
+            "range": 4,
+            "modifier": 2.5,
+            "duration": 5
+          }
+        ],
+        "focus": {
+          "base": 100,
+          "items": 0,
+          "bonus": 0,
+          "effective": 100
+        },
+        "strength": {
+          "base": 50,
+          "items": 0,
+          "bonus": 0,
+          "effective": 50
+        },
+        "alive": true,
+        "respawnTimer": 0,
+        "gems": 0,
+        "gold": 0,
+        "earnedGold": 0,
+        "treasureGold": 0,
+        "items": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumables": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ward": {
+          "charges": 1,
+          "rechargeTimer": 0
+        },
+        "kda": [
+          0,
+          0,
+          0
+        ],
+        "submissionDuration": 0,
+        "channelTimer": 0,
+        "channelType": 0,
+        "priority": 99,
+        "nextPriority": 99,
+        "draftOrder": 1
+      },
+      {
+        "entity": {
+          "kind": 1,
+          "index": 2
+        },
+        "team": 0,
+        "type": 2,
+        "known": 15,
+        "position": {
+          "x": 10,
+          "y": 16
+        },
+        "health": 480,
+        "maxHealth": 800,
+        "roundFlags": 1027,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          5
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          1,
+          6
+        ],
+        "attackRange": 1,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 1,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 8,
+            "attributes": 0,
+            "enhancedAuto": false
+          },
+          {
+            "type": 6,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 16,
+            "attributes": 0,
+            "range": 2
+          }
+        ],
+        "focus": {
+          "base": 100,
+          "items": 0,
+          "bonus": 0,
+          "effective": 100
+        },
+        "strength": {
+          "base": 70,
+          "items": 0,
+          "bonus": 0,
+          "effective": 70
+        },
+        "alive": true,
+        "respawnTimer": 0,
+        "gems": 22,
+        "gold": 90,
+        "earnedGold": 90,
+        "treasureGold": 0,
+        "items": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumables": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ward": {
+          "charges": 1,
+          "rechargeTimer": 0
+        },
+        "kda": [
+          0,
+          0,
+          0
+        ],
+        "submissionDuration": 0,
+        "channelTimer": 0,
+        "channelType": 0,
+        "priority": 98,
+        "nextPriority": 98,
+        "draftOrder": 2
+      },
+      {
+        "entity": {
+          "kind": 1,
+          "index": 3
+        },
+        "team": 0,
+        "type": 0,
+        "known": 15,
+        "health": 0,
+        "maxHealth": 1200,
+        "roundFlags": 0,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          3,
+          1
+        ],
+        "attackRange": 1,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 3,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 19,
+            "attributes": 1,
+            "range": 4,
+            "radius": 1,
+            "modifier": 1,
+            "stunDuration": 1
+          },
+          {
+            "type": 1,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 8,
+            "attributes": 0,
+            "enhancedAuto": false
+          }
+        ],
+        "focus": {
+          "base": 100,
+          "items": 0,
+          "bonus": 0,
+          "effective": 100
+        },
+        "strength": {
+          "base": 50,
+          "items": 0,
+          "bonus": 0,
+          "effective": 50
+        },
+        "alive": false,
+        "respawnTimer": 60,
+        "gems": 0,
+        "gold": 0,
+        "earnedGold": 0,
+        "treasureGold": 0,
+        "items": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumables": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ward": {
+          "charges": 1,
+          "rechargeTimer": 0
+        },
+        "kda": [
+          0,
+          1,
+          0
+        ],
+        "submissionDuration": 0,
+        "channelTimer": 0,
+        "channelType": 0,
+        "priority": 97,
+        "nextPriority": 97,
+        "draftOrder": 3
+      },
+      {
+        "entity": {
+          "kind": 1,
+          "index": 4
+        },
+        "team": 1,
+        "type": 5,
+        "known": 15,
+        "position": {
+          "x": 32,
+          "y": 16
+        },
+        "health": 750,
+        "maxHealth": 750,
+        "roundFlags": 1080,
+        "buffs": [],
+        "cooldowns": [
+          1,
+          2
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          2,
+          3
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 2,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 3,
+            "attributes": 1,
+            "range": 4,
+            "modifier": 2
+          },
+          {
+            "type": 3,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 19,
+            "attributes": 1,
+            "range": 4,
+            "radius": 1,
+            "modifier": 1.399999976158142,
+            "stunDuration": 0
+          }
+        ],
+        "focus": {
+          "base": 100,
+          "items": 0,
+          "bonus": 0,
+          "effective": 100
+        },
+        "strength": {
+          "base": 35,
+          "items": 0,
+          "bonus": 0,
+          "effective": 35
+        },
+        "alive": true,
+        "respawnTimer": 0,
+        "gems": 0,
+        "gold": 50,
+        "earnedGold": 50,
+        "treasureGold": 0,
+        "items": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumables": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ward": {
+          "charges": 1,
+          "rechargeTimer": 0
+        },
+        "kda": [
+          1,
+          0,
+          0
+        ],
+        "submissionDuration": 0,
+        "channelTimer": 0,
+        "channelType": 0,
+        "priority": 5,
+        "nextPriority": 5,
+        "draftOrder": 0
+      },
+      {
+        "entity": {
+          "kind": 1,
+          "index": 5
+        },
+        "team": 1,
+        "type": 10,
+        "known": 15,
+        "position": {
+          "x": 33,
+          "y": 17
+        },
+        "health": 860,
+        "maxHealth": 1000,
+        "roundFlags": 3126,
+        "buffs": [],
+        "cooldowns": [
+          4,
+          1
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          1,
+          7
+        ],
+        "attackRange": 1,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 1,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 8,
+            "attributes": 0,
+            "enhancedAuto": false
+          },
+          {
+            "type": 7,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 8,
+            "attributes": 0,
+            "range": 4,
+            "modifier": 2.5,
+            "duration": 5
+          }
+        ],
+        "focus": {
+          "base": 100,
+          "items": 0,
+          "bonus": 0,
+          "effective": 100
+        },
+        "strength": {
+          "base": 50,
+          "items": 0,
+          "bonus": 0,
+          "effective": 50
+        },
+        "alive": true,
+        "respawnTimer": 0,
+        "gems": 22,
+        "gold": 90,
+        "earnedGold": 90,
+        "treasureGold": 0,
+        "items": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumables": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ward": {
+          "charges": 1,
+          "rechargeTimer": 0
+        },
+        "kda": [
+          0,
+          0,
+          1
+        ],
+        "submissionDuration": 0,
+        "channelTimer": 0,
+        "channelType": 0,
+        "priority": 10,
+        "nextPriority": 10,
+        "draftOrder": 1
+      },
+      {
+        "entity": {
+          "kind": 1,
+          "index": 6
+        },
+        "team": 1,
+        "type": 9,
+        "known": 15,
+        "position": {
+          "x": 34,
+          "y": 19
+        },
+        "health": 900,
+        "maxHealth": 900,
+        "roundFlags": 1043,
+        "buffs": [],
+        "cooldowns": [
+          1,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          4,
+          6
+        ],
+        "attackRange": 1,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 4,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 3,
+            "attributes": 1,
+            "range": 4,
+            "modifier": 1.25,
+            "stunDuration": 1
+          },
+          {
+            "type": 6,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 16,
+            "attributes": 0,
+            "range": 2
+          }
+        ],
+        "focus": {
+          "base": 100,
+          "items": 0,
+          "bonus": 0,
+          "effective": 100
+        },
+        "strength": {
+          "base": 40,
+          "items": 0,
+          "bonus": 0,
+          "effective": 40
+        },
+        "alive": true,
+        "respawnTimer": 0,
+        "gems": 22,
+        "gold": 90,
+        "earnedGold": 90,
+        "treasureGold": 0,
+        "items": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumables": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ward": {
+          "charges": 1,
+          "rechargeTimer": 0
+        },
+        "kda": [
+          0,
+          0,
+          1
+        ],
+        "submissionDuration": 0,
+        "channelTimer": 0,
+        "channelType": 0,
+        "priority": 5,
+        "nextPriority": 5,
+        "draftOrder": 2
+      },
+      {
+        "entity": {
+          "kind": 1,
+          "index": 7
+        },
+        "team": 1,
+        "type": 3,
+        "known": 15,
+        "position": {
+          "x": 31,
+          "y": 16
+        },
+        "health": 560,
+        "maxHealth": 700,
+        "roundFlags": 1027,
+        "buffs": [],
+        "cooldowns": [
+          4,
+          2
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          2,
+          4
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 2,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 3,
+            "attributes": 1,
+            "range": 4,
+            "modifier": 2
+          },
+          {
+            "type": 4,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 3,
+            "attributes": 0,
+            "range": 4,
+            "modifier": 0,
+            "stunDuration": 1
+          }
+        ],
+        "focus": {
+          "base": 70,
+          "items": 0,
+          "bonus": 0,
+          "effective": 70
+        },
+        "strength": {
+          "base": 30,
+          "items": 0,
+          "bonus": 0,
+          "effective": 30
+        },
+        "alive": true,
+        "respawnTimer": 0,
+        "gems": 0,
+        "gold": 0,
+        "earnedGold": 0,
+        "treasureGold": 0,
+        "items": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumables": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ward": {
+          "charges": 1,
+          "rechargeTimer": 0
+        },
+        "kda": [
+          0,
+          0,
+          1
+        ],
+        "submissionDuration": 0,
+        "channelTimer": 0,
+        "channelType": 0,
+        "priority": 5,
+        "nextPriority": 5,
+        "draftOrder": 3
+      },
+      {
+        "entity": {
+          "kind": 1,
+          "index": 8
+        },
+        "team": 1,
+        "type": 4,
+        "known": 15,
+        "position": {
+          "x": 35,
+          "y": 18
+        },
+        "health": 700,
+        "maxHealth": 900,
+        "roundFlags": 1027,
+        "buffs": [],
+        "cooldowns": [
+          4,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          1,
+          6
+        ],
+        "attackRange": 1,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 1,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 8,
+            "attributes": 0,
+            "enhancedAuto": false
+          },
+          {
+            "type": 6,
+            "cooldown": 8,
+            "maxCharges": 0,
+            "target": 16,
+            "attributes": 0,
+            "range": 2
+          }
+        ],
+        "focus": {
+          "base": 100,
+          "items": 0,
+          "bonus": 0,
+          "effective": 100
+        },
+        "strength": {
+          "base": 40,
+          "items": 0,
+          "bonus": 0,
+          "effective": 40
+        },
+        "alive": true,
+        "respawnTimer": 0,
+        "gems": 0,
+        "gold": 0,
+        "earnedGold": 0,
+        "treasureGold": 0,
+        "items": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumables": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "ward": {
+          "charges": 1,
+          "rechargeTimer": 0
+        },
+        "kda": [
+          0,
+          0,
+          1
+        ],
+        "submissionDuration": 0,
+        "channelTimer": 0,
+        "channelType": 0,
+        "priority": 5,
+        "nextPriority": 5,
+        "draftOrder": 4
+      }
+    ],
+    "camps": [
+      {
+        "entity": {
+          "kind": 2,
+          "index": 0
+        },
+        "team": 2,
+        "type": 1,
+        "known": 1,
+        "position": {
+          "x": 28,
+          "y": 3
+        },
+        "health": 2400,
+        "maxHealth": 2400,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 60,
+          "items": 0,
+          "bonus": 0,
+          "effective": 60
+        },
+        "group": 0,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 1
+        },
+        "team": 2,
+        "type": 1,
+        "known": 1,
+        "position": {
+          "x": 11,
+          "y": 36
+        },
+        "health": 2400,
+        "maxHealth": 2400,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 60,
+          "items": 0,
+          "bonus": 0,
+          "effective": 60
+        },
+        "group": 1,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 2
+        },
+        "team": 2,
+        "type": 1,
+        "known": 1,
+        "position": {
+          "x": 31,
+          "y": 10
+        },
+        "health": 2400,
+        "maxHealth": 2400,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 60,
+          "items": 0,
+          "bonus": 0,
+          "effective": 60
+        },
+        "group": 2,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 3
+        },
+        "team": 2,
+        "type": 1,
+        "known": 1,
+        "position": {
+          "x": 8,
+          "y": 29
+        },
+        "health": 2400,
+        "maxHealth": 2400,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 60,
+          "items": 0,
+          "bonus": 0,
+          "effective": 60
+        },
+        "group": 3,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 4
+        },
+        "team": 2,
+        "type": 0,
+        "known": 1,
+        "health": 0,
+        "maxHealth": 1350,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 20,
+          "items": 0,
+          "bonus": 0,
+          "effective": 20
+        },
+        "group": 4,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 5
+        },
+        "team": 2,
+        "type": 0,
+        "known": 1,
+        "position": {
+          "x": 34,
+          "y": 18
+        },
+        "health": 1050,
+        "maxHealth": 1350,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 20,
+          "items": 0,
+          "bonus": 0,
+          "effective": 20
+        },
+        "group": 5,
+        "awake": true
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 6
+        },
+        "team": 2,
+        "type": 3,
+        "known": 1,
+        "position": {
+          "x": 19,
+          "y": 2
+        },
+        "health": 500,
+        "maxHealth": 500,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 0,
+          "items": 0,
+          "bonus": 0,
+          "effective": 0
+        },
+        "group": 6,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 7
+        },
+        "team": 2,
+        "type": 3,
+        "known": 1,
+        "position": {
+          "x": 20,
+          "y": 37
+        },
+        "health": 500,
+        "maxHealth": 500,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 0,
+          "items": 0,
+          "bonus": 0,
+          "effective": 0
+        },
+        "group": 7,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 8
+        },
+        "team": 2,
+        "type": 3,
+        "known": 1,
+        "position": {
+          "x": 19,
+          "y": 3
+        },
+        "health": 500,
+        "maxHealth": 500,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 0,
+          "items": 0,
+          "bonus": 0,
+          "effective": 0
+        },
+        "group": 6,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 9
+        },
+        "team": 2,
+        "type": 3,
+        "known": 1,
+        "position": {
+          "x": 20,
+          "y": 36
+        },
+        "health": 500,
+        "maxHealth": 500,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 0,
+          "items": 0,
+          "bonus": 0,
+          "effective": 0
+        },
+        "group": 7,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 10
+        },
+        "team": 2,
+        "type": 3,
+        "known": 1,
+        "position": {
+          "x": 36,
+          "y": 2
+        },
+        "health": 500,
+        "maxHealth": 500,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 0,
+          "items": 0,
+          "bonus": 0,
+          "effective": 0
+        },
+        "group": 8,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 11
+        },
+        "team": 2,
+        "type": 3,
+        "known": 1,
+        "position": {
+          "x": 3,
+          "y": 37
+        },
+        "health": 500,
+        "maxHealth": 500,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 0,
+          "items": 0,
+          "bonus": 0,
+          "effective": 0
+        },
+        "group": 9,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 12
+        },
+        "team": 2,
+        "type": 3,
+        "known": 1,
+        "position": {
+          "x": 36,
+          "y": 3
+        },
+        "health": 500,
+        "maxHealth": 500,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 0,
+          "items": 0,
+          "bonus": 0,
+          "effective": 0
+        },
+        "group": 8,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 13
+        },
+        "team": 2,
+        "type": 3,
+        "known": 1,
+        "position": {
+          "x": 3,
+          "y": 36
+        },
+        "health": 500,
+        "maxHealth": 500,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 0,
+          "items": 0,
+          "bonus": 0,
+          "effective": 0
+        },
+        "group": 9,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 14
+        },
+        "team": 2,
+        "type": 0,
+        "known": 1,
+        "health": 0,
+        "maxHealth": 1350,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 20,
+          "items": 0,
+          "bonus": 0,
+          "effective": 20
+        },
+        "group": 10,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 15
+        },
+        "team": 2,
+        "type": 0,
+        "known": 1,
+        "health": 0,
+        "maxHealth": 1350,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 20,
+          "items": 0,
+          "bonus": 0,
+          "effective": 20
+        },
+        "group": 11,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 16
+        },
+        "team": 2,
+        "type": 0,
+        "known": 1,
+        "health": 0,
+        "maxHealth": 1350,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 20,
+          "items": 0,
+          "bonus": 0,
+          "effective": 20
+        },
+        "group": 12,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 17
+        },
+        "team": 2,
+        "type": 0,
+        "known": 1,
+        "health": 0,
+        "maxHealth": 1350,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 20,
+          "items": 0,
+          "bonus": 0,
+          "effective": 20
+        },
+        "group": 13,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 18
+        },
+        "team": 2,
+        "type": 1,
+        "known": 1,
+        "position": {
+          "x": 32,
+          "y": 10
+        },
+        "health": 2400,
+        "maxHealth": 2400,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 60,
+          "items": 0,
+          "bonus": 0,
+          "effective": 60
+        },
+        "group": 2,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 19
+        },
+        "team": 2,
+        "type": 1,
+        "known": 1,
+        "position": {
+          "x": 7,
+          "y": 29
+        },
+        "health": 2400,
+        "maxHealth": 2400,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 60,
+          "items": 0,
+          "bonus": 0,
+          "effective": 60
+        },
+        "group": 3,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 20
+        },
+        "team": 2,
+        "type": 1,
+        "known": 1,
+        "position": {
+          "x": 29,
+          "y": 3
+        },
+        "health": 2400,
+        "maxHealth": 2400,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 60,
+          "items": 0,
+          "bonus": 0,
+          "effective": 60
+        },
+        "group": 0,
+        "awake": false
+      },
+      {
+        "entity": {
+          "kind": 2,
+          "index": 21
+        },
+        "team": 2,
+        "type": 1,
+        "known": 1,
+        "position": {
+          "x": 10,
+          "y": 36
+        },
+        "health": 2400,
+        "maxHealth": 2400,
+        "buffs": [],
+        "cooldowns": [
+          0,
+          0
+        ],
+        "charges": [
+          0,
+          0
+        ],
+        "abilities": [
+          0,
+          0
+        ],
+        "attackRange": 3,
+        "chebyshevRange": true,
+        "abilityProps": [
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          },
+          {
+            "type": 0,
+            "cooldown": 2,
+            "maxCharges": 0,
+            "target": 0,
+            "attributes": 0
+          }
+        ],
+        "focus": {
+          "base": 1,
+          "items": 0,
+          "bonus": 0,
+          "effective": 1
+        },
+        "strength": {
+          "base": 60,
+          "items": 0,
+          "bonus": 0,
+          "effective": 60
+        },
+        "group": 1,
+        "awake": false
+      }
+    ],
+    "altarLocks": [],
+    "teleports": [],
+    "groups": [
+      {
+        "state": 1,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": -1
+      },
+      {
+        "state": 1,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": -1
+      },
+      {
+        "state": 1,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": -1
+      },
+      {
+        "state": 1,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": -1
+      },
+      {
+        "state": 3,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": 37
+      },
+      {
+        "state": 1,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": -1
+      },
+      {
+        "state": 1,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": -1
+      },
+      {
+        "state": 1,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": -1
+      },
+      {
+        "state": 1,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": -1
+      },
+      {
+        "state": 1,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": -1
+      },
+      {
+        "state": 3,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": 31
+      },
+      {
+        "state": 3,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": 19
+      },
+      {
+        "state": 2,
+        "rewardAvailable": true,
+        "captureTeam": 0,
+        "captureTimer": 1,
+        "respawnRounds": -1
+      },
+      {
+        "state": 3,
+        "rewardAvailable": false,
+        "captureTeam": 2,
+        "captureTimer": 0,
+        "respawnRounds": 29
+      }
+    ],
+    "wards": [
+      {
+        "entity": {
+          "kind": 3,
+          "index": 65536
+        },
+        "owner": {
+          "kind": 1,
+          "index": 6
+        },
+        "team": 1,
+        "position": {
+          "x": 33,
+          "y": 30
+        },
+        "timer": -1,
+        "radius": 6,
+        "disabled": false
+      },
+      {
+        "entity": {
+          "kind": 3,
+          "index": 131073
+        },
+        "owner": {
+          "kind": 1,
+          "index": 3
+        },
+        "team": 0,
+        "position": {
+          "x": 26,
+          "y": 14
+        },
+        "timer": -1,
+        "radius": 6,
+        "disabled": false
+      },
+      {
+        "entity": {
+          "kind": 3,
+          "index": 65538
+        },
+        "owner": {
+          "kind": 1,
+          "index": 5
+        },
+        "team": 1,
+        "position": {
+          "x": 33,
+          "y": 24
+        },
+        "timer": -1,
+        "radius": 6,
+        "disabled": false
+      },
+      {
+        "entity": {
+          "kind": 3,
+          "index": 524291
+        },
+        "owner": {
+          "kind": 1,
+          "index": 7
+        },
+        "team": 1,
+        "position": {
+          "x": 28,
+          "y": 14
+        },
+        "timer": -1,
+        "radius": 6,
+        "disabled": false
+      },
+      {
+        "entity": {
+          "kind": 3,
+          "index": 458756
+        },
+        "owner": {
+          "kind": 1,
+          "index": 8
+        },
+        "team": 1,
+        "position": {
+          "x": 29,
+          "y": 14
+        },
+        "timer": -1,
+        "radius": 6,
+        "disabled": false
+      },
+      {
+        "entity": {
+          "kind": 3,
+          "index": 327685
+        },
+        "owner": {
+          "kind": 1,
+          "index": 4
+        },
+        "team": 1,
+        "position": {
+          "x": 28,
+          "y": 15
+        },
+        "timer": -1,
+        "radius": 6,
+        "disabled": false
+      }
+    ],
+    "controlWards": [],
+    "spells": []
+  },
+  "steps": 4755,
+  "stdout": "draft 10\ndraft 9\ndraft 2\ndraft 0\n",
+  "replayErrors": [
+    {
+      "code": 42,
+      "before": {
+        "round": 42,
+        "inputPosition": 814,
+        "step": {
+          "phase": 14,
+          "kind": 3,
+          "actor": {
+            "kind": 1,
+            "index": 6
+          },
+          "from": {
+            "x": 0,
+            "y": 0
+          },
+          "to": {
+            "x": 0,
+            "y": 0
+          },
+          "round": 42,
+          "inputPosition": 814,
+          "substep": 7,
+          "priority": 0
+        }
+      },
+      "after": {
+        "round": 42,
+        "inputPosition": 814,
+        "step": {
+          "phase": 10,
+          "kind": 7,
+          "actor": {
+            "kind": 1,
+            "index": 6
+          },
+          "from": {
+            "x": 0,
+            "y": 0
+          },
+          "to": {
+            "x": 0,
+            "y": 0
+          },
+          "round": 42,
+          "inputPosition": 0,
+          "substep": 0,
+          "priority": 0
+        }
+      }
+    }
+  ],
+  "statisticsSource": "Local engine 0.0.1 reconstruction; not a native platform 0.0.3 summary. Damage counters omitted."
+}

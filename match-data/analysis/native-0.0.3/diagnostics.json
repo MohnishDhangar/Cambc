@@ -1,0 +1,693 @@
+[
+  {
+    "series": "match-1- team-Forged-Tokens",
+    "game": "01",
+    "round": 568,
+    "score": [
+      1018,
+      724
+    ],
+    "teams": [
+      {
+        "kills": 0,
+        "deaths": 0,
+        "earnedGold": 4040,
+        "collectedGems": 1018,
+        "submittedGems": 1018,
+        "spentGold": 3990,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 25,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 0,
+        "deaths": 0,
+        "earnedGold": 3070,
+        "collectedGems": 724,
+        "submittedGems": 724,
+        "spentGold": 2850,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 27,
+        "fuelExhaustions": 2,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-1- team-Forged-Tokens",
+    "game": "02",
+    "round": 429,
+    "score": [
+      462,
+      1056
+    ],
+    "teams": [
+      {
+        "kills": 0,
+        "deaths": 0,
+        "earnedGold": 2895,
+        "collectedGems": 528,
+        "submittedGems": 462,
+        "spentGold": 2610,
+        "gems": 66,
+        "lostGems": 0,
+        "tributeStarts": 8,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": [
+          {
+            "champion": "Varg",
+            "id": 0,
+            "turns": 94,
+            "start": 210,
+            "end": 303,
+            "position": {
+              "x": 22,
+              "y": 3
+            },
+            "gems": 66,
+            "health": 420
+          },
+          {
+            "champion": "Vendetta",
+            "id": 2,
+            "turns": 71,
+            "start": 233,
+            "end": 303,
+            "position": {
+              "x": 22,
+              "y": 2
+            },
+            "gems": 66,
+            "health": 286
+          },
+          {
+            "champion": "Varg",
+            "id": 0,
+            "turns": 21,
+            "start": 189,
+            "end": 209,
+            "position": {
+              "x": 22,
+              "y": 2
+            },
+            "gems": 66,
+            "health": 420
+          }
+        ]
+      },
+      {
+        "kills": 0,
+        "deaths": 0,
+        "earnedGold": 4320,
+        "collectedGems": 1056,
+        "submittedGems": 1056,
+        "spentGold": 3780,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 16,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-1- team-Forged-Tokens",
+    "game": "03",
+    "round": 748,
+    "score": [
+      220,
+      1002
+    ],
+    "teams": [
+      {
+        "kills": 1,
+        "deaths": 25,
+        "earnedGold": 2670,
+        "collectedGems": 672,
+        "submittedGems": 220,
+        "spentGold": 2620,
+        "gems": 0,
+        "lostGems": 452,
+        "tributeStarts": 13,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 25,
+        "deaths": 2,
+        "earnedGold": 4230,
+        "collectedGems": 1140,
+        "submittedGems": 1002,
+        "spentGold": 3440,
+        "gems": 94,
+        "lostGems": 44,
+        "tributeStarts": 32,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-1- team-Forged-Tokens",
+    "game": "04",
+    "round": 571,
+    "score": [
+      396,
+      1008
+    ],
+    "teams": [
+      {
+        "kills": 1,
+        "deaths": 17,
+        "earnedGold": 3403,
+        "collectedGems": 648,
+        "submittedGems": 396,
+        "spentGold": 3350,
+        "gems": 0,
+        "lostGems": 252,
+        "tributeStarts": 21,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 15,
+        "deaths": 4,
+        "earnedGold": 5235,
+        "collectedGems": 1080,
+        "submittedGems": 1008,
+        "spentGold": 4660,
+        "gems": 36,
+        "lostGems": 36,
+        "tributeStarts": 24,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-1- team-Forged-Tokens",
+    "game": "05",
+    "round": 453,
+    "score": [
+      462,
+      1024
+    ],
+    "teams": [
+      {
+        "kills": 0,
+        "deaths": 15,
+        "earnedGold": 3022,
+        "collectedGems": 718,
+        "submittedGems": 462,
+        "spentGold": 2980,
+        "gems": 0,
+        "lostGems": 256,
+        "tributeStarts": 17,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 15,
+        "deaths": 0,
+        "earnedGold": 4180,
+        "collectedGems": 1082,
+        "submittedGems": 1024,
+        "spentGold": 3450,
+        "gems": 58,
+        "lostGems": 0,
+        "tributeStarts": 31,
+        "fuelExhaustions": 6,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-2-team-lll",
+    "game": "01",
+    "round": 800,
+    "score": [
+      228,
+      1020
+    ],
+    "teams": [
+      {
+        "kills": 0,
+        "deaths": 19,
+        "earnedGold": 1931,
+        "collectedGems": 320,
+        "submittedGems": 228,
+        "spentGold": 1670,
+        "gems": 92,
+        "lostGems": 0,
+        "tributeStarts": 3,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 18,
+        "deaths": 0,
+        "earnedGold": 4340,
+        "collectedGems": 1088,
+        "submittedGems": 1020,
+        "spentGold": 4230,
+        "gems": 68,
+        "lostGems": 0,
+        "tributeStarts": 16,
+        "fuelExhaustions": 6,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-2-team-lll",
+    "game": "02",
+    "round": 1931,
+    "score": [
+      0,
+      1000
+    ],
+    "teams": [
+      {
+        "kills": 3,
+        "deaths": 93,
+        "earnedGold": 1759,
+        "collectedGems": 0,
+        "submittedGems": 0,
+        "spentGold": 1670,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 0,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 93,
+        "deaths": 3,
+        "earnedGold": 18400,
+        "collectedGems": 1000,
+        "submittedGems": 1000,
+        "spentGold": 18070,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 5,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-2-team-lll",
+    "game": "03",
+    "round": 568,
+    "score": [
+      1018,
+      760
+    ],
+    "teams": [
+      {
+        "kills": 0,
+        "deaths": 0,
+        "earnedGold": 4040,
+        "collectedGems": 1018,
+        "submittedGems": 1018,
+        "spentGold": 3990,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 25,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 0,
+        "deaths": 0,
+        "earnedGold": 3160,
+        "collectedGems": 760,
+        "submittedGems": 760,
+        "spentGold": 2910,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 27,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-2-team-lll",
+    "game": "04",
+    "round": 464,
+    "score": [
+      964,
+      1004
+    ],
+    "teams": [
+      {
+        "kills": 0,
+        "deaths": 0,
+        "earnedGold": 4505,
+        "collectedGems": 1022,
+        "submittedGems": 964,
+        "spentGold": 4150,
+        "gems": 58,
+        "lostGems": 0,
+        "tributeStarts": 41,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 0,
+        "deaths": 0,
+        "earnedGold": 4300,
+        "collectedGems": 1048,
+        "submittedGems": 1004,
+        "spentGold": 3780,
+        "gems": 44,
+        "lostGems": 0,
+        "tributeStarts": 42,
+        "fuelExhaustions": 8,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-2-team-lll",
+    "game": "05",
+    "round": 475,
+    "score": [
+      540,
+      1044
+    ],
+    "teams": [
+      {
+        "kills": 0,
+        "deaths": 7,
+        "earnedGold": 2260,
+        "collectedGems": 540,
+        "submittedGems": 540,
+        "spentGold": 2060,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 12,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 7,
+        "deaths": 0,
+        "earnedGold": 3310,
+        "collectedGems": 1088,
+        "submittedGems": 1044,
+        "spentGold": 3010,
+        "gems": 44,
+        "lostGems": 0,
+        "tributeStarts": 23,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-3-team-know",
+    "game": "01",
+    "round": 568,
+    "score": [
+      1018,
+      824
+    ],
+    "teams": [
+      {
+        "kills": 0,
+        "deaths": 0,
+        "earnedGold": 4040,
+        "collectedGems": 1018,
+        "submittedGems": 1018,
+        "spentGold": 3990,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 25,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 0,
+        "deaths": 0,
+        "earnedGold": 4130,
+        "collectedGems": 824,
+        "submittedGems": 824,
+        "spentGold": 3000,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 21,
+        "fuelExhaustions": 9,
+        "stationaryCarriers": [
+          {
+            "champion": "Cassi",
+            "id": 3,
+            "turns": 18,
+            "start": 369,
+            "end": 386,
+            "position": {
+              "x": 57,
+              "y": 61
+            },
+            "gems": 44,
+            "health": 536.2003173828125
+          }
+        ]
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-3-team-know",
+    "game": "02",
+    "round": 653,
+    "score": [
+      396,
+      1023
+    ],
+    "teams": [
+      {
+        "kills": 1,
+        "deaths": 1,
+        "earnedGold": 2510,
+        "collectedGems": 396,
+        "submittedGems": 396,
+        "spentGold": 2470,
+        "gems": 0,
+        "lostGems": 0,
+        "tributeStarts": 7,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": [
+          {
+            "champion": "Varg",
+            "id": 0,
+            "turns": 377,
+            "start": 210,
+            "end": 586,
+            "position": {
+              "x": 22,
+              "y": 3
+            },
+            "gems": 66,
+            "health": 420
+          },
+          {
+            "champion": "Vendetta",
+            "id": 2,
+            "turns": 354,
+            "start": 233,
+            "end": 586,
+            "position": {
+              "x": 22,
+              "y": 2
+            },
+            "gems": 66,
+            "health": 286
+          },
+          {
+            "champion": "Varg",
+            "id": 0,
+            "turns": 21,
+            "start": 189,
+            "end": 209,
+            "position": {
+              "x": 22,
+              "y": 2
+            },
+            "gems": 66,
+            "health": 420
+          }
+        ]
+      },
+      {
+        "kills": 0,
+        "deaths": 2,
+        "earnedGold": 5175,
+        "collectedGems": 1188,
+        "submittedGems": 1023,
+        "spentGold": 3800,
+        "gems": 165,
+        "lostGems": 0,
+        "tributeStarts": 24,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-3-team-know",
+    "game": "03",
+    "round": 541,
+    "score": [
+      1018,
+      958
+    ],
+    "teams": [
+      {
+        "kills": 2,
+        "deaths": 5,
+        "earnedGold": 5170,
+        "collectedGems": 1208,
+        "submittedGems": 1018,
+        "spentGold": 4520,
+        "gems": 102,
+        "lostGems": 88,
+        "tributeStarts": 32,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 5,
+        "deaths": 3,
+        "earnedGold": 5000,
+        "collectedGems": 980,
+        "submittedGems": 958,
+        "spentGold": 4340,
+        "gems": 22,
+        "lostGems": 0,
+        "tributeStarts": 30,
+        "fuelExhaustions": 1,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-3-team-know",
+    "game": "04",
+    "round": 700,
+    "score": [
+      1096,
+      854
+    ],
+    "teams": [
+      {
+        "kills": 10,
+        "deaths": 16,
+        "earnedGold": 6836,
+        "collectedGems": 1802,
+        "submittedGems": 1096,
+        "spentGold": 6350,
+        "gems": 72,
+        "lostGems": 634,
+        "tributeStarts": 24,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": [
+          {
+            "champion": "Ryth",
+            "id": 3,
+            "turns": 31,
+            "start": 257,
+            "end": 287,
+            "position": {
+              "x": 21,
+              "y": 14
+            },
+            "gems": 138,
+            "health": 675
+          },
+          {
+            "champion": "Ryth",
+            "id": 3,
+            "turns": 15,
+            "start": 669,
+            "end": 683,
+            "position": {
+              "x": 26,
+              "y": 13
+            },
+            "gems": 72,
+            "health": 552
+          }
+        ]
+      },
+      {
+        "kills": 16,
+        "deaths": 21,
+        "earnedGold": 3155,
+        "collectedGems": 1228,
+        "submittedGems": 854,
+        "spentGold": 3110,
+        "gems": 0,
+        "lostGems": 374,
+        "tributeStarts": 26,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  },
+  {
+    "series": "match-3-team-know",
+    "game": "05",
+    "round": 971,
+    "score": [
+      1030,
+      894
+    ],
+    "teams": [
+      {
+        "kills": 11,
+        "deaths": 7,
+        "earnedGold": 6462,
+        "collectedGems": 1256,
+        "submittedGems": 1030,
+        "spentGold": 5810,
+        "gems": 106,
+        "lostGems": 120,
+        "tributeStarts": 13,
+        "fuelExhaustions": 0,
+        "stationaryCarriers": []
+      },
+      {
+        "kills": 6,
+        "deaths": 18,
+        "earnedGold": 3460,
+        "collectedGems": 966,
+        "submittedGems": 894,
+        "spentGold": 3410,
+        "gems": 0,
+        "lostGems": 72,
+        "tributeStarts": 13,
+        "fuelExhaustions": 3,
+        "stationaryCarriers": []
+      }
+    ],
+    "rawTurnCountsMatch": true
+  }
+]

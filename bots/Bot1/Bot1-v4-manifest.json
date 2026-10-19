@@ -1,0 +1,56 @@
+{
+  "strategyVersion": 4,
+  "sdkVersion": "2.2.5",
+  "engineVersion": "0.0.3",
+  "mode": "release",
+  "build": "successful",
+  "evaluation": {
+    "path": "replays/v4-release-evaluation/summary.json",
+    "maps": 17,
+    "sides": [
+      "A",
+      "B"
+    ],
+    "games": 102,
+    "results": {
+      "BaselineV1": {
+        "wins": 19,
+        "games": 34
+      },
+      "BaselineV3": {
+        "wins": 32,
+        "games": 34
+      },
+      "starter-cpp": {
+        "wins": 34,
+        "games": 34
+      }
+    },
+    "caughtErrors": 0,
+    "botFaults": 0,
+    "rawFuelExhaustions": 0
+  },
+  "sources": {
+    "bots/Bot1/src/bot.cpp": "cb4d100fb7d62c316781fde06c575fb89473994ff351f87f658b11f664c428b3",
+    "bots/Bot1/src/bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
+    "bots/Bot1/src/draft.cpp": "a7564587afbb50c86969a6f4d0c6e4c788858ca2c604c4742627e4a0577a33ee",
+    "bots/Bot1/src/draft.h": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd",
+    "bots/Bot1/src/main.cpp": "6bdfa965f5d75f3f19586bf7627cabd8c98a5cba91071f8071eb8b66876ecc3c",
+    "bots/Bot1/src/random.h": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+  },
+  "candidateZip": {
+    "path": "bots/Bot1/Bot1-v4.zip",
+    "sha256": "b296e83d43e8b16709e655ee4470a526e9e84160ee02fbad0e8c483661e1a062",
+    "bytes": 10195,
+    "sourceFilesMatchWorkspace": true,
+    "sourceFilesMatchEvaluatedManifest": true,
+    "archiveCrcValid": true
+  },
+  "candidateWasm": {
+    "path": "bots/Bot1/Bot1-v4.wasm",
+    "sha256": "4d7b97189d9a4d3f2fbbe9377ee3a1326b3b9417850b58e87039b85eeec8ce43",
+    "bytes": 3321290
+  },
+  "defaultAliasesMatchVersion4": true,
+  "historicalBaselinesMatchOriginalArchives": true
+}
