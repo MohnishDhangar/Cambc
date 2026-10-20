@@ -4,13 +4,14 @@
 Uses the map serialization boundary verified in prepared-high-elo and checks the
 entire input record against the recorded count. Does not claim match outcomes.
 """
-import csv, json, struct
+import csv, json, struct, re, zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 PREP=ROOT/"match-data/v5/prepared-high-elo"
+SRC=ROOT/"match-data/v5/high-elo-teams"
+MAPDIR=ROOT/"maps"
 LENGTHS={0:4,1:8,2:9,3:17,4:0,5:8,6:8,7:0,8:8,9:9,10:8,11:4}
-def read(path,map_file, limit=None):
-    data=path.read_bytes()
+def read(data,map_file, limit=None):
     start=14+Path(map_file).stat().st_size
     expected=struct.unpack_from("<I",data,start)[0]
     p=start+4; n=0; subs={}; kinds={}; dump=[]
@@ -38,9 +39,20 @@ def main():
             seen.add(r["replay_sha256"])
             selected.append(r)
     report=[]
+    source={}
+    for p in SRC.rglob("*.zip"):
+        m=re.match(r"\\d+-([0-9a-f-]{36})\\.zip$",p.name)
+        if m:source[m.group(1)]=p
+    for p in SRC.rglob("replay.repl26a"):
+        m=re.match(r"\\d+-([0-9a-f-]{36})$",p.parent.name)
+        if m:source[m.group(1)]=p
     for r in selected:
         try:
-            v=read(PREP/r["replay_path"], PREP/"maps"/(r["map_sha256"]+".map26a"))
+            p=source[r["match_id"]]
+            if p.suffix==".zip":
+                with zipfile.ZipFile(p) as z:raw=z.read("replay.repl26a")
+            else:raw=p.read_bytes()
+            v=read(raw, MAPDIR/(r["map_name"]+".map26a"))
             v.update(id=r["match_id"],opponent=r["opponent"],side=r["our_side"],map=r["map_name"],valid=v["parsed_count"]==v["recorded_count"] and v["end_aligned"])
         except Exception as e:
             v={"id":r["match_id"],"error":str(e)}
