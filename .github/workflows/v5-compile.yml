@@ -1,0 +1,47 @@
+name: V5 compile with available CAMBC 2.2.5
+on:
+  push:
+    branches: [develop/v5-week2]
+    paths:
+      - 'bots/Bot1/src/**'
+      - '.github/workflows/v5-compile.yml'
+  workflow_dispatch:
+
+jobs:
+  compile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+
+      - name: Install CAMBC 2.2.5
+        run: |
+          python3 -m pip install --user cambc==2.2.5
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Install WASI SDK 33.0
+        run: |
+          curl -fLsS --retry 3 -o /tmp/wasi-sdk.tar.gz https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-33/wasi-sdk-33.0-x86_64-linux.tar.gz
+          mkdir -p "$RUNNER_TEMP/wasi"
+          tar -xzf /tmp/wasi-sdk.tar.gz -C "$RUNNER_TEMP/wasi"
+          echo "WASI_SDK_PREFIX=$RUNNER_TEMP/wasi/wasi-sdk-33.0-x86_64-linux" >> "$GITHUB_ENV"
+
+      - name: Initialize client SDK and build v5
+        env:
+          CAMBC_OFFLINE: '1'
+          CAMBC_NO_UPDATE_CHECK: '1'
+        run: |
+          cambc --version
+          cambc init --yes .
+          cambc build Bot1 --release --output "$RUNNER_TEMP/Bot1-v5.wasm"
+          ls -lh "$RUNNER_TEMP/Bot1-v5.wasm"
+          sha256sum "$RUNNER_TEMP/Bot1-v5.wasm"
+
+      - name: Upload compiled v5
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Bot1-v5-available-client
+          path: ${{ runner.temp }}/Bot1-v5.wasm
+          retention-days: 7
