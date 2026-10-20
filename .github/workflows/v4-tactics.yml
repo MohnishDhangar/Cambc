@@ -10,6 +10,8 @@ jobs:
   inspect:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    env:
+      CAMBC_CACHE: .cambc/cache
     steps:
       - uses: actions/checkout@v4
       - name: Install client
@@ -18,7 +20,6 @@ jobs:
         run: CAMBC_OFFLINE=1 "$HOME/.local/bin/cambc" init --yes .
       - name: Analyze selected replays
         env:
-          CAMBC_CACHE: .cambc/cache
           REPLAY_SELECT: "team-9/04-734168de|team-24/01-b7512a73|team-19/02-dcaaeae5"
         run: |
           node match-data/analysis/extract_v4_study.mjs match-data/v4 results/v4-tactics
