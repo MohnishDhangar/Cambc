@@ -20,6 +20,18 @@ games = data["games"]
 # Engine outcomes must be mapped via games with a non-tied score and completed
 # result; print mapping rather than assuming enum 1/2 or 0/1.
 outcome_cross = collections.Counter()
+identity_counts = collections.Counter()
+identity_by_match = {}
+for g in games:
+    log = Path("match-data/v4") / g["path"] / "team-a.stdout"
+    if not log.is_file():
+        state = "missing"
+    else:
+        content=log.read_bytes().replace(b"\\x00", b"").decode(errors="replace")
+        state = "verified" if content.startswith("Bot1 strategy v4 (SDK 2.2.5)") else "unverified"
+    identity_counts[state] += 1
+    identity_by_match[g["path"]] = state
+print("TEAM_A_IDENTITY",dict(identity_counts))
 outcome_ties = collections.Counter()
 by_category = collections.Counter()
 for g in games:
@@ -65,13 +77,13 @@ for g in games:
        path=g["path"],sha256=g["sha256"],category=g["category"],opponent_group=g["group"],
        folder_label=folder,engine_outcome=g.get("outcome"),score_A=scores[0],score_B=scores[1],
        score_leader=score_winner,inferred_engine_winner=engine or "",
-       corrected_result_assuming_team_A_is_Bot1=result,status=status,
+       corrected_result_assuming_team_A_is_Bot1=result,team_a_identity=identity_by_match[g["path"]],status=status,
        map_hash=g["mapHash"],round=g["round"]
     ))
 csv_path=DEST/"manifest-provisional.csv"
 with csv_path.open("w",newline="") as f:
     writer=csv.DictWriter(f,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
-summary=dict(total=len(rows),outcomesByScore=[dict(outcome=x[0][0],scoreLeader=x[0][1],games=x[1]) for x in sorted(outcome_cross.items())],
+summary=dict(total=len(rows),teamAIdentity=dict(identity_counts),outcomesByScore=[dict(outcome=x[0][0],scoreLeader=x[0][1],games=x[1]) for x in sorted(outcome_cross.items())],
               resolution=dict(outcome_winner=outcome_winner,classificationCounts={str(k):v for k,v in sorted(counts.items())}),
               mismatches=[r for r in rows if r["status"]!="agreement"])
 (DEST/"summary-provisional.json").write_text(json.dumps(summary,indent=2)+"\n")
@@ -80,3 +92,34 @@ print("CORRECTIONS_NEEDED",sum(r["status"]=="wrong_folder" for r in rows))
 print("UNRESOLVED",sum(r["status"]=="unresolved" for r in rows))
 print("MISMATCH_SAMPLE",json.dumps(summary["mismatches"][:8],indent=1))
 print("OUTPUT",csv_path)
+
+report = [
+    "# Reconciled v4 match labels", "",
+    "Generated from the existing 245 engine-0.0.3 replay reconstructions.",
+    "No replay files were changed or moved.", "",
+    f"- Analyzed matches: **{len(rows)}**",
+    f"- Team A identity: **{identity_counts['verified']}** verified v4 stdout markers, "
+    f"**{len(rows)-identity_counts['verified']}** unverified/missing.",
+    f"- Original score-comparison discrepancies: **{sum(not x['classifiedCorrectly'] for x in games)}**.",
+    f"- Engine-outcome folder discrepancies: **{sum(r['status']=='wrong_folder' for r in rows)}**.",
+    f"- Replays needing manual outcome verification: **{sum(r['status']=='unresolved' or r['team_a_identity']!='verified' for r in rows)}**.",
+    f"- True v4 engine wins in this selected dataset: **{sum(r['corrected_result_assuming_team_A_is_Bot1']=='wins' for r in rows)}**.",
+    f"- True v4 engine losses in this selected dataset: **{sum(r['corrected_result_assuming_team_A_is_Bot1']=='losses' for r in rows)}**.",
+    "",
+    "## Method", "",
+    "Engine outcome enum is inferred and checked against all decisive (non-tied) scores: 1 = Team A, 2 = Team B.",
+    "When scores tie, engine outcome is authoritative; a tie is not necessarily a draw.",
+    "Team A is verified against `team-a.stdout` within each match folder.",
+    "The original `category` retains the opponent Elo tier, but analyses should use the corrected result column rather than the folder's wins/losses directory.",
+    "Matched replays are anchored by their original `path` and SHA-256. This dataset is selected, not a random lobby sample.",
+    "",
+    "## Counts by folder", "",
+    "| Original folder | Correct | Incorrect |", "|---|---:|---:|",
+]
+for category in sorted({r['category'] for r in rows}):
+    subset=[r for r in rows if r['category']==category]
+    report.append(f"| {category} | {sum(r['status']=='agreement' for r in subset)} | {sum(r['status']=='wrong_folder' for r in subset)} |")
+report += ["", "A full per-match manifest is in [manifest-provisional.csv](manifest-provisional.csv)."]
+(DEST/"RECONCILIATION.md").write_text("\\n".join(report)+"\\n")
+if identity_counts["verified"] != len(rows):
+    raise SystemExit("Not all Team A identities verified; do not finalize outcome labels.")
