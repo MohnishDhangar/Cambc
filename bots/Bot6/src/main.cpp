@@ -1,21 +1,27 @@
+// Dispatch draft and gameplay; a failed turn is logged and still yields.
 #include <cambc.h>
 #include <iostream>
-#include <exception>
 #include "bot.h"
 #include "draft.h"
 
 int main() {
     Bot bot;
-    std::cout << "Bot6 v6.0 macro-controller" << std::endl;
+    std::cout << "Bot6 v6.1 frozen-v4 executor + macro policy" << std::endl;
     while (true) {
+        const auto started = cambc::round_number();
         try {
-            if (cambc::is_draft()) play_draft();
-            else bot.play_turn();
-        } catch (const std::exception& e) {
-            std::cout << "v6 error at " << bot.action << ": " << e.what() << '\n';
+            if (cambc::is_draft())
+                play_draft();
+            else
+                bot.play_turn();
+        } catch (const std::exception& error) {
+            std::cout << "bot error at " << bot.action << ": " << error.what() << std::endl;
         } catch (...) {
-            std::cout << "v6 error unknown at " << bot.action << '\n';
+            std::cout << "bot error: unknown exception" << std::endl;
         }
+
+        if (!cambc::is_draft() && cambc::round_number() != started)
+            std::cout << "fuel spill at " << bot.action << " from " << started << " to " << cambc::round_number() << '\n';
         cambc::end_turn();
     }
 }

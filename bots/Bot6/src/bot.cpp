@@ -1,553 +1,637 @@
-// V6.0: independent macro-strategy policy + shared team task claims.
-// Deliberately conservative executor: legal actions first, optimization later.
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <limits>
 #include <optional>
-#include <span>
-#include <variant>
 
 using namespace cambc;
 namespace {
-int distance(vec2 a, vec2 b) { return int(a.chebyshev_distance(b)); }
-bitboard around(vec2 p, int radius) {
+int dist(vec2 a, vec2 b) { return static_cast<int>(a.chebyshev_distance(b)); }
+bitboard around(vec2 p, int r) {
     bitboard b;
-    b.draw_chebyshev(p, radius);
+    b.draw_chebyshev(p, r);
     return b;
 }
-unsigned identity(const champion& c) {
-    return static_cast<unsigned>(static_cast<handle_champion_t>(c));
+unsigned id(const champion& c) { return static_cast<unsigned>(static_cast<handle_champion_t>(c)); }
+float camp_health(camp_type kind) {
+    constexpr float values[]{1350, 2400, 500, 500, 20000};
+    return values[static_cast<int>(kind)];
+}
+float camp_damage(camp_type kind) {
+    constexpr float values[]{20, 60, 0, 0, 200};
+    return values[static_cast<int>(kind)];
 }
 bitboard occupied() {
     auto b = vision::champion_tiles() | vision::camp_tiles() | vision::teleport_tiles();
     b.set(self().position(), false);
     return b;
 }
-float clamp_value(float x, float a, float b) { return std::max(a, std::min(x,b)); }
-const char* mode_name(MacroMode m) {
-    switch(m) {
-        case MacroMode::economy: return "economy";
-        case MacroMode::tempo_farm: return "tempo";
-        case MacroMode::contest: return "contest";
-        case MacroMode::objective: return "objective";
-        default: return "adaptive";
-    }
 }
-const char* job_name(Job j) {
-    switch(j) {
-        case Job::bank: return "bank";
-        case Job::recover: return "recover";
-        case Job::intercept: return "intercept";
-        case Job::siege: return "siege";
-        default: return "farm";
+
+float v6_macro_adjust(float score, float value, float gold, int distance,
+                      float work, float bank_trip, float danger_cost,
+                      unsigned round, bool major) {
+#ifndef V6_MACRO_MODE
+#define V6_MACRO_MODE 5
+#endif
+    // 0: exact v4 reward, 1: economy, 2: tempo, 3: contest,
+    // 4: objective, 5: adaptive. One compile-time policy per tournament bot.
+    int mode=V6_MACRO_MODE;
+    if (mode==5) {
+        const auto me=cambc::self();
+        if (round<300 && me.gold_count()<150) mode=1;
+        else if (major && round>400) mode=4;
+        else if (me.gem_count()>0) mode=2;
+        else mode=2;
     }
-}
+    if (mode==0) return score;
+    if (mode==1) {
+        // Invest in early gold when upgrades still have time to pay back.
+        return score * (round<650 ? (1.f+std::min(.65f, gold/std::max(1.f,value))) : 1.f);
+    }
+    if (mode==2) {
+        // Penalize long walks harder; target high bankable gem throughput.
+        return score * (0.8f + 12.f / std::max(12.f,12.f+distance*.9f+bank_trip*.15f));
+    }
+    if (mode==3) {
+        // Prize accessible contested groups, but do not reward suicidal attacks.
+        return score * (1.f+(danger_cost<1.f ? .2f : 0.f));
+    }
+    if (mode==4) {
+        return score * (major?1.5f:(work>45.f?.8f:1.f));
+    }
+    return score;
 }
 
 void Bot::initialize() {
     action = "initialize";
     auto& me = self();
-    allies = champions(team::ally);
-    enemies = champions(team::enemy);
-    std::sort(allies.begin(), allies.end(), [](const auto& a, const auto& b) {
-        return identity(a) < identity(b);
-    });
-    for (int i=0;i<int(allies.size());++i)
-        if (allies[i] == me) slot=i;
-
     terrain = map::walls() | map::holes() | map::altars() | map::spawn_region(team::enemy);
-    for (const auto& g: map::camp_groups()) {
-        if (g.camps().empty()) continue;
-        CampPlan p{g, g.camps().front().spawn_position()};
-        for (const auto& member:g) {
-            p.base_hp += member.base_stats().base_health;
-            p.base_damage += member.base_stats().base_strength;
-            ++p.members;
+    allies = champions(team::ally);
+    enemy_roster = champions(team::enemy);
+    std::sort(allies.begin(), allies.end(), [](const auto& a, const auto& b) { return id(a) < id(b); });
+    for (int i = 0; i < static_cast<int>(allies.size()); ++i)
+        if (allies[i] == me) slot = i;
+    for (auto& g : map::camp_groups()) {
+        auto tiles = g.spawn_tiles();
+        Group entry{g, tiles, g.camps().front().spawn_position()};
+        for (const auto& c : g) {
+            entry.health += camp_health(c.kind());
+            entry.damage += camp_damage(c.kind());
+            ++entry.members;
         }
-        // Engine-provided design statistics avoid hard-coded Week 2 camp IDs.
-        p.major = p.base_hp >= 4200.f && g.gem_value() > 0;
-        camps.push_back(p);
+        entry.major = g.gem_value() && entry.health >= 10000;
+        groups.push_back(std::move(entry));
     }
+    objective_map = std::any_of(groups.begin(), groups.end(), [](const Group& g) { return g.major; })
+        && std::none_of(groups.begin(), groups.end(), [](const Group& g) { return g.camp.gem_value() && !g.major; });
+    const auto type = me.champion_name();
+    caster_build = type == champion_type::stellar || type == champion_type::prism || type == champion_type::ren
+        || type == champion_type::cassi || (type == champion_type::tavi && objective_map);
     bitboard visited;
     home_distance.compute(terrain, map::spawn_region(team::ally), visited);
-    bitboard bank_goals;
-    for (auto p: map::altars().positions())
-        bank_goals |= around(p, constants::submit_gems_range);
-    bank_goals &= ~terrain;
-    if (!bank_goals.is_empty()) altar_distance.compute(terrain, bank_goals, visited);
+    bitboard altar_goals;
+    for (auto p : map::altars().positions()) altar_goals |= around(p, constants::submit_gems_range);
+    altar_goals &= ~terrain;
+    altar_distance.compute(terrain, altar_goals, visited);
+    me.set_priority(100 - slot);
+    initialized = true;
+}
 
-    auto type=me.champion_name();
-    caster = type == champion_type::stellar || type == champion_type::prism
-        || type == champion_type::cassi || type == champion_type::tavi;
-    if (slot < 8) shared_memory[slot]=0;
-    me.set_priority(90-slot);
-    initialized=true;
+void Bot::claim(int index) {
+    target = index;
+    // Zero means unassigned. Groups beyond byte range still work without claims.
+    if (slot < 8) shared_memory[slot] = index >= 0 && index < 254 ? index + 1 : 0;
 }
 
 void Bot::observe() {
-    action="observe";
+    action = "observe";
     shared_memory.read(0, std::span{claims});
-}
-
-float Bot::danger(vec2 p) const {
-    float total=0.f;
-    for (const auto& e:enemies) {
-        if (!e.is_alive() || !e.is_visible()) continue;
-        if (distance(p,e.position())<=e.attack_range()+1)
-            total += e.strength()+45.f;
-    }
-    return total;
-}
-
-float Bot::clear_time(const CampPlan& g) const {
-    const auto& me=self();
-    float dps=std::max(28.f,me.strength());
-    for (const auto& a:me.abilities())
-        if (a.is_damage() || a.is_aoe_damage()) dps+=a.damage_amount()/10.f;
-    if (me.champion_name()==champion_type::varg)
-        dps *= std::min(2.2f,1.f+0.32f*(g.members-1));
-    return g.base_hp/std::max(28.f,dps);
-}
-
-MacroMode Bot::macro_mode() const {
-#ifndef V6_DEFAULT_MACRO
-#define V6_DEFAULT_MACRO 4
-#endif
-    constexpr int selected=V6_DEFAULT_MACRO;
-    if (selected>=0 && selected<4) return static_cast<MacroMode>(selected);
-    // Auto-switching policy: does not assume an unobservable opponent state.
-    const auto& me=self();
-    if (me.gem_count() >= static_cast<unsigned>(params.bank_gems))
-        return MacroMode::tempo_farm;
-    if (round<200 && me.gold_count()<static_cast<unsigned>(params.shop_gold))
-        return MacroMode::economy;
-    for (const auto& enemy:enemies)
-        if (enemy.is_alive() && enemy.is_visible()
-            && distance(me.position(),enemy.position())<=5
-            && enemy.gem_count()>=15 && me.health()>me.max_health()*.62f)
-            return MacroMode::contest;
-    bool only_major=true;
-    for (const auto& g:camps)
-        if (g.group.gem_value()>0 && !g.major) only_major=false;
-    if (only_major) return MacroMode::objective;
-    return MacroMode::tempo_farm;
-}
-
-float Bot::camp_utility(int i, MacroMode mode) const {
-    const auto& me=self();
-    const auto& g=camps[i];
-    if (round<g.avoid_until) return -1e8f;
-    int d=distance(me.position(),g.centre);
-    if (g.group.gem_value()==0 && round>450) return -1e8f;
-
-    // Observe lifecycle only when the camp's spawn location is visible.
-    bool visible=false,ready=false;
-    for (const auto& c:g.group)
-        if (vision::visible_tiles().is_set(c.spawn_position())) {visible=true;break;}
-    if (visible) {
-        auto state=g.group.state();
-        if (auto respawn=std::get_if<map::camp_group_respawning>(&state)) {
-            if (respawn->timer>std::max(12,d+3)) return -1e8f;
+    const auto visible = vision::visible_tiles();
+    const auto camp_tiles = vision::camp_tiles();
+    for (auto& g : groups) {
+        g.visible = false;
+        for (const auto& c : g.camp)
+            if (visible.is_set(c.spawn_position())) { g.visible = true; break; }
+        if (!g.visible) {
+            if (g.state == 2 && round >= g.ready_round) g.state = 0;
+            continue;
         }
-        ready=std::holds_alternative<map::camp_group_reward_available>(state);
-    }
-    const float work=ready?0.f:clear_time(g);
-    const float exposed=(!ready && g.base_damage>0)
-        ?g.base_damage*(work/7.f + 1.f)/std::max(1.f,me.health()) : 0.f;
-    if (exposed>1.75f && !g.major) return -1e8f;
-    if (g.major && (round<160 || (!caster && me.strength()<145.f))) return -1e8f;
-    float gold=params.gold_weight;
-    if (mode==MacroMode::economy) gold=.8f;
-    if (mode==MacroMode::tempo_farm) gold=.11f;
-    float bounty=float(g.group.gem_value()) + gold*float(g.group.gold_value());
-    if (ready) bounty+=12.f;
-    float reward=bounty/std::max(3.f, 4.f + params.distance_weight*d + work);
-    reward*=g.major?(mode==MacroMode::objective?2.0f:0.7f):1.f;
-    if (mode==MacroMode::tempo_farm) reward*=params.farm_bonus;
-    float bank_dist=float(altar_distance.get(g.centre));
-    if (bank_dist < distance_field::unreachable)
-        reward /= 1.f + .004f * bank_dist;
-    const float peril=danger(g.centre) * params.risk_weight
-        /std::max(1.f,me.health());
-    reward /= 1.f+peril+std::max(0.f,exposed-0.5f);
-    // Team task reservations are stronger than per-champion greedy choices.
-    for (int j=0;j<int(allies.size()) && j<8;++j)
-        if (j!=slot && claims[j]==i+1)
-            reward *= ready?0.015f:0.25f;
-    if (held_target==i) reward*=1.14f; // prevent pointless oscillation
-    return reward;
-}
-
-Bot::Plan Bot::select_plan(MacroMode mode) {
-    auto& me=self();
-    Plan best;
-    best.macro=mode;
-    if (!me.is_alive()) return best;
-    const bool home=map::spawn_region(team::ally).is_set(me.position());
-    const auto hp=me.health()/std::max(1.f,me.max_health());
-
-    bool bank_now=me.gem_count()>=static_cast<unsigned>(params.bank_gems)
-        || (me.gem_count()>0 && (hp<.52f || danger(me.position())>0
-             || round>1200));
-    if (me.gem_count()>0 && mode==MacroMode::tempo_farm && me.gem_count()>=12)
-        bank_now=true;
-    if (bank_now) {best.job=Job::bank;best.utility=1e6f;return best;}
-    if (!home && (hp<params.health_reserve
-        || (me.gem_count()==0 && me.gold_count()>=static_cast<unsigned>(params.shop_gold)
-           && round>last_shop_round+60 && hp<.87f))) {
-        best.job=Job::recover;best.utility=1e5f;return best;
-    }
-
-    const bool pressure=(mode==MacroMode::contest);
-    if (pressure && hp>.5f) {
-        for (const auto& e:enemies) {
-            if (!e.is_visible() || !e.is_alive()) continue;
-            int d=distance(me.position(),e.position());
-            if (d>7) continue;
-            float score=50.f/(1+d)+e.gem_count()*1.7f
-                +clamp_value((me.health()-e.health())/120.f,-8.f,8.f);
-            if (score>best.utility) {
-                best.job=Job::intercept;
-                best.enemy_target=e.position();
-                best.utility=score*params.contest_bonus;
+        auto state = g.camp.state();
+        if (auto respawn = std::get_if<map::camp_group_respawning>(&state)) {
+            g.recipient = -1;
+            g.state = 2;
+            g.ready_round = round + std::max(0, respawn->timer);
+        } else if (std::holds_alternative<map::camp_group_reward_available>(state)) {
+            g.state = 1;
+            g.health = g.damage = 0;
+            g.members = 0;
+        } else {
+            g.recipient = -1;
+            g.state = 0;
+            g.health = g.damage = 0;
+            g.members = 0;
+            for (const auto& c : g.camp) {
+                const auto p = c.spawn_position();
+                if (visible.is_set(p) && !camp_tiles.is_set(p)) continue;
+                g.health += c.is_visible() ? c.health() : camp_health(c.kind());
+                g.damage += camp_damage(c.kind());
+                ++g.members;
             }
         }
-        if (best.job==Job::intercept && best.utility>6.f) return best;
     }
+}
 
-    best.utility=-1e8f;
-    for (int i=0;i<int(camps.size());++i) {
-        if (fuel_remaining()<28000) break;
-        float u=camp_utility(i,mode);
-        if (u>best.utility) {
-            best.utility=u;
-            best.camp_index=i;
-            best.job=camps[i].major?Job::siege:Job::farm;
+void Bot::buy_items() {
+    action = "buy_items";
+    auto& me = self();
+    const bool home = me.is_alive() && map::spawn_region(team::ally).is_set(me.position());
+    const auto type = me.champion_name();
+    if (me.is_alive() && !home && type != champion_type::tavi) return;
+    // A crystal is an escape from disconnected terrain and blocked corridors.
+    if ((home || !me.is_alive()) && me.can_buy(consumable_type::tp_crystal))
+        me.buy(consumable_type::tp_crystal);
+    auto counts = me.item_count();
+    while (me.gold_count() >= 30 && fuel_remaining() > 15000) {
+        item_type item = item_type::power_shard_of_strength;
+        if (counts[item_type::monster_emblem_of_strength] == 0)
+            item = item_type::monster_shard_of_strength;
+        else if (counts[item_type::jungle_emblem_of_strength] == 0)
+            item = item_type::jungle_shard_of_strength;
+        else if (home && me.max_health() < me.base_stats().base_health + 500)
+            item = item_type::power_shard_of_health;
+        if (caster_build) {
+            item = item_type::power_shard_of_focus;
+            if (counts[item_type::power_emblem_of_focus] >= 2 && home
+                && !counts[item_type::durability_emblem_of_health]) item = item_type::durability_shard_of_health;
         }
-    }
-    if (best.utility<0) {
-        best.job=Job::recover;
-        best.camp_index=-1;
-    }
-    return best;
-}
-
-void Bot::publish_claim(int target) {
-    held_target=target;
-    if (slot<8) shared_memory[slot]=(target>=0 && target<254)?target+1:0;
-}
-
-bool Bot::buy() {
-    action="shop";
-    auto& me=self();
-    if (!me.is_alive()) return false;
-    const bool home=map::spawn_region(team::ally).is_set(me.position());
-    if (!home && me.champion_name()!=champion_type::tavi) return false;
-    bool done=false;
-    auto counts=me.item_count();
-    for (int n=0;n<8 && fuel_remaining()>16000;++n) {
-        item_type item=caster?item_type::power_shard_of_focus:item_type::power_shard_of_strength;
-        if (!caster && counts[item_type::monster_emblem_of_strength]==0)
-            item=item_type::monster_shard_of_strength;
-        else if (!caster && counts[item_type::jungle_emblem_of_strength]==0)
-            item=item_type::jungle_shard_of_strength;
-        else if (home && me.champion_name()==champion_type::ryth
-                 && counts[item_type::durability_emblem_of_health]==0)
-            item=item_type::durability_shard_of_health;
         if (!me.can_buy(item)) break;
         me.buy(item);
-        done=true;
-        counts=me.item_count();
-        last_shop_round=round;
+        counts = me.item_count();
+        last_shop_round = round;
     }
-    return done;
 }
 
-bool Bot::try_combat(const unit& target,bool is_enemy) {
-    auto& me=self();
-    if (fuel_remaining()<18000 || !target.is_visible() || target.health()<=0)
-        return false;
-    const vec2 goal=target.position();
-    bool acted=false;
-    if (me.can_cast()) {
-        float best=-1.f;
-        std::optional<ability> selected;
-        for (const auto& spell:me.abilities()) {
-            if (!spell.is_ready() || !spell.info()) continue;
-            if (!(spell.is_damage() || spell.is_aoe_damage() || spell.is_cc())) continue;
-            if (!spell.valid_tiles().is_set(goal)) continue;
-            if (is_enemy?!(spell.can_target_enemies() || spell.can_target_ground())
-                       :!(spell.can_target_camps() || spell.can_target_ground())) continue;
-            const bool exclusive=std::visit([](const auto& data){
-                return data.exclusive_with_movement;},*spell.info());
-            if (walked && exclusive) continue;
-            float value=spell.damage_amount()+(spell.is_cc()?45.f:0.f);
-            if (value>best) {best=value;selected=spell;}
-        }
-        if (selected) {
-            action="cast";
-            if (selected->can_target_ground()) acted=selected->use(goal);
-            else if (is_enemy) acted=selected->use(static_cast<const champion&>(target));
-            else acted=selected->use(static_cast<const camp&>(target));
+float Bot::expected_damage(const Group& g) const {
+    float dps = farm_dps;
+    if (splash) dps *= std::min(3, std::max(1, g.members));
+    const float turns = g.health / std::max(1.f, dps);
+    float damage = g.damage * incoming_multiplier;
+    if (g.members > 1) damage *= .65f;
+    return std::max(0.f, damage * (turns + 2) - std::ceil(turns / 8) * shield_cycle);
+}
+
+int Bot::select_camp() {
+    action = "select_camp";
+    auto& me = self();
+    farm_dps = me.strength();
+    shield_cycle = 0;
+    splash = me.champion_name() == champion_type::varg;
+    incoming_multiplier = 1;
+    for (const auto& a : me.abilities()) {
+        if (a.is_attack_reset()) farm_dps += me.strength() / 8;
+        else if (a.is_damage() || a.is_cc() || a.is_aoe_damage()) farm_dps += a.damage_amount() / 8;
+        else if (a.is_shield()) shield_cycle = a.shield_amount();
+    }
+    const auto counts = me.item_count();
+    if (counts[item_type::jungle_emblem_of_strength]) incoming_multiplier *= .7f;
+    if (counts[item_type::durability_emblem_of_strength]) incoming_multiplier *= .9f;
+    const auto health_reserve = me.health() - std::max(120.f, me.max_health() * .18f);
+    const auto strength = me.strength();
+    const auto enemy_spawn = map::spawn_region(team::enemy).positions().front();
+    distance_field travel;
+    bitboard visited;
+    travel.compute(terrain, around(me.position(), 0), visited);
+    float best = -1;
+    int choice = -1;
+    for (int pass = 0; pass < 2 && choice < 0; ++pass)
+    for (int i = 0; i < static_cast<int>(groups.size()); ++i) {
+        if (fuel_remaining() < 33000) break;
+        const auto& g = groups[i];
+        if (g.avoid_until > round || (objective_map && g.major)) continue;
+        int distance = distance_field::unreachable;
+        for (const auto& c : g.camp) distance = std::min(distance, int(travel.get(c.spawn_position())));
+        if (distance == distance_field::unreachable) continue;
+        int wait = g.state == 2 ? std::max(0, int(g.ready_round) - int(round) - distance) : 0;
+        if (wait > 12) continue;
+        int assigned = 0;
+        if (i < 254)
+            for (int j = 0; j < static_cast<int>(allies.size()) && j < 8; ++j)
+                if (j != slot && claims[j] == i + 1) ++assigned;
+        // Do not interrupt a teammate's capture or duplicate its farming route.
+        if (pass == 0 ? assigned != 0 : (assigned == 0 || g.state != 0)) continue;
+        const float damage = g.state == 1 ? 0 : expected_damage(g) / ((assigned + 1) * (assigned + 1));
+        if (damage > health_reserve) continue;
+        float work = g.state == 1 ? 0 : g.health / std::max(1.f, strength * 1.25f);
+        if (me.champion_name() == champion_type::varg) work /= std::min(3, std::max(1, g.members));
+        const float bank_trip = altar_distance.get(g.centre) == distance_field::unreachable ? 100.f : altar_distance.get(g.centre);
+        const float value = g.camp.gem_value() + g.camp.gold_value() * (round < 700 ? .32f : .12f);
+        float score = value / (distance + wait + work / (assigned + 1) + 6 + bank_trip * .35f);
+        const float cost = expected_damage(g)/std::max(1.f,me.health());
+        score=v6_macro_adjust(score,value,g.camp.gold_value()*.32f,distance,
+                              work,bank_trip,cost,round,g.major);
+        if (dist(g.centre, enemy_spawn) + 4 < home_distance.get(g.centre)) score *= .65f;
+        if (i == target) score *= 1.3f;
+        if (score > best) { best = score; choice = i; }
+    }
+    return choice;
+}
+
+void Bot::refresh_threats() {
+    threats.clear();
+    visible_enemies.clear();
+    for (const auto& enemy : enemy_roster) {
+        if (!enemy.is_visible() || !enemy.is_alive()) continue;
+        visible_enemies.push_back(enemy);
+        threats.push_back({enemy.position(), enemy.strength() + 35, enemy.attack_range() + 1});
+    }
+    for (const auto& g : groups) {
+        if (g.state != 0 || !g.visible) continue;
+        for (const auto& c : g.camp)
+            if (camp_damage(c.kind()) > 0 && c.is_visible() && c.health() > 0 && c.is_awake())
+                threats.push_back({c.position(), c.strength(), c.attack_range()});
+    }
+}
+
+float Bot::danger(vec2 tile) const {
+    float value = 0;
+    for (const auto& t : threats)
+        if (dist(tile, t.position) <= t.range) value += t.damage;
+    return value;
+}
+
+bool Bot::navigate(bitboard goals, bool escape, bool use_dash) {
+    action = "navigate";
+    if (fuel_remaining() < 18000) return false;
+    auto& me = self();
+    if (goals.is_set(me.position())) return false;
+    auto units = occupied();
+    auto blocked = terrain | units;
+    blocked.set(me.position(), false);
+    goals &= ~blocked;
+    if (goals.is_empty()) return false;
+    distance_field field;
+    bitboard visited;
+    // Compute the complete field so dash/crystal destinations in a separate
+    // component can be evaluated too.
+    field.compute(blocked, goals, visited);
+    auto origin = me.position();
+    float current = field.get(origin);
+    if (escape) current += danger(origin) * 2;
+    auto score = [&](vec2 p) {
+        return float(field.get(p)) + (escape ? danger(p) * 2 : 0.f);
+    };
+    // Dashes use the SDK's reachable mask with holes traversable but illegal
+    // as landing squares. Normal walking has its own stricter mask below.
+    if (use_dash) for (const auto& a : me.abilities()) {
+        if (!a.is_dash() || !a.is_ready()) continue;
+        auto dash_walls = map::walls() | map::altars() | map::spawn_region(team::enemy) | units;
+        auto candidates = dash_walls.reachable_tiles(origin, 2) & ~blocked;
+        auto best = origin;
+        float value = current - 1.5f;
+        for (auto p : candidates.positions()) if (score(p) < value) { value = score(p); best = p; }
+        action = "navigate dash";
+        if (best != origin && a.use(best)) {
+            origin = me.position();
+            // A dash changes vision. Refresh occupants before an ordinary step.
+            units = occupied();
+            blocked = terrain | units;
+            blocked.set(origin, false);
+            refresh_threats();
+            current = score(origin);
         }
     }
-    for (int n=0;n<3 && fuel_remaining()>14000;++n) {
-        if (!target.is_visible() || target.health()<=0
-            || !me.attack_tiles().is_set(target.position())) break;
+    if (me.can_move()) {
+        auto candidates = blocked.reachable_tiles(origin, me.base_stats().base_move_speed).positions();
+        std::sort(candidates.begin(), candidates.end(), [&](vec2 a, vec2 b) { return score(a) < score(b); });
+        for (auto p : candidates) {
+            if (p == origin || score(p) >= current) continue;
+            action = "navigate walk";
+            if (me.move_absolute(p)) { walked = true; return true; } // Retry on hidden occupants.
+        }
+    }
+    // A three-tick crystal is useful only when it beats walking by at least
+    // five tiles, or connects a component that walking cannot reach.
+    if (me.consumables()[consumable_type::tp_crystal].count() && danger(origin) == 0) {
+        auto landings = around(origin, 3) & ~blocked;
+        auto best = origin;
+        float value = field.get(origin) - 5.f;
+        for (auto p : landings.positions())
+            if (field.get(p) < value && danger(p) == 0) { value = field.get(p); best = p; }
+        action = "navigate crystal";
+        if (best != origin && me.consumables()[consumable_type::tp_crystal].use(best)) return true;
+    }
+    return me.position() != previous;
+}
+
+bool Bot::fight(const unit& victim, bool enemy) {
+    action = "fight";
+    if (fuel_remaining() < 16000) return false;
+    auto& me = self();
+    if (!victim.is_visible() || victim.health() <= 0) return false;
+    const auto position = victim.position();
+    const float hp = victim.health();
+    bool acted = false;
+    // Use targeted and area spells before walking; exclusivity is checked
+    // against our record of an ordinary move this turn.
+    std::optional<ability> best_spell;
+    float best_value = 0;
+    for (const auto& a : me.abilities()) {
+        if (!a.is_ready() || !a.info()) continue;
+        const bool moved = walked;
+        const bool exclusive = std::visit([](const auto& info) { return info.exclusive_with_movement; }, *a.info());
+        if (moved && exclusive) continue;
+        if (!(a.is_damage() || a.is_aoe_damage() || a.is_cc())) continue;
+        if (!a.valid_tiles().is_set(position)) continue;
+        if (enemy ? !(a.can_target_enemies() || a.can_target_ground()) : !(a.can_target_camps() || a.can_target_ground())) continue;
+        float value = a.damage_amount();
+        if (a.is_aoe_damage()) {
+            const auto radius = a.get<ability_aoe_damage>().radius;
+            for (const auto& c : vision::camps())
+                if (c.position() != position && dist(c.position(), position) <= radius) value += a.damage_amount();
+        }
+        if (a.is_cc()) value += enemy ? 60 : victim.strength();
+        if (value > best_value) { best_value = value; best_spell = a; }
+    }
+    if (best_spell && (hp > me.strength() || dist(me.position(), position) > me.attack_range())) {
+        bool result;
+        if (best_spell->can_target_ground()) result = best_spell->use(position);
+        else if (enemy) result = best_spell->use(static_cast<const champion&>(victim));
+        else result = best_spell->use(static_cast<const camp&>(victim));
+        acted = result;
+    }
+    action = "fight attacks";
+    // Vendetta can reset again after a kill. Every query below is fresh.
+    for (int attacks = 0; attacks < 3; ++attacks) {
+        if (!victim.is_visible() || victim.health() <= 0 || dist(me.position(), position) > me.attack_range()) break;
         if (!me.can_attack()) {
-            bool reset=false;
-            for (const auto& a:me.abilities())
-                if (a.is_attack_reset() && a.is_ready()) {
-                    reset=a.use(); break;
-                }
+            bool reset = false;
+            for (const auto& a : me.abilities())
+                if (a.is_attack_reset() && a.is_ready()) { reset = a.use(); break; }
             if (!reset || !me.can_attack()) break;
         }
-        action="attack";
-        me.attack(target);
-        acted=true;
+        me.attack(victim);
+        acted = true;
     }
+    action = "fight shield";
+    if (!enemy && victim.is_visible() && victim.health() > 0 && danger(me.position()) > 0)
+        for (const auto& a : me.abilities())
+            if (a.is_shield() && a.is_ready()) { a.use(); acted = true; break; }
+    if (acted) stalled = 0;
     return acted;
 }
 
-bool Bot::attack_visible_enemy(bool chase) {
-    auto& me=self();
+bool Bot::defend() {
+    action = "defend";
+    auto& me = self();
     std::optional<champion> victim;
-    float top=-1e8f;
-    for (const auto& e:enemies) {
-        if (!e.is_visible() || !e.is_alive()) continue;
-        int d=distance(me.position(),e.position());
-        if (d>(chase?7:me.attack_range()+1)) continue;
-        float value=100.f/(1+d)+e.gem_count()*2.f
-            -e.health()*.005f;
-        if (value>top) {top=value;victim=e;}
+    float score = -1;
+    for (const auto& c : visible_enemies) {
+        if (!c.is_visible() || !c.is_alive()) continue;
+        const int d = dist(me.position(), c.position());
+        if (d > 4) continue;
+        // Fight nearby threats and secure exposed carriers, without chasing.
+        float value = 2000.f / (c.health() + 100) + c.gem_count() * .05f - d * .1f;
+        if (value > score) { score = value; victim = c; }
     }
-    if (!victim || me.health()<me.max_health()*.32f) return false;
-    if (try_combat(*victim,true)) return true;
-    if (!chase) return false;
-    bitboard goals=around(victim->position(),me.attack_range());
-    return navigate(goals,true);
+    if (!victim) return false;
+    if (me.health() < me.max_health() * .35f && victim->health() > me.strength() * 2) return false;
+    return fight(*victim, true);
 }
 
-bool Bot::navigate(bitboard goals,bool flee) {
-    action="navigate";
-    auto& me=self();
-    if (fuel_remaining()<25000 || !me.can_move() || me.is_teleporting()
-        || me.is_recalling() || me.is_submitting_gems()) return false;
-    const vec2 origin=me.position();
-    auto blocked=terrain | occupied();
-    blocked.set(origin,false);
-    goals &= ~blocked;
-    if (goals.is_empty() || goals.is_set(origin)) return false;
-    distance_field field;
-    bitboard visited;
-    field.compute(blocked,goals,visited);
-    const float here=field.get(origin);
-    if (here>=distance_field::unreachable) return false;
-    bitboard legal=(blocked.reachable_tiles(origin,me.base_stats().base_move_speed) & ~blocked);
-    const float limit=here + (flee?danger(origin)*.13f:0.f);
-    std::vector<std::pair<float,vec2>> options;
-    for (auto tile:legal.positions()) {
-        if (tile==origin || occupied().is_set(tile) || terrain.is_set(tile)) continue;
-        const float remaining=field.get(tile);
-        if (remaining>=distance_field::unreachable) continue;
-        const float value=remaining+(flee?danger(tile)*.13f:0.f);
-        if (value<limit-.005f) options.emplace_back(value,tile);
+void Bot::recover() {
+    action = "recover";
+    auto& me = self();
+    claim(-1);
+    const int home = home_distance.get(me.position());
+    if (danger(me.position()) == 0 && home > constants::recall_time + 1) {
+        me.recall();
+        return;
     }
-    std::sort(options.begin(),options.end(),[](const auto& x,const auto& y) {
-        return x.first<y.first;
-    });
-    // SDK reachable_tiles can suggest occupied landings. Error 22 is a
-    // recoverable destination rejection (seen in live v5 and v6 smoke logs).
-    // Try alternatives; propagate other engine errors rather than hiding bugs.
-    for (const auto& option:options) {
-        if (fuel_remaining()<18000) break;
-        const vec2 tile=option.second;
-        if (occupied().is_set(tile) || terrain.is_set(tile)) continue;
-        action="walk";
-        try {
-            if (me.move_absolute(tile)) {walked=true;return true;}
-        } catch (const cambc::error& e) {
-            if (e.code()!=error_code::invalid_action_move_bad_destination)
-                throw;
-        }
-    }
-    return false;
+    navigate(map::spawn_region(team::ally), true);
+    if (!me.is_teleporting() && me.can_attack()) defend();
 }
 
-bool Bot::do_bank() {
-    action="bank";
-    auto& me=self();
+bool Bot::bank() {
+    action = "bank";
+    auto& me = self();
     if (!me.gem_count()) return false;
+    claim(-1);
     bitboard goals;
-    for (auto altar:map::altars().positions()) {
-        if (distance(me.position(),altar)<=constants::submit_gems_range) {
-            if (vision::has_altar_lock(altar)) {
-                const auto lock=vision::altar_lock_at(altar);
+    for (auto p : map::altars().positions()) {
+        if (dist(me.position(), p) <= constants::submit_gems_range) {
+            // submit_gems also attacks an enemy lock. Own locks permit tribute.
+            if (vision::has_altar_lock(p)) {
+                const auto lock = vision::altar_lock_at(p);
                 if (lock.is_enemy()) {
-                    if (me.can_attack() && me.attack_tiles().is_set(altar)) {
-                        action="unlock";
-                        me.attack(lock);
-                    }
-                    continue;
+                    if (me.can_attack()) me.attack(lock);
+                    return true;
                 }
             }
-            if (danger(me.position())*std::max(2.f,me.gem_count()/10.f)
-                 <me.health()*.90f) {
-                action="submit";
-                me.submit_gems(altar);
+            if (danger(me.position()) < me.health() / (std::ceil(me.gem_count() / 10.f) + 2)) {
+                me.submit_gems(p);
                 return true;
             }
         }
-        goals |= around(altar, constants::submit_gems_range);
+        goals |= around(p, constants::submit_gems_range);
     }
-    return navigate(goals,true);
+    navigate(goals, me.health() < me.max_health() * .5f);
+    return true;
 }
 
-bool Bot::do_recover() {
-    action="recover";
-    auto& me=self();
-    if (map::spawn_region(team::ally).is_set(me.position())) return false;
-    if (danger(me.position())<1.f &&
-        home_distance.get(me.position())>constants::recall_time+2) {
-        me.recall();
+bool Bot::capture_group(int index) {
+    auto& g = groups[index];
+    if (g.recipient >= 0) {
+        const auto& a = allies[g.recipient];
+        if (!a.is_visible() || !a.is_alive() || a.is_recalling() || a.gem_count()
+            || (g.recipient != slot && claims[g.recipient] != index + 1 && !g.tiles.is_set(a.position()))) g.recipient = -1;
+    }
+    int recipient = g.recipient;
+    float best = 1e9f;
+    if (recipient < 0) for (int j = 0; j < static_cast<int>(allies.size()); ++j) {
+        const auto& a = allies[j];
+        if (!a.is_visible() || !a.is_alive() || a.gem_count() || a.is_recalling()
+            || a.is_submitting_gems() || a.is_teleporting()) continue;
+        const auto position = a.position();
+        if (!g.tiles.is_set(position) && (j != slot && (j >= 8 || claims[j] != index + 1))) continue;
+        int distance = 65535;
+        for (auto p : g.tiles.positions()) distance = std::min(distance, dist(position, p));
+        if (distance > 6) continue;
+        const auto items = a.item_count();
+        int investment = 0, item_index = 0;
+        for (const auto count : items) { investment += count * (item_index % 2 ? 5 : 1); ++item_index; }
+        const float score = std::min(investment, 20) * 3.f + distance * 4.f - (distance == 0 ? 4.f : 0.f) + j * .001f;
+        if (score < best) { best = score; recipient = j; }
+    }
+    if (recipient < 0) recipient = slot;
+    g.recipient = recipient;
+    if (recipient == slot) { navigate(g.tiles); stalled = 0; return true; }
+    g.avoid_until = round + 12;
+    claim(-1);
+    if (g.tiles.is_set(self().position())) {
+        navigate(around(self().position(), 2) & ~g.tiles & ~terrain);
         return true;
     }
-    return navigate(map::spawn_region(team::ally),true);
-}
-
-bool Bot::cast_or_attack_camp(const CampPlan& g) {
-    action="farm-action";
-    auto& me=self();
-    std::optional<camp> choice;
-    float best=1e9f;
-    for (const auto& c:g.group) {
-        if (!c.is_visible() || c.health()<=0) continue;
-        float value=c.health()+distance(me.position(),c.position())*70.f;
-        if (value<best) {best=value;choice=c;}
-    }
-    if (!choice) return false;
-    if (try_combat(*choice,false)) return true;
-    // Don't stand on top of camp or teleport tiles.
-    if (choice->is_visible() && choice->health()>0) {
-        bitboard positions=around(choice->position(),me.attack_range());
-        if (navigate(positions)) {
-            if (me.can_attack()) try_combat(*choice,false);
-            return true;
-        }
-    }
     return false;
 }
 
-bool Bot::do_farm() {
-    action="farm";
-    if (plan.camp_index<0 || plan.camp_index>=int(camps.size())) return false;
-    auto& g=camps[plan.camp_index];
-    bool visible=false;
-    const auto seen=vision::visible_tiles();
-    for (const auto& member:g.group)
-        if (seen.is_set(member.spawn_position())) {visible=true;break;}
-    if (visible) {
-        const auto state=g.group.state();
-        if (std::holds_alternative<map::camp_group_reward_available>(state)) {
-            // A single designated ally finishes capture while others move on.
-            return navigate(g.group.spawn_tiles());
-        }
-        if (std::holds_alternative<map::camp_group_respawning>(state)) {
-            g.avoid_until=round+12;
-            publish_claim(-1);
-            return false;
-        }
-        if (cast_or_attack_camp(g)) return true;
+bool Bot::siege_objective() {
+    auto& me = self();
+    if (!objective_map || !caster_build || me.health() < me.max_health() * .45f
+        || (round < 400 && me.focus() < 180)) return false;
+    if (target >= 0 && !groups[target].major && groups[target].state == 1) return false;
+    int index = -1, best = 65535;
+    for (int i = 0; i < static_cast<int>(groups.size()); ++i) {
+        const auto& g = groups[i];
+        if (!g.major || g.avoid_until > round || (g.state == 2 && g.ready_round > round + 10)) continue;
+        const int score = home_distance.get(g.centre) + (g.state == 2 ? 20 : 0);
+        if (score < best) { best = score; index = i; }
     }
-    bitboard goals;
-    for (const auto& c:g.group)
-        goals |= around(c.spawn_position(),std::max(1,self().attack_range()));
-    return navigate(goals);
+    if (index < 0) return false;
+    auto& g = groups[index];
+    claim(index);
+    if (g.state == 1) return capture_group(index);
+    bitboard unsafe, firing;
+    const auto visible = vision::visible_tiles(), live = vision::camp_tiles();
+    for (const auto& c : g.camp) {
+        const auto p = c.spawn_position();
+        if (visible.is_set(p) && !live.is_set(p)) continue;
+        if (camp_damage(c.kind()) > 0) unsafe |= around(p, 3);
+    }
+    for (const auto& c : g.camp) {
+        const auto p = c.spawn_position();
+        if (visible.is_set(p) && !live.is_set(p)) continue;
+        for (auto q : (around(p, 4) & ~terrain & ~unsafe).positions()) {
+            const int dx = q.x - p.x, dy = q.y - p.y;
+            if (dx * dx + dy * dy <= 16) firing.set(q, true);
+        }
+    }
+    if (firing.is_empty()) return false;
+    if (!firing.is_set(me.position())) { navigate(firing, true); return true; }
+    if (g.state == 2) return true;
+    bool visible_target = false;
+    for (const auto& c : g.camp) {
+        if (!c.is_visible() || c.health() <= 0) continue;
+        const auto p = c.position(), q = me.position();
+        const int dx = q.x - p.x, dy = q.y - p.y;
+        if (dx * dx + dy * dy > 16) continue;
+        visible_target = true;
+        fight(c, false);
+        if (std::holds_alternative<map::camp_group_reward_available>(g.camp.state())) { g.state = 1; capture_group(index); }
+        break;
+    }
+    if (!visible_target) {
+        // Move to another firing lane when terrain blocks line of sight.
+        firing &= ~around(me.position(), 1);
+        navigate(firing, true);
+    }
+    scout();
+    return true;
 }
 
-bool Bot::do_intercept() {
-    action="intercept";
-    // Recheck current vision after planner; do not chase speculative positions.
-    if (attack_visible_enemy(true)) return true;
-    return false;
+void Bot::farm() {
+    action = "farm";
+    auto& me = self();
+    if (target >= 0 && (groups[target].state == 2 || groups[target].avoid_until > round)) claim(-1);
+    // Preserve an active target to finish the whole group and its capture.
+    if (target < 0) claim(select_camp());
+    if (target < 0) {
+        if (me.health() < me.max_health() * .85f || me.gold_count() >= 150) { returning = true; recover(); }
+        else {
+            // No safe unclaimed camp: wait near spawn, allowing teammates to
+            // finish rather than pulling a camp this champion cannot survive.
+            navigate(map::spawn_region(team::ally));
+        }
+        return;
+    }
+    auto& g = groups[target];
+    if (g.state == 1) {
+        if (capture_group(target)) return;
+        claim(select_camp());
+        if (target >= 0) navigate(around(groups[target].centre, 1));
+        return;
+    }
+    // Do not stand on a respawn tile while waiting for the camp to reappear.
+    if (g.state == 2) {
+        auto waiting = around(g.centre, 2) & ~g.tiles;
+        navigate(waiting);
+        return;
+    }
+    std::optional<camp> victim;
+    float value = std::numeric_limits<float>::max();
+    for (const auto& c : g.camp) {
+        if (!c.is_visible() || c.health() <= 0) continue;
+        float score = c.health() + dist(me.position(), c.position()) * 80.f;
+        if (me.champion_name() == champion_type::varg) {
+            for (const auto& other : g.camp)
+                if (other != c && other.is_visible() && dist(c.position(), other.position()) <= 1) score -= 300;
+        }
+        if (score < value) { value = score; victim = c; }
+    }
+    if (!victim) { navigate(around(g.centre, 1)); return; }
+    fight(*victim, false);
+    if (victim->is_visible() && victim->health() > 0) {
+        const int range = me.attack_range();
+        auto goals = around(victim->position(), range) & ~vision::camp_tiles();
+        if (navigate(goals, false, !me.can_attack())) fight(*victim, false);
+    } else {
+        action = "farm killed camp state";
+        // Recheck immediately after a kill; capture can start next round.
+        if (std::holds_alternative<map::camp_group_reward_available>(g.camp.state())) {
+            g.state = 1;
+            capture_group(target);
+        }
+    }
+    action = "farm scout";
+    scout();
 }
 
-bool Bot::do_siege() {
-    action="siege";
-    if (plan.camp_index<0) return false;
-    // Same legal executor, different macro allocation and objective value.
-    return do_farm();
-}
-
-void Bot::ward() {
-    action="ward";
-    auto& me=self();
-    if (!me.is_alive() || me.is_teleporting() || me.is_recalling()
-        || me.is_submitting_gems() || fuel_remaining()<15000
-        || me.ward_cooldown()>0
-        || me.restrictions().contains(buff_restrictions::ward)) return;
-    auto choice=me.ward_placement_tiles() & map::bushes()
-        & ~map::walls() & ~vision::ward_tiles(team::ally);
-    auto unseen=choice & ~vision::visible_tiles();
-    if (!unseen.is_empty()) choice=unseen;
-    if (choice.is_empty()) return;
-    // Observation utility: prefer bushes near the selected objective.
-    vec2 target=self().position();
-    if (plan.camp_index>=0) target=camps[plan.camp_index].centre;
-    if (plan.job==Job::intercept) target=plan.enemy_target;
-    vec2 best=choice.positions().front();
-    for (auto p:choice.positions())
-        if (distance(p,target)<distance(best,target)) best=p;
-    me.place_ward(best);
+void Bot::scout() {
+    action = "scout";
+    if (fuel_remaining() < 12000) return;
+    auto& me = self();
+    if (me.ward_cooldown() > 0 || me.restrictions().contains(buff_restrictions::ward)) return;
+    // Put vision into the bush ahead without occupying the destination.
+    auto choices = me.ward_placement_tiles() & map::bushes() & ~map::walls() & ~vision::ward_tiles(team::ally);
+    if (choices.is_empty()) return;
+    const auto unseen = choices & ~vision::visible_tiles();
+    if (!unseen.is_empty()) choices = unseen;
+    me.place_ward(choices.positions().front());
 }
 
 void Bot::play_turn() {
-    if (!initialized) {initialize();return;}
-    round=round_number();
-    walked=false;
-    auto& me=self();
-    if (!me.is_alive()) {publish_claim(-1);return;}
-    if (me.is_recalling() || me.is_submitting_gems() || me.is_teleporting()) {
-        publish_claim(-1);
-        return;
-    }
-    buy(); // Buying need not consume the movement or attack action.
-    if (!me.can_move() && !me.can_attack() && !me.can_cast()) {
-        publish_claim(-1);
-        return;
-    }
+    if (!initialized) { initialize(); return; }
+    auto& me = self();
+    round = round_number();
+    walked = false;
+    if (me.is_alive() && (me.is_recalling() || me.is_submitting_gems() || me.is_teleporting())) return;
+    buy_items(); // Dead champions may shop too.
+    if (!me.is_alive()) { claim(-1); returning = false; return; }
+    if (me.is_recalling() || me.is_submitting_gems() || me.is_teleporting()) return;
+    if (!me.can_move() && !me.can_attack() && !me.can_cast()) return;
     observe();
-    const auto now=me.position();
-    stalled_turns=now==last_position?stalled_turns+1:0;
-    last_position=now;
-    if (stalled_turns>12 && held_target>=0 && held_target<int(camps.size())) {
-        camps[held_target].avoid_until=round+30;
-        publish_claim(-1);
-        stalled_turns=0;
+    refresh_threats();
+    const auto position = me.position();
+    stalled = position == previous ? stalled + 1 : 0;
+    previous = position;
+    const bool home = map::spawn_region(team::ally).is_set(position);
+    if (home) {
+        returning = false;
+        if (me.health() < me.max_health() * .98f) return; // Healing occurs at turn end.
     }
-    const MacroMode mode=macro_mode();
-    plan=select_plan(mode);
-    if (plan.job==Job::farm || plan.job==Job::siege) publish_claim(plan.camp_index);
-    else publish_claim(-1);
-    // Avoid spamming long stdout logs: one compact event every ~100 rounds.
-    if (slot==0 && round%100==0) {
-        std::cout<<"v6 macro "<<round<<" "<<mode_name(mode)<<" "
-                 <<job_name(plan.job)<<" target "<<plan.camp_index<<"\n";
+    if (!home && (me.health() < std::max(180.f, me.max_health() * .28f)
+        || (me.champion_name() != champion_type::tavi && me.gold_count() >= 180
+            && round > last_shop_round + 40 && me.gem_count() == 0))) returning = true;
+    if (returning) { recover(); return; }
+    if (stalled > 14 && target >= 0 && groups[target].state != 1 && !(objective_map && groups[target].major)) {
+        groups[target].avoid_until = round + 35;
+        claim(-1);
+        stalled = 0;
     }
-    if (plan.job!=Job::bank && me.gem_count()>0 && me.health()<me.max_health()*.45f)
-        plan.job=Job::bank;
-    if (plan.job==Job::bank) {do_bank();return;}
-    if (plan.job==Job::recover) {do_recover();return;}
-    // An immediate attack is a tactical opportunity, not a macro-mode switch.
-    if (attack_visible_enemy(false)) {ward();return;}
-    switch(plan.job) {
-        case Job::intercept: do_intercept();break;
-        case Job::siege: do_siege();break;
-        case Job::farm: do_farm();break;
-        case Job::bank: do_bank();break;
-        case Job::recover: do_recover();break;
-    }
-    ward();
+    if (defend()) return;
+    if (bank()) return;
+    if (siege_objective()) return;
+    if (objective_map && target >= 0 && groups[target].major) claim(-1);
+    farm();
 }
