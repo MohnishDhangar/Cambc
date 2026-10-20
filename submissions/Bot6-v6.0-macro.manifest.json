@@ -4,16 +4,16 @@
   "status": "requires successful current-client smoke test",
   "files": {
     "src/bot.cpp": {
-      "bytes": 28676,
-      "sha256": "229a209abf2b0fe582157ff5f7aaec43407d5fdac7756dce5d87d30d71bf226d"
+      "bytes": 28728,
+      "sha256": "321480f1f3bc4548f448f554b787c686bed8b86403d35e9208a76d2aa3a2eac3"
     },
     "src/bot.h": {
       "bytes": 2072,
       "sha256": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159"
     },
     "src/draft.cpp": {
-      "bytes": 2846,
-      "sha256": "9b5b879b439ef0e83294885996bd97133d158ba3d34cb9e2809a8d744d19509a"
+      "bytes": 2877,
+      "sha256": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb"
     },
     "src/draft.h": {
       "bytes": 33,
@@ -28,6 +28,6 @@
       "sha256": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
     }
   },
-  "archive_sha256": "95043fba224ad4bdf78d9f5277d4b571930950b4cfd8b7993d0ea0f29af9f16d",
-  "archive_bytes": 11299
+  "archive_sha256": "f4affbb8a15bbf6f9153b27d93d41eabda7d721bf1a022ccf4f227f03c879bde",
+  "archive_bytes": 11331
 }
