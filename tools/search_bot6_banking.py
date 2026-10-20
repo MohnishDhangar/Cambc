@@ -45,7 +45,7 @@ def main():
                 s=source_file.read_text()
                 if source_file.name=="bot.cpp":
                     assert "#ifndef V6_BANK_THRESHOLD" in s
-                    s="#define V6_MACRO_MODE 1\\n#define V6_BANK_THRESHOLD "+index+"\\n"+s
+                    s="#define V6_MACRO_MODE 1\n#define V6_BANK_THRESHOLD "+index+"\n"+s
                 dest.write_text(s)
         variants[name]=label
     env={**os.environ,"CAMBC_NO_UPDATE_CHECK":"1","CAMBC_OFFLINE":"1"}
