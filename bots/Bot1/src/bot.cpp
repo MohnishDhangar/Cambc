@@ -187,7 +187,7 @@ int Bot::select_camp() {
         if (me.champion_name() == champion_type::varg) work /= std::min(3, std::max(1, g.members));
         const float bank_trip = altar_distance.get(g.centre) == distance_field::unreachable ? 100.f : altar_distance.get(g.centre);
         const float value = g.camp.gem_value() + g.camp.gold_value() * (round < 700 ? .32f : .12f);
-        float score = value / (distance + wait + work / (assigned + 1) + 6 + bank_trip * .60f);
+        float score = value / (distance + wait + work / (assigned + 1) + 6 + bank_trip * .35f);
         if (dist(g.centre, enemy_spawn) + 4 < home_distance.get(g.centre)) score *= .65f;
         if (i == target) score *= 1.3f;
         if (score > best) { best = score; choice = i; }
@@ -464,8 +464,24 @@ bool Bot::siege_objective() {
             if (dx * dx + dy * dy <= 16) firing.set(q, true);
         }
     }
+    // Under the Week 2 rules Golem attacks at range 4 and Monolith at
+    // range 5, so there may be no tile in spell range outside monster
+    // range. Do not silently abandon the only available gem objective.
+    const bool safe_firing = !firing.is_empty();
+    if (!safe_firing) {
+        for (const auto& c : g.camp) {
+            const auto p = c.spawn_position();
+            if (visible.is_set(p) && !live.is_set(p)) continue;
+            for (auto q : (around(p, 4) & ~terrain).positions()) {
+                const int dx = q.x - p.x, dy = q.y - p.y;
+                if (dx * dx + dy * dy <= 16) firing.set(q, true);
+            }
+        }
+    }
     if (firing.is_empty()) return false;
-    if (!firing.is_set(me.position())) { navigate(firing, true); return true; }
+    // Use risk-aware navigation when the engine reports an unsafe firing
+    // lane; retreat/heal checks remain in the surrounding strategy.
+    if (!firing.is_set(me.position())) { navigate(firing, !safe_firing); return true; }
     if (g.state == 2) return true;
     bool visible_target = false;
     for (const auto& c : g.camp) {
