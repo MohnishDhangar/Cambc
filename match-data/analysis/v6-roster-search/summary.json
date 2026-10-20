@@ -1,0 +1,772 @@
+{
+  "rules": "all 17 development maps, 4 sealed excluded; both sides; unchanged v4 opponent",
+  "client": "CAMBC 3.0.1",
+  "first_maps": [
+    "00ambush",
+    "00collision",
+    "00contest",
+    "00corners",
+    "00eight",
+    "00elkring"
+  ],
+  "remaining_maps": [
+    "00expanse",
+    "00fragment",
+    "00interlock",
+    "00monolith",
+    "01big-world",
+    "01boss-battle",
+    "01broken-curve",
+    "01concentrated-wealth",
+    "01elk-arena",
+    "01fracture",
+    "01gold-rush"
+  ],
+  "executor_sha256": "229a209abf2b0fe582157ff5f7aaec43407d5fdac7756dce5d87d30d71bf226d",
+  "fixed_macro_mode": 1,
+  "fixed_bank_threshold": 0,
+  "selection": "top five by wins then gem margin on first 6 maps; forced 3 controls",
+  "screened_candidates": 22,
+  "first_stage_games": 264,
+  "validated_candidates": [
+    "Bot6R12",
+    "Bot6R09",
+    "Bot6R03",
+    "Bot6R01",
+    "Bot6R02",
+    "Bot6R00"
+  ],
+  "validation_games": 132,
+  "results": {
+    "Bot6R00": {
+      "core_draft": [
+        "tavi",
+        "varg",
+        "vendetta"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 4,
+        "rate": 0.3333,
+        "wilson95": [
+          0.138,
+          0.609
+        ],
+        "mean_margin": -139.8,
+        "A_wins": 2,
+        "B_wins": 2,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 1,
+        "failed_matches": 0
+      },
+      "validation": {
+        "n": 22,
+        "wins": 7,
+        "rate": 0.3182,
+        "wilson95": [
+          0.164,
+          0.527
+        ],
+        "mean_margin": -112.1,
+        "A_wins": 3,
+        "B_wins": 4,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 347,
+        "failed_matches": 0
+      },
+      "combined": {
+        "n": 34,
+        "wins": 11,
+        "rate": 0.3235,
+        "wilson95": [
+          0.191,
+          0.492
+        ],
+        "mean_margin": -121.9,
+        "A_wins": 5,
+        "B_wins": 6,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 348,
+        "failed_matches": 0
+      }
+    },
+    "Bot6R01": {
+      "core_draft": [
+        "stellar",
+        "prism",
+        "tavi"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 6,
+        "rate": 0.5,
+        "wilson95": [
+          0.254,
+          0.746
+        ],
+        "mean_margin": 9.2,
+        "A_wins": 4,
+        "B_wins": 2,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": {
+        "n": 22,
+        "wins": 10,
+        "rate": 0.4545,
+        "wilson95": [
+          0.269,
+          0.653
+        ],
+        "mean_margin": 8.6,
+        "A_wins": 3,
+        "B_wins": 7,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 338,
+        "failed_matches": 0
+      },
+      "combined": {
+        "n": 34,
+        "wins": 16,
+        "rate": 0.4706,
+        "wilson95": [
+          0.315,
+          0.633
+        ],
+        "mean_margin": 8.8,
+        "A_wins": 7,
+        "B_wins": 9,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 338,
+        "failed_matches": 0
+      }
+    },
+    "Bot6R02": {
+      "core_draft": [
+        "heart_of_ruin",
+        "vesper_vale",
+        "tavi"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 6,
+        "rate": 0.5,
+        "wilson95": [
+          0.254,
+          0.746
+        ],
+        "mean_margin": -87.4,
+        "A_wins": 4,
+        "B_wins": 2,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 1,
+        "failed_matches": 0
+      },
+      "validation": {
+        "n": 22,
+        "wins": 13,
+        "rate": 0.5909,
+        "wilson95": [
+          0.387,
+          0.767
+        ],
+        "mean_margin": 91.9,
+        "A_wins": 6,
+        "B_wins": 7,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 425,
+        "failed_matches": 0
+      },
+      "combined": {
+        "n": 34,
+        "wins": 19,
+        "rate": 0.5588,
+        "wilson95": [
+          0.395,
+          0.711
+        ],
+        "mean_margin": 28.6,
+        "A_wins": 10,
+        "B_wins": 9,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 426,
+        "failed_matches": 0
+      }
+    },
+    "Bot6R03": {
+      "core_draft": [
+        "stellar",
+        "prism",
+        "vesper_vale"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 6,
+        "rate": 0.5,
+        "wilson95": [
+          0.254,
+          0.746
+        ],
+        "mean_margin": 62.8,
+        "A_wins": 0,
+        "B_wins": 6,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": {
+        "n": 22,
+        "wins": 11,
+        "rate": 0.5,
+        "wilson95": [
+          0.307,
+          0.693
+        ],
+        "mean_margin": 154.7,
+        "A_wins": 5,
+        "B_wins": 6,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 343,
+        "failed_matches": 0
+      },
+      "combined": {
+        "n": 34,
+        "wins": 17,
+        "rate": 0.5,
+        "wilson95": [
+          0.341,
+          0.659
+        ],
+        "mean_margin": 122.2,
+        "A_wins": 5,
+        "B_wins": 12,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 343,
+        "failed_matches": 0
+      }
+    },
+    "Bot6R04": {
+      "core_draft": [
+        "stellar",
+        "prism",
+        "varg"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 5,
+        "rate": 0.4167,
+        "wilson95": [
+          0.193,
+          0.68
+        ],
+        "mean_margin": -144.6,
+        "A_wins": 1,
+        "B_wins": 4,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R05": {
+      "core_draft": [
+        "stellar",
+        "prism",
+        "heart_of_ruin"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 4,
+        "rate": 0.3333,
+        "wilson95": [
+          0.138,
+          0.609
+        ],
+        "mean_margin": -248.7,
+        "A_wins": 0,
+        "B_wins": 4,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R06": {
+      "core_draft": [
+        "stellar",
+        "prism",
+        "marcella"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 4,
+        "rate": 0.3333,
+        "wilson95": [
+          0.138,
+          0.609
+        ],
+        "mean_margin": -69.2,
+        "A_wins": 1,
+        "B_wins": 3,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R07": {
+      "core_draft": [
+        "stellar",
+        "prism",
+        "vendetta"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 3,
+        "rate": 0.25,
+        "wilson95": [
+          0.089,
+          0.532
+        ],
+        "mean_margin": -148.9,
+        "A_wins": 1,
+        "B_wins": 2,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R08": {
+      "core_draft": [
+        "stellar",
+        "tavi",
+        "vesper_vale"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 5,
+        "rate": 0.4167,
+        "wilson95": [
+          0.193,
+          0.68
+        ],
+        "mean_margin": -78.1,
+        "A_wins": 3,
+        "B_wins": 2,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R09": {
+      "core_draft": [
+        "prism",
+        "tavi",
+        "vesper_vale"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 8,
+        "rate": 0.6667,
+        "wilson95": [
+          0.391,
+          0.862
+        ],
+        "mean_margin": 134.2,
+        "A_wins": 3,
+        "B_wins": 5,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": {
+        "n": 22,
+        "wins": 13,
+        "rate": 0.5909,
+        "wilson95": [
+          0.387,
+          0.767
+        ],
+        "mean_margin": 54.1,
+        "A_wins": 6,
+        "B_wins": 7,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 399,
+        "failed_matches": 0
+      },
+      "combined": {
+        "n": 34,
+        "wins": 21,
+        "rate": 0.6176,
+        "wilson95": [
+          0.45,
+          0.761
+        ],
+        "mean_margin": 82.4,
+        "A_wins": 9,
+        "B_wins": 12,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 399,
+        "failed_matches": 0
+      }
+    },
+    "Bot6R10": {
+      "core_draft": [
+        "stellar",
+        "tavi",
+        "varg"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 1,
+        "rate": 0.0833,
+        "wilson95": [
+          0.015,
+          0.354
+        ],
+        "mean_margin": -380.6,
+        "A_wins": 0,
+        "B_wins": 1,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R11": {
+      "core_draft": [
+        "heart_of_ruin",
+        "vesper_vale",
+        "prism"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 5,
+        "rate": 0.4167,
+        "wilson95": [
+          0.193,
+          0.68
+        ],
+        "mean_margin": -61.2,
+        "A_wins": 2,
+        "B_wins": 3,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 1,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R12": {
+      "core_draft": [
+        "heart_of_ruin",
+        "vesper_vale",
+        "stellar"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 8,
+        "rate": 0.6667,
+        "wilson95": [
+          0.391,
+          0.862
+        ],
+        "mean_margin": 139.0,
+        "A_wins": 4,
+        "B_wins": 4,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 2,
+        "failed_matches": 0
+      },
+      "validation": {
+        "n": 22,
+        "wins": 12,
+        "rate": 0.5455,
+        "wilson95": [
+          0.347,
+          0.731
+        ],
+        "mean_margin": 120.9,
+        "A_wins": 4,
+        "B_wins": 8,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 414,
+        "failed_matches": 0
+      },
+      "combined": {
+        "n": 34,
+        "wins": 20,
+        "rate": 0.5882,
+        "wilson95": [
+          0.422,
+          0.736
+        ],
+        "mean_margin": 127.3,
+        "A_wins": 8,
+        "B_wins": 12,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 416,
+        "failed_matches": 0
+      }
+    },
+    "Bot6R13": {
+      "core_draft": [
+        "heart_of_ruin",
+        "tavi",
+        "prism"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 4,
+        "rate": 0.3333,
+        "wilson95": [
+          0.138,
+          0.609
+        ],
+        "mean_margin": -260.2,
+        "A_wins": 0,
+        "B_wins": 4,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R14": {
+      "core_draft": [
+        "heart_of_ruin",
+        "varg",
+        "stellar"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 5,
+        "rate": 0.4167,
+        "wilson95": [
+          0.193,
+          0.68
+        ],
+        "mean_margin": -17.2,
+        "A_wins": 1,
+        "B_wins": 4,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R15": {
+      "core_draft": [
+        "heart_of_ruin",
+        "marcella",
+        "tavi"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 3,
+        "rate": 0.25,
+        "wilson95": [
+          0.089,
+          0.532
+        ],
+        "mean_margin": -339.3,
+        "A_wins": 1,
+        "B_wins": 2,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R16": {
+      "core_draft": [
+        "vesper_vale",
+        "marcella",
+        "varg"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 4,
+        "rate": 0.3333,
+        "wilson95": [
+          0.138,
+          0.609
+        ],
+        "mean_margin": -353.7,
+        "A_wins": 1,
+        "B_wins": 3,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 1,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R17": {
+      "core_draft": [
+        "varg",
+        "tavi",
+        "marcella"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 2,
+        "rate": 0.1667,
+        "wilson95": [
+          0.047,
+          0.448
+        ],
+        "mean_margin": -368.8,
+        "A_wins": 0,
+        "B_wins": 2,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R18": {
+      "core_draft": [
+        "vesper_vale",
+        "varg",
+        "tavi"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 4,
+        "rate": 0.3333,
+        "wilson95": [
+          0.138,
+          0.609
+        ],
+        "mean_margin": -253.8,
+        "A_wins": 1,
+        "B_wins": 3,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R19": {
+      "core_draft": [
+        "willow",
+        "stellar",
+        "prism"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 3,
+        "rate": 0.25,
+        "wilson95": [
+          0.089,
+          0.532
+        ],
+        "mean_margin": -164.5,
+        "A_wins": 1,
+        "B_wins": 2,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R20": {
+      "core_draft": [
+        "cassi_and_issac",
+        "prism",
+        "tavi"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 2,
+        "rate": 0.1667,
+        "wilson95": [
+          0.047,
+          0.448
+        ],
+        "mean_margin": -343.9,
+        "A_wins": 0,
+        "B_wins": 2,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6R21": {
+      "core_draft": [
+        "vesper_vale",
+        "varg",
+        "vendetta"
+      ],
+      "screen": {
+        "n": 12,
+        "wins": 3,
+        "rate": 0.25,
+        "wilson95": [
+          0.089,
+          0.532
+        ],
+        "mean_margin": -252.6,
+        "A_wins": 0,
+        "B_wins": 3,
+        "faults": 0,
+        "caught_errors": 0,
+        "fuel_spill_messages": 0,
+        "failed_matches": 0
+      },
+      "validation": null,
+      "combined": null
+    }
+  }
+}
