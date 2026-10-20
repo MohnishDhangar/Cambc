@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_ADAPTIVE_BANK_BATCH 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -650,8 +651,19 @@ void Bot::play_turn() {
 #endif
     const unsigned bag=me.gem_count();
     int threshold=V6_BANK_THRESHOLD;
+#if V6_ADAPTIVE_BANK_BATCH
+    // Stop burning entire altar trips for one gem. A longer return route
+    // warrants batching a few more gems; keep channels at <=1 tick when
+    // practical and flush all small bags near the end of the game.
+    const int altar_steps = altar_distance.get(position);
+    const int bounded_steps = altar_steps == distance_field::unreachable ? 24 : std::min(altar_steps, 24);
+    threshold = std::min(10, 4 + bounded_steps / 4);
+    if (round > 1100) threshold = std::min(threshold, 8);
+    if (round > 1600) threshold = 1;
+#else
     if (round>1100) threshold=std::min(threshold,8);
     if (round>1600) threshold=1; // Never finish with unbanked small bags.
+#endif
     bool carrier_threat=false;
     for (const auto& enemy:visible_enemies)
         if (enemy.is_alive() && enemy.is_visible()
