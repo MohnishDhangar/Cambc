@@ -220,8 +220,9 @@ float Bot::danger(vec2 tile) const {
 
 bool Bot::navigate(bitboard goals, bool escape, bool use_dash) {
     action = "navigate";
-    if (fuel_remaining() < 18000) return false;
+    if (fuel_remaining() < 27000) return false;
     auto& me = self();
+    if (me.is_teleporting() || me.is_recalling() || me.is_submitting_gems()) return false;
     if (goals.is_set(me.position())) return false;
     auto units = occupied();
     auto blocked = terrain | units;
@@ -259,13 +260,19 @@ bool Bot::navigate(bitboard goals, bool escape, bool use_dash) {
             current = score(origin);
         }
     }
-    if (me.can_move()) {
-        auto candidates = blocked.reachable_tiles(origin, me.base_stats().base_move_speed).positions();
+    if (me.can_move() && !me.is_teleporting()) {
+        // reachable_tiles does not guarantee every returned destination is
+        // currently unoccupied: exclude known units *after* path expansion.
+        auto candidates = (blocked.reachable_tiles(origin, me.base_stats().base_move_speed)
+                           & ~occupied() & ~terrain).positions();
         std::sort(candidates.begin(), candidates.end(), [&](vec2 a, vec2 b) { return score(a) < score(b); });
         for (auto p : candidates) {
             if (p == origin || score(p) >= current) continue;
+            if (occupied().is_set(p) || terrain.is_set(p)) continue;
             action = "navigate walk";
-            if (me.move_absolute(p)) { walked = true; return true; } // Retry on hidden occupants.
+            if (me.move_absolute(p)) { walked = true; return true; }
+            // Failed movement may have revealed a hidden occupant. Do not
+            // retry it in the same turn; re-check all later candidates.
         }
     }
     // A three-tick crystal is useful only when it beats walking by at least
@@ -562,8 +569,12 @@ void Bot::farm() {
 
 void Bot::scout() {
     action = "scout";
-    if (fuel_remaining() < 12000) return;
+    if (fuel_remaining() < 18000) return;
     auto& me = self();
+    // A successful crystal/dash can start teleporting during this same turn,
+    // even if the start-of-turn guard in play_turn() already passed.
+    if (!me.is_alive() || me.is_teleporting() || me.is_recalling()
+        || me.is_submitting_gems()) return;
     if (me.ward_cooldown() > 0 || me.restrictions().contains(buff_restrictions::ward)) return;
     // Put vision into the bush ahead without occupying the destination.
     auto choices = me.ward_placement_tiles() & map::bushes() & ~map::walls() & ~vision::ward_tiles(team::ally);
