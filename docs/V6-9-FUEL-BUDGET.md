@@ -11,3 +11,6 @@ CAMBC 3.0.1; 17 development maps, A/B sides, 34 games each v6.9 vs v4, pinned v6
 
 ## State
 Source patch submitted; CI evidence will determine acceptance or rejection. v6.8 remains the separate field-test bot.
+
+## Actual result — REJECTED
+The completed, pinned 102-game tournament reported 21/34 wins vs v4 (unchanged from v6.8), 85.68 mean gem margin (v6.8: 91.47), 47 round-change diagnostic log events (v6.8: 52), no engine faults or caught errors, and 17/34 head-to-head against v6.8. No convincing competitive improvement. See `match-data/analysis/v6.9-fuel-budget/summary.json`. These logged events are round-number changes during `play_turn`, not direct WASM fuel-fault measurements. Do not promote.
