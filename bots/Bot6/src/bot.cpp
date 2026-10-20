@@ -2,6 +2,7 @@
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
 #define V6_NONBLOCKING_BANK 1
+#define V6_BANK_FUEL_GUARD 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -453,7 +454,14 @@ bool Bot::bank() {
     // A blocked altar ring produces zero viable goals; the navigation
     // attempt returns false. Don't let such a trip consume the full turn:
     // allow defend(), siege_objective(), and farm() to continue working.
+#if V6_BANK_FUEL_GUARD
+    const bool advanced = navigate(goals, me.health() < me.max_health() * .5f);
+    // Bank navigation must not be followed by a second heavy pathfinding
+    // search unless enough fuel remains for the rest of the turn.
+    return advanced || fuel_remaining() < 45000;
+#else
     return navigate(goals, me.health() < me.max_health() * .5f);
+#endif
 #else
     navigate(goals, me.health() < me.max_health() * .5f);
     return true;
