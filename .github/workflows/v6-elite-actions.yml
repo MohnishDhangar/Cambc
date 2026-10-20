@@ -3,6 +3,7 @@ on:
   push:
     branches: [research/v6-elite-strategy-audit]
     paths:
+      - tools/build_v6_map_split.py
       - tools/analyze_v6_elite_actions.py
       - .github/workflows/v6-elite-actions.yml
   workflow_dispatch:
@@ -14,13 +15,15 @@ jobs:
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
-      - name: Decode unique match action streams and compare teams
+      - name: Seal held-out maps and quarantine leakage-connected groups
+        run: python3 tools/build_v6_map_split.py
+      - name: Decode training-only match action streams and compare teams
         run: python3 tools/analyze_v6_elite_actions.py
       - name: Commit report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add match-data/analysis/v6-elite-research/attempted-actions*
+          git add match-data/analysis/v6-elite-research/attempted-actions* match-data/analysis/v6-elite-research/v6-map-split.*
           if ! git diff --cached --quiet; then
             git commit -m "research: elite-vs-v4 action-rate and draft benchmark"
             git push origin HEAD:research/v6-elite-strategy-audit
@@ -32,4 +35,5 @@ jobs:
           path: |
             match-data/analysis/v6-elite-research/attempted-actions*
             match-data/analysis/v6-elite-research/errors.json
+            match-data/analysis/v6-elite-research/v6-map-split.*
           retention-days: 14
