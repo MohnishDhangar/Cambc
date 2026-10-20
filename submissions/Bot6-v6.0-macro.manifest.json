@@ -4,8 +4,8 @@
   "status": "requires successful current-client smoke test",
   "files": {
     "src/bot.cpp": {
-      "bytes": 28676,
-      "sha256": "229a209abf2b0fe582157ff5f7aaec43407d5fdac7756dce5d87d30d71bf226d"
+      "bytes": 28769,
+      "sha256": "62a2afd716c162a082ae6f129bed3e826554aceb7a1adc012350e8419ac1d653"
     },
     "src/bot.h": {
       "bytes": 2072,
@@ -28,6 +28,6 @@
       "sha256": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
     }
   },
-  "archive_sha256": "95043fba224ad4bdf78d9f5277d4b571930950b4cfd8b7993d0ea0f29af9f16d",
-  "archive_bytes": 11299
+  "archive_sha256": "ef18b0c155db42534ce04f6022b0c4ca4a99cf347ef4d63be11a741717939894",
+  "archive_bytes": 11319
 }
