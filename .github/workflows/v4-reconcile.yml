@@ -1,0 +1,22 @@
+name: Reconcile v4 replay outcomes
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/v5-week2]
+    paths:
+      - 'match-data/analysis/reconcile_v4_results.py'
+      - '.github/workflows/v4-reconcile.yml'
+jobs:
+  reconcile:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reconcile using existing decoded 245-match metrics
+        run: python3 match-data/analysis/reconcile_v4_results.py
+      - name: Upload audit and provisional manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v4-reconciled-outcomes
+          path: match-data/analysis/v4-study/reconciliation/
+          retention-days: 30
