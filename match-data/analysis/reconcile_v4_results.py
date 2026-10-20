@@ -120,21 +120,21 @@ for label, sample in sorted(corrected_groups.items()):
         "matches_with_round200":len(cp),
     }
 (DEST/"CORRECTED-OUTCOME-ANALYSIS.md").write_text(
-    "# V4 corrected-category performance\\n\\n"
+    "# V4 corrected-category performance\n\n"
     "Using official replay-engine outcomes, not original wins/losses folder labels. "
-    "All data use pre–Week 2 engine 0.0.3 and deliberately selected matches.\\n\\n"
-    "| Verified category | Games | Median gems (v4–opponent) | Median gold (v4–opponent) | Median deaths (v4–opponent) | Opp. score lead at round 200 |\\n"
-    "|---|---:|---|---|---|---:|\\n" +
+    "All data use pre–Week 2 engine 0.0.3 and deliberately selected matches.\n\n"
+    "| Verified category | Games | Median gems (v4–opponent) | Median gold (v4–opponent) | Median deaths (v4–opponent) | Opp. score lead at round 200 |\n"
+    "|---|---:|---|---|---|---:|\n" +
     "".join(f"| {key} | {stat['games']} | {stat['median_our_gems']}–{stat['median_opponent_gems']} | "
             f"{stat['median_our_gold']}–{stat['median_opponent_gold']} | "
             f"{stat['median_our_deaths']}–{stat['median_opponent_deaths']} | "
-            f"{stat['median_score_gap_at_200_opponent_minus_us']} |\\n"
+            f"{stat['median_score_gap_at_200_opponent_minus_us']} |\n"
             for key,stat in corrected_stats.items()) +
-    "\\nThe round-200 column includes only games reaching that checkpoint. "
-    "Interpret these as descriptive historical comparisons, not post-patch performance claims.\\n"
+    "\nThe round-200 column includes only games reaching that checkpoint. "
+    "Interpret these as descriptive historical comparisons, not post-patch performance claims.\n"
 )
 summary["correctedCategories"]=corrected_stats
-(DEST/"summary.json").write_text(json.dumps(summary,indent=2)+"\\n")
+(DEST/"summary.json").write_text(json.dumps(summary,indent=2)+"\n")
 print("CORRECTED_GROUP_SUMMARY",json.dumps(corrected_stats,sort_keys=True))
 
 
