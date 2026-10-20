@@ -1,0 +1,148 @@
+{
+  "engine_client": "cambc 3.0.1 from pinned CI environment",
+  "map_split": "17 training maps; four reserved maps never used",
+  "frozen_opponent": "Bot4Frozen from frozen v4 archive",
+  "candidate_source_sha256": "c31fcb0135e02f848bb150490bb01d7c2bafe34c521a2bb9416f78ef227cfc3d",
+  "games": 204,
+  "modes": {
+    "Bot6M0": {
+      "label": "v4-baseline-weight",
+      "wins": 10,
+      "games": 34,
+      "win_fraction": 0.2941,
+      "wilson95": [
+        0.1683,
+        0.4617
+      ],
+      "avg_gem_margin": -147.47,
+      "side": {
+        "A": {
+          "wins": 3,
+          "games": 17
+        },
+        "B": {
+          "wins": 7,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6M1": {
+      "label": "economy",
+      "wins": 11,
+      "games": 34,
+      "win_fraction": 0.3235,
+      "wilson95": [
+        0.1913,
+        0.4916
+      ],
+      "avg_gem_margin": -136.56,
+      "side": {
+        "A": {
+          "wins": 4,
+          "games": 17
+        },
+        "B": {
+          "wins": 7,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6M2": {
+      "label": "tempo",
+      "wins": 9,
+      "games": 34,
+      "win_fraction": 0.2647,
+      "wilson95": [
+        0.146,
+        0.4312
+      ],
+      "avg_gem_margin": -157.59,
+      "side": {
+        "A": {
+          "wins": 3,
+          "games": 17
+        },
+        "B": {
+          "wins": 6,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6M3": {
+      "label": "contest",
+      "wins": 9,
+      "games": 34,
+      "win_fraction": 0.2647,
+      "wilson95": [
+        0.146,
+        0.4312
+      ],
+      "avg_gem_margin": -158.32,
+      "side": {
+        "A": {
+          "wins": 3,
+          "games": 17
+        },
+        "B": {
+          "wins": 6,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6M4": {
+      "label": "objective",
+      "wins": 10,
+      "games": 34,
+      "win_fraction": 0.2941,
+      "wilson95": [
+        0.1683,
+        0.4617
+      ],
+      "avg_gem_margin": -155.97,
+      "side": {
+        "A": {
+          "wins": 3,
+          "games": 17
+        },
+        "B": {
+          "wins": 7,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6M5": {
+      "label": "adaptive",
+      "wins": 8,
+      "games": 34,
+      "win_fraction": 0.2353,
+      "wilson95": [
+        0.1244,
+        0.4
+      ],
+      "avg_gem_margin": -158.65,
+      "side": {
+        "A": {
+          "wins": 4,
+          "games": 17
+        },
+        "B": {
+          "wins": 4,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    }
+  },
+  "no_fatal_errors": true
+}
