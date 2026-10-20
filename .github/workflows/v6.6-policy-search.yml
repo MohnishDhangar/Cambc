@@ -1,0 +1,49 @@
+name: V6.6 macro + banking staged search
+on:
+  push:
+    branches: [develop/v6.6-mode-bank-search]
+    paths:
+      - 'tools/search_v6_policy_6_6.py'
+      - '.github/workflows/v6.6-policy-search.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  optimize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: CAMBC 3.0.1
+        run: |
+          python3 -m pip install --user 'cambc==3.0.1'
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Provision matching SDK
+        env:
+          CAMBC_NO_UPDATE_CHECK: '1'
+        run: |
+          cambc --version
+          CAMBC_OFFLINE=1 cambc init --yes .
+      - name: Stage-1 selection and stage-2 validation (17 training maps)
+        run: |
+          python3 tools/search_v6_policy_6_6.py
+      - name: Save reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V6-6-macro-bank-search
+          path: match-data/analysis/v6.6-policy-search/*.json
+          retention-days: 30
+      - name: Commit complete verified results to branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add match-data/analysis/v6.6-policy-search/games.csv match-data/analysis/v6.6-policy-search/summary.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'research: v6.6 macro-bank parameter interaction results'
+            git fetch origin develop/v6.6-mode-bank-search
+            git rebase origin/develop/v6.6-mode-bank-search
+            git push origin HEAD:develop/v6.6-mode-bank-search
+          fi
