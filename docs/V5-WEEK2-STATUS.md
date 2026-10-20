@@ -1,5 +1,15 @@
 # V5 Week 2 development log — 20 October 2026
 
+## Client 3.0.1 verification update
+
+Installed the downloaded CAMBC 3.0.1 client and refreshed the project SDK on 20 October 2026. The new C++ SDK exposes `camp_type::golem` and `champion_draft::heart_of_ruin`. The previous client, SDK, maps, configuration, and CMake files are preserved in `.cambc/before-client-3.0.1.tar.gz`.
+
+The platform map refresh downloaded 21 maps and removed nine unchanged withdrawn maps. Current map names include `00lanes` and `00monolith`; the older examples below use historical names.
+
+Bot1 compiled in release mode without source changes. One complete smoke match against `starter-cpp` on `00lanes` finished at round 973: Bot1 won 1005–240 gems, with zero reported crashes for either team. Results are in `replays/client-3.0.1-smoke.json` and the replay bundle is in `replays/client-3.0.1-smoke/`. This establishes build/run compatibility, not competitive strength or completion of the broader checks below.
+
+The compatibility warning in the initial notes below describes the state before this update.
+
 ## Basis and compatibility
 
 Primary source: **Patch Notes – Week 2**, posted 20 October 2026. Do not use previous rules or pre-patch replay outcomes as proof of patched-game performance.

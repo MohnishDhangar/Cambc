@@ -1,5 +1,7 @@
 # Cambridge Battlecode: Bot1
 
+**Client update, 20 October 2026:** the project now uses CAMBC/SDK **3.0.1** and the refreshed 21-map platform pool. Bot1 builds successfully and won a complete smoke match against the starter on `00lanes`, with zero reported crashes. See [the update log](docs/V5-WEEK2-STATUS.md). Release results and older map names below are historical.
+
 A playable C++ bot for the bundled CAMBC 2026 SDK (`2.2.5`). The implementation is in `bots/Bot1/src/`; `bots/starter-cpp/` is the comparison opponent.
 
 **Current release: [Bot1-v4.zip](bots/Bot1/Bot1-v4.zip).** V4 keeps v1's ordinary-map farming core, elects one capture recipient while helpers move on, and uses equipped ranged casters for monoliths and large elk objectives. It was checked in 102 complete local games: **19/34 against frozen v1, 32/34 against frozen v3, and 34/34 against the starter**, with zero fuel exhaustion, caught errors, or bot faults. See the [v4 evaluation](replays/v4-release-evaluation/REPORT.md) and [strategy](bots/Bot1/STRATEGY.md).
