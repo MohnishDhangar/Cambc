@@ -1,6 +1,9 @@
 name: V4 replay tactics check
 on:
   workflow_dispatch:
+  push:
+    branches: [develop/v5-week2]
+    paths: ['.github/workflows/v4-tactics.yml']
 permissions:
   contents: read
 jobs:
