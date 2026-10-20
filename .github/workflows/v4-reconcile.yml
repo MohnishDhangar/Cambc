@@ -6,6 +6,8 @@ on:
     paths:
       - 'match-data/analysis/reconcile_v4_results.py'
       - '.github/workflows/v4-reconcile.yml'
+permissions:
+  contents: write
 jobs:
   reconcile:
     runs-on: ubuntu-24.04
@@ -13,7 +15,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: Reconcile using existing decoded 245-match metrics
         run: python3 match-data/analysis/reconcile_v4_results.py
-      - name: Upload audit and provisional manifest
+      - name: Commit corrected manifest to development branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add match-data/analysis/v4-study/reconciliation/
+          if ! git diff --cached --quiet; then
+            git commit -m "data: record verified outcomes for all 245 v4 replays"
+            git push origin HEAD:develop/v5-week2
+          fi
+      - name: Upload audit and reconciled manifest
         if: always()
         uses: actions/upload-artifact@v4
         with:
