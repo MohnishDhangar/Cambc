@@ -24,7 +24,7 @@ jobs:
         run: |
           node match-data/analysis/extract_v4_study.mjs match-data/v4 results/v4-tactics
           python3 match-data/analysis/study_v4_tactics.py results/v4-tactics match-data/analysis/v4-study/TACTICS.md
-          head -110 match-data/analysis/v4-study/TACTICS.md
+          cat match-data/analysis/v4-study/TACTICS.md
       - uses: actions/upload-artifact@v4
         with:
           name: v4-tactics-case-studies
