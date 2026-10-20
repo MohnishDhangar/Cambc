@@ -1,0 +1,28 @@
+{
+  "v6.16": {
+    "source_commit": "3d611d14a27863e50fe4fc32269b53127851dfc5",
+    "zip_sha256": "a34e9173f2bec2abb7ea9c68f6620de531414c8d7267c79fcad49603cb170a95",
+    "entry_sha256": {
+      "src/bot.cpp": "2350a0d582cc62c2c54b6c208998d2f3df3393e9841fa4d73a4250017b239252",
+      "src/bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
+      "src/draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
+      "src/draft.h": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd",
+      "src/main.cpp": "5cf147c942f6404849e5f5dbd1516e9e651a5c08be91102ed27c500e0571c559",
+      "src/random.h": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+    },
+    "CAMBC_layout": "src/*.cpp and src/*.h"
+  },
+  "v6.17-experimental": {
+    "source_commit": "8d3193b34c100c2cc9d64d23f24c8132690f76a6",
+    "zip_sha256": "39fa4384513ec885b1fc31639cdc6a06447d93824c815563b0e7d14bb943bbe4",
+    "entry_sha256": {
+      "src/bot.cpp": "35b594b039b3b36c602a13b9a9316c8841fd10879b0f33e549885be54aad2dea",
+      "src/bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
+      "src/draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
+      "src/draft.h": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd",
+      "src/main.cpp": "5cf147c942f6404849e5f5dbd1516e9e651a5c08be91102ed27c500e0571c559",
+      "src/random.h": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+    },
+    "CAMBC_layout": "src/*.cpp and src/*.h"
+  }
+}
