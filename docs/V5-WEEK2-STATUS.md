@@ -1,0 +1,59 @@
+# V5 Week 2 development log — 20 October 2026
+
+## Basis and compatibility
+
+Primary source: **Patch Notes – Week 2**, posted 20 October 2026. Do not use previous rules or pre-patch replay outcomes as proof of patched-game performance.
+
+The repository's existing SDK and supplied CLI identify as `cambc 2.2.5`. **That installed SDK does not expose `camp_type::golem` or `champion_draft::heart_of_ruin`**, so it predates the breaking enum changes described in the patch. A true patched-engine compilation and match evaluation has **not yet been completed**.
+
+## Patch changes to account for
+
+- Cassi: base HP 700→600; HP growth 71.25→65; Strength growth 3.5→3; Focus growth 15→13.
+- Issac: HP growth 95→80; Strength growth 4.75→3.
+- Stellar: Focus 100→85; Strength 35→30; Focus growth 10→9.
+- Varg: Strength 50→40.
+- Ren: Strength 40→35; Focus growth 10→9.
+- Ryth: Strength 50→45.
+- Marcella: 2 gold per gem tributed, stun immunity retained; Focus 50→60, Focus growth 10→15.
+- Willow: Strength 45→55, Focus 105→120.
+- Vesper Vale: gold passive 20%→33%, Strength 45→50.
+- Vendetta: Strength growth 5→6.
+- Prism: carried-gem Focus bonus 0.2→1 per gem; Health growth 75→60, Strength growth 3.5→2.5, Focus growth 10→8.
+- Tavi: ability S2 multiplier 2.2→1.4× Focus; Strength 35→45.
+- Heart of Ruin: new melee champion (1000 HP, 40 Strength, 100 Focus, growths +100/+5/+15), missing-health damage passive, self shield, dash AoE stun.
+- Wolf gems 22→4 and gold 90→40; Elk gems 36→15, gold 160→90, range 3→4; gem cluster HP 500→120 and gems 24→7; gold cluster HP 500→120 and gold 35→20; monolith range 3→5.
+- Golem: new camp (5000 HP, 120 Strength, attack range 4, 160 gold, 36 gems, respawn 80).
+- Champion-kill gold 50→100; ward cooldown 1→10; altar-lock durability 3→5.
+- Breaking API changes: new camp/champion enums and dash ability payload changes.
+
+## Initial v5 changes in this branch
+
+1. Remove the five-element hard-coded camp HP / damage arrays. Use engine-provided camp design stats instead to prevent out-of-bounds access with a new camp enum and stale reward difficulty estimates.
+2. Determine large-objective thresholds from engine-reported health instead of fixed old camp-type HP constants.
+3. Use each camp's actual attack range in siege safety computation. If no zero-damage firing tile exists, allow a candidate tile while applying the existing danger-aware movement (still needs battle testing).
+4. Protect gem carriers by prioritizing banking before discretionary fights.
+5. Give attack-reset champions an opportunity for a second hit against enemy altar locks.
+6. Add a bank-stall fallback to seek lower-danger altar approach or recall.
+7. Record planning version 5 in draft memory.
+
+## Required next checks (not claimed complete)
+
+- Obtain the refreshed post-patch `cambc` binary/SDK/engine and run `cambc init` in a **separate test project**. Confirm `golem`, `heart_of_ruin` and revised dash payload are present in the generated SDK.
+- Build both patched v4 (unchanged baseline) and the v5 candidate. Do not overwrite archived v4 artifacts.
+- Inspect and correct new-champion handling in the draft. The current draft remains the proven v4 ordering and does not yet pick Heart of Ruin.
+- Revisit all siege objective rules: range-five monoliths invalidate risk-free range-four caster cheese.
+- Validate `cam[b]c::camp::base_stats` remains valid for the updated SDK and update any renamed APIs.
+- Run head-to-head paired seeds/maps, both team sides; collect results and first-failure examples.
+- For pre-patch archived replay analysis, tag as `engine-0.0.3 / pre-week2`; never mix with post-patch score averages.
+- Test lock removal, team claims, bank-stall escape, capture behavior, min fuel, and no-error execution on several maps.
+
+## Commands after updating the client
+
+```sh
+./tools/cambc --version
+./tools/cambc init
+./tools/cambc build Bot1 --release
+./tools/cambc run Bot1 starter-cpp --release --map maps/packs.map26a --out-dir results/v5-smoke
+```
+
+The `tools/cambc` wrapper requires the ignored `.cambc/client/cambc` binary. Store match data under a unique results directory to prevent overwriting history.
