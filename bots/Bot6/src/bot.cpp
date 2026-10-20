@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_EARLY_SIEGE 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -490,8 +491,13 @@ bool Bot::capture_group(int index) {
 
 bool Bot::siege_objective() {
     auto& me = self();
+    #if V6_EARLY_SIEGE
+    if (!objective_map || !caster_build || me.health() < me.max_health() * .45f
+        || (round < 120 && me.focus() < 125)) return false;
+#else
     if (!objective_map || !caster_build || me.health() < me.max_health() * .45f
         || (round < 400 && me.focus() < 180)) return false;
+#endif
     if (target >= 0 && !groups[target].major && groups[target].state == 1) return false;
     int index = -1, best = 65535;
     for (int i = 0; i < static_cast<int>(groups.size()); ++i) {
