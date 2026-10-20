@@ -57,7 +57,7 @@ def main():
                     picks=["C::"+n for n in ORDERS[index].split(",")]
                     assert len(picks)==11 and len(set(picks))==11
                     # Preserve v4 siege draft on maps identified as objective-only.
-                    s=s.replace(anchor,"    if (!objective) order = {" + ", ".join(picks) + "};\\n" + anchor,1)
+                    s=s.replace(anchor,"    if (!objective) order = {" + ", ".join(picks) + "};\n" + anchor,1)
                 dest.write_text(s)
         variants[name]=label
     env={**os.environ,"CAMBC_NO_UPDATE_CHECK":"1","CAMBC_OFFLINE":"1"}
