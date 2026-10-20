@@ -41,7 +41,9 @@ Missing or unverified values are JSON `null` (blank in CSV). No match date is in
 
 The collection was described as losses of five-game series, some 1:4. Therefore the folder label is retained in `collection_labels.outcome_folder`; it is **not** assigned to `result.outcome` for individual games. Scores, winners, rounds, drafts, crash/fuel-exhaustion flags, and completion status remain unset pending replay decoding during the later analysis phase.
 
-The logs contain `Bot1 strategy v4 (SDK 2.2.5)`. This is preserved as an observed banner and is not trusted as a submission identifier. The collection's `v5` directory label also does not establish an exact source commit or uploaded artifact. Submission IDs, hashes, patch labels, timestamps, and opponent versions remain unknown unless independently supplied.
+The user confirmed that **v4 was used for all 500 matches**. `our_bot.submission_label` is therefore `v4`, with `user_confirmation` provenance. The collection remains under its original `v5` directory; that directory is an organizational label, not the submitted bot version.
+
+The logs contain `Bot1 strategy v4 (SDK 2.2.5)`. This is preserved as an observed banner; the submission label is based on the user's confirmation. Exact platform submission IDs, source commits, uploaded artifact hashes, patch labels, match timestamps, and opponent versions remain unknown unless independently supplied.
 
 `engine_parse_valid` means the official engine accepted the replay bytes. It does not establish that the whole timeline replays correctly or that the match completed. `gameplay_replayed` and `completion_verified` remain false.
 
