@@ -12,3 +12,6 @@ CAMBC 3.0.1; every one of the 17 unsealed training maps, both sides, 102 matched
 Four held-out maps remain sealed: `00lanes`, `01corridors`, `01hooks`, `01islands`.
 
 Script `tools/benchmark_v6_9_adaptive_bank.py`, workflow `.github/workflows/v6.9-adaptive-bank.yml`.
+
+## Actual result — REJECTED
+102 games completed: candidate 20/34 wins against frozen v4 (pinned v6.8: 21/34), mean gem margin +79.09 (v6.8: +91.47), 30 round-change log events (v6.8: 52), no engine faults or caught exceptions; head-to-head 16/34 against exact v6.8. The banking modification did not improve the primary win metric and thus is not promoted. Evidence: `match-data/analysis/v6.9-adaptive-bank/summary.json`. The legacy 'fuel spill' event string counts round-number changes, not confirmed WASM fuel faults.
