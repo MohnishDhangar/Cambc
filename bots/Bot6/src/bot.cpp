@@ -2,6 +2,7 @@
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
 #define V6_EARLY_SIEGE 1
+#define V6_RELAXED_SIEGE_FIRING 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -525,6 +526,22 @@ bool Bot::siege_objective() {
             if (dx * dx + dy * dy <= 16) firing.set(q, true);
         }
     }
+#if V6_RELAXED_SIEGE_FIRING
+    // When group monster ranges cover every safe firing tile, the legacy
+    // plan never engages. On objective-only maps a healthy empty-handed
+    // caster can instead attack from the outer rim despite some risk.
+    if (firing.is_empty() && me.gem_count() == 0 &&
+        me.health() > me.max_health() * .8f) {
+        for (const auto& c : g.camp) {
+            const auto p = c.spawn_position();
+            if (visible.is_set(p) && !live.is_set(p)) continue;
+            for (auto q : (around(p, 4) & ~terrain).positions()) {
+                const int dx = q.x - p.x, dy = q.y - p.y;
+                if (dx * dx + dy * dy <= 16) firing.set(q, true);
+            }
+        }
+    }
+#endif
     if (firing.is_empty()) return false;
     if (!firing.is_set(me.position())) { navigate(firing, true); return true; }
     if (g.state == 2) return true;
