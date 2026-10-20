@@ -2,6 +2,8 @@
 
 > **Engine:** archived CAMBC 0.0.3 (pre–Week 2 balance). Generated from native replay records. This report is observational, not a causal test of proposed strategies.
 
+> **Important correction (20 October 2026):** The folder labels were checked against the engine's actual winner in all 245 matches, with Team A identified as Bot1 v4 in every match. **46 folder labels disagree with engine outcomes**; the 44 cited below was based on tributed score comparisons and did not handle tied-score tiebreaks correctly. The category aggregates below use the *original directory labels* and should not be treated as true win/loss stratifications. Use the [reconciled outcome report](reconciliation/RECONCILIATION.md) and [per-match CSV](reconciliation/manifest.csv) for corrected classifications.
+
 ## Data quality
 - Folders found: **245**. Native decoding: **245**. Analysis: **245**. Distinct replay SHA-256 values: **245**.
 - Decode failures: **0**. Metric extraction failures: **0**. Duplicate replays: **0**. Folder outcome mismatches: **44**.
