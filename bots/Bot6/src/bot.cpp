@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_ADAPTIVE_BANK_DISTANCE 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -656,6 +657,14 @@ void Bot::play_turn() {
     for (const auto& enemy:visible_enemies)
         if (enemy.is_alive() && enemy.is_visible()
             && dist(position,enemy.position())<=5) carrier_threat=true;
+#if V6_ADAPTIVE_BANK_DISTANCE
+    // Batch small rewards only when a distant altar makes repeated trips costly.
+    // Nearby altars, exposed carriers, and the late game retain immediate banking.
+    const int altar_walk = altar_distance.get(position);
+    if (bag && round < 1500 && altar_walk > 12 && altar_walk < distance_field::unreachable
+        && me.health() > me.max_health() * .72f && !carrier_threat)
+        threshold = 8;
+#endif
     const bool should_bank = bag && (bag>=static_cast<unsigned>(threshold)
         || altar_distance.get(position)<=2 || me.health()<me.max_health()*.50f
         || (carrier_threat && bag>=6));
