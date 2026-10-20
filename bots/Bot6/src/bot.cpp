@@ -149,7 +149,7 @@ void Bot::buy_items() {
     if ((home || !me.is_alive()) && me.can_buy(consumable_type::tp_crystal))
         me.buy(consumable_type::tp_crystal);
     auto counts = me.item_count();
-    while (me.gold_count() >= 30 && fuel_remaining() > 15000) {
+    while (me.gold_count() >= 30 && fuel_remaining() > 45000) {
         item_type item = item_type::power_shard_of_strength;
         if (counts[item_type::monster_emblem_of_strength] == 0)
             item = item_type::monster_shard_of_strength;
@@ -198,12 +198,13 @@ int Bot::select_camp() {
     const auto enemy_spawn = map::spawn_region(team::enemy).positions().front();
     distance_field travel;
     bitboard visited;
+    if (fuel_remaining() < 95000) return -1;
     travel.compute(terrain, around(me.position(), 0), visited);
     float best = -1;
     int choice = -1;
     for (int pass = 0; pass < 2 && choice < 0; ++pass)
     for (int i = 0; i < static_cast<int>(groups.size()); ++i) {
-        if (fuel_remaining() < 33000) break;
+        if (fuel_remaining() < 62000) break;
         const auto& g = groups[i];
         if (g.avoid_until > round || (objective_map && g.major)) continue;
         int distance = distance_field::unreachable;
@@ -259,7 +260,7 @@ float Bot::danger(vec2 tile) const {
 
 bool Bot::navigate(bitboard goals, bool escape, bool use_dash) {
     action = "navigate";
-    if (fuel_remaining() < 18000) return false;
+    if (fuel_remaining() < 75000) return false;
     auto& me = self();
     if (goals.is_set(me.position())) return false;
     auto units = occupied();
@@ -271,6 +272,7 @@ bool Bot::navigate(bitboard goals, bool escape, bool use_dash) {
     bitboard visited;
     // Compute the complete field so dash/crystal destinations in a separate
     // component can be evaluated too.
+    if (fuel_remaining() < 65000) return false;
     field.compute(blocked, goals, visited);
     auto origin = me.position();
     float current = field.get(origin);
@@ -328,7 +330,7 @@ bool Bot::navigate(bitboard goals, bool escape, bool use_dash) {
 
 bool Bot::fight(const unit& victim, bool enemy) {
     action = "fight";
-    if (fuel_remaining() < 16000) return false;
+    if (fuel_remaining() < 35000) return false;
     auto& me = self();
     if (!victim.is_visible() || victim.health() <= 0) return false;
     const auto position = victim.position();
