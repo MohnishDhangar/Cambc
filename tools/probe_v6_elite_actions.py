@@ -41,10 +41,10 @@ def main():
     report=[]
     source={}
     for p in SRC.rglob("*.zip"):
-        m=re.match(r"\\d+-([0-9a-f-]{36})\\.zip$",p.name)
+        m=re.match(r"[0-9]+-([0-9a-f-]{36})[.]zip$",p.name)
         if m:source[m.group(1)]=p
     for p in SRC.rglob("replay.repl26a"):
-        m=re.match(r"\\d+-([0-9a-f-]{36})$",p.parent.name)
+        m=re.match(r"[0-9]+-([0-9a-f-]{36})$",p.parent.name)
         if m:source[m.group(1)]=p
     for r in selected:
         try:
@@ -62,4 +62,5 @@ def main():
                       "examples":good[:3]},indent=2)[:13000])
     out=ROOT/"match-data/analysis/v6-elite-research";out.mkdir(parents=True,exist_ok=True)
     (out/"probe.json").write_text(json.dumps(report,indent=2)+"\n")
+    assert len(good)==len(report),f"Only {len(good)}/{len(report)} complete action streams"
 if __name__=="__main__":main()
