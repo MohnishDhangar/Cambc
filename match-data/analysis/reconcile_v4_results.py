@@ -93,6 +93,51 @@ print("UNRESOLVED",sum(r["status"]=="unresolved" for r in rows))
 print("MISMATCH_SAMPLE",json.dumps(summary["mismatches"][:8],indent=1))
 print("OUTPUT",csv_path)
 
+# Rebuild performance summaries by the engine-corrected result, not directory.
+from statistics import median
+def safe_med(values):
+    vals=[v for v in values if v is not None]
+    return round(float(median(vals)), 2) if vals else None
+corrected_groups=collections.defaultdict(list)
+for game in games:
+    leader=outcome_winner[str(game["outcome"])]
+    outcome_label="wins" if leader=="A" else "losses"
+    elo_tier=game["category"].split("/")[0]
+    corrected_groups[f"{elo_tier}/{outcome_label}"].append(game)
+corrected_stats={}
+for label, sample in sorted(corrected_groups.items()):
+    cp=[g for g in sample if "200" in g["teamA"]["checkpoint"] and "200" in g["teamB"]["checkpoint"]]
+    corrected_stats[label]={
+        "games":len(sample),
+        "median_our_gems":safe_med(g["teamA"]["score"] for g in sample),
+        "median_opponent_gems":safe_med(g["teamB"]["score"] for g in sample),
+        "median_our_gold":safe_med(g["teamA"]["gold"] for g in sample),
+        "median_opponent_gold":safe_med(g["teamB"]["gold"] for g in sample),
+        "median_our_deaths":safe_med(g["teamA"]["deaths"] for g in sample),
+        "median_opponent_deaths":safe_med(g["teamB"]["deaths"] for g in sample),
+        "median_score_gap_at_200_opponent_minus_us":safe_med(
+            g["teamB"]["checkpoint"]["200"]["score"]-g["teamA"]["checkpoint"]["200"]["score"] for g in cp),
+        "matches_with_round200":len(cp),
+    }
+(DEST/"CORRECTED-OUTCOME-ANALYSIS.md").write_text(
+    "# V4 corrected-category performance\\n\\n"
+    "Using official replay-engine outcomes, not original wins/losses folder labels. "
+    "All data use pre–Week 2 engine 0.0.3 and deliberately selected matches.\\n\\n"
+    "| Verified category | Games | Median gems (v4–opponent) | Median gold (v4–opponent) | Median deaths (v4–opponent) | Opp. score lead at round 200 |\\n"
+    "|---|---:|---|---|---|---:|\\n" +
+    "".join(f"| {key} | {stat['games']} | {stat['median_our_gems']}–{stat['median_opponent_gems']} | "
+            f"{stat['median_our_gold']}–{stat['median_opponent_gold']} | "
+            f"{stat['median_our_deaths']}–{stat['median_opponent_deaths']} | "
+            f"{stat['median_score_gap_at_200_opponent_minus_us']} |\\n"
+            for key,stat in corrected_stats.items()) +
+    "\\nThe round-200 column includes only games reaching that checkpoint. "
+    "Interpret these as descriptive historical comparisons, not post-patch performance claims.\\n"
+)
+summary["correctedCategories"]=corrected_stats
+(DEST/"summary.json").write_text(json.dumps(summary,indent=2)+"\\n")
+print("CORRECTED_GROUP_SUMMARY",json.dumps(corrected_stats,sort_keys=True))
+
+
 report = [
     "# Reconciled v4 match labels", "",
     "Generated from the existing 245 engine-0.0.3 replay reconstructions.",
