@@ -27,8 +27,8 @@
   ],
   "resolution": {
     "outcome_winner": {
-      "1": "A",
-      "2": "B"
+      "2": "B",
+      "1": "A"
     },
     "classificationCounts": {
       "('higher-elo/losses', 'agreement')": 111,
@@ -869,4 +869,4 @@
       "matches_with_round200": 53
     }
   }
-}\n
+}
