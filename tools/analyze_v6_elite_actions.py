@@ -124,11 +124,24 @@ def mean(values):
     return round(statistics.mean(values),3) if values else None
 def main():
     paths=indexed_sources()
-    with (PREP/"matches.csv").open() as fh:allrows=list(csv.DictReader(fh))
+    with (PREP/"matches.csv").open() as fh:source_rows=list(csv.DictReader(fh))
+    split_file=OUT/"v6-map-split.csv"
+    if not split_file.exists():
+        raise RuntimeError("Run python3 tools/build_v6_map_split.py before analyzing")
+    with split_file.open() as fh:split_rows=list(csv.DictReader(fh))
+    by_id={r["match_id"]:r for r in split_rows}
+    if len(source_rows)!=len(split_rows) or set(by_id)!={r["match_id"] for r in source_rows}:
+        raise ValueError("Map split does not match source collection")
+    allrows=[r for r in source_rows if by_id[r["match_id"]]["v6_split"]=="train"]
+    with (OUT/"v6-map-split.json").open() as fh:split_info=json.load(fh)
+    reserved=set(split_info["reserved_map_names"])
+    if set(r["map_name"] for r in allrows) & reserved:
+        raise ValueError("Held-out maps entered training")
     unique={}
     for row in allrows:
         unique.setdefault(row["replay_sha256"],row)
-    if len(unique)!=179 or len(allrows)!=500:raise ValueError("Unexpected collection inventory")
+    if len(unique)!=split_info["split_counts"]["train"]["distinct_replay_contents"] or len(allrows)!=split_info["split_counts"]["train"]["records"]:
+        raise ValueError("Training inventory mismatch with manifest")
     results=[];fail=[]
     for sha,row in unique.items():
         try:
@@ -170,7 +183,9 @@ def main():
                 ("tribute_attempts","tribute"),("buy_attempts","buy_item"),("fuel_exhaustion_turns","turns_fuel_exhausted")]:
                 d["our_"+field]=us.get(name,0);d["their_"+field]=other.get(name,0)
             writer.writerow(d)
-    summary={"n_unique":len(results),"n_source_rows":len(allrows),"n_invalid":len(fail),
+    summary={"n_unique":len(results),"n_training_source_rows":len(allrows),"n_source_rows":len(source_rows),
+             "excluded_from_training":len(source_rows)-len(allrows),
+             "reserved_maps":sorted(reserved),"n_invalid":len(fail),
              "stdout_v4_markers":sum(r["stdout_v4_marker"] for r in results),
              "stdout_v5_markers":sum(r["stdout_v5_marker"] for r in results),
              "by_opponent":{},"by_map":{},"all":{}}
