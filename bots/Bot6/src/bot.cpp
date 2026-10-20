@@ -416,6 +416,65 @@ void Bot::recover() {
     if (!me.is_teleporting() && me.can_attack()) defend();
 }
 
+#ifndef V6_SMART_BANK
+#define V6_SMART_BANK 1
+#endif
+#if V6_SMART_BANK
+bool Bot::bank() {
+    action = "bank";
+    auto& me = self();
+    if (!me.gem_count()) return false;
+    claim(-1);
+
+    // In CAMBC 3.0.1 tribute automatically attacks a hostile altar lock.
+    // Locate a safe tribute square instead of waiting forever on an unsafe one.
+    const float channel = std::max(1.f, std::ceil(me.gem_count() / 10.f));
+    const float safe_damage = me.health() / (channel + 2.f);
+    const auto visible = vision::visible_tiles();
+    const auto occupied_tiles = occupied();
+    bitboard all_goals, safe_goals;
+    std::optional<vec2> open_here, locked_here;
+    for (auto p : map::altars().positions()) {
+        const bool hostile_lock = visible.is_set(p) && vision::has_altar_lock(p)
+            && vision::altar_lock_at(p).is_enemy();
+        if (dist(me.position(), p) <= constants::submit_gems_range) {
+            if (hostile_lock) locked_here = p;
+            else open_here = p;
+        }
+        const auto adjacent = around(p, constants::submit_gems_range)
+            & ~terrain & ~occupied_tiles;
+        all_goals |= adjacent;
+        if (!hostile_lock)
+            for (auto q : adjacent.positions())
+                if (danger(q) < safe_damage) safe_goals.set(q, true);
+    }
+    if (open_here && danger(me.position()) < safe_damage) {
+        action = "bank safe tribute";
+        me.submit_gems(*open_here);
+        return true;
+    }
+    if (locked_here && !open_here && danger(me.position()) < safe_damage) {
+        action = "bank clear lock";
+        me.submit_gems(*locked_here);
+        return true;
+    }
+    if (!safe_goals.is_empty() && navigate(safe_goals, true)) return true;
+    // If no safer tribute square is reachable, attempt the objective rather
+    // than looping at the altar without issuing a command.
+    if (open_here) {
+        action = "bank forced tribute";
+        me.submit_gems(*open_here);
+        return true;
+    }
+    if (locked_here) {
+        action = "bank forced lock clear";
+        me.submit_gems(*locked_here);
+        return true;
+    }
+    if (!all_goals.is_empty()) navigate(all_goals, true);
+    return true;
+}
+#else
 bool Bot::bank() {
     action = "bank";
     auto& me = self();
@@ -442,6 +501,8 @@ bool Bot::bank() {
     navigate(goals, me.health() < me.max_health() * .5f);
     return true;
 }
+
+#endif
 
 bool Bot::capture_group(int index) {
     auto& g = groups[index];
