@@ -1,0 +1,58 @@
+name: V4 opponent replay study
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/v5-week2]
+    paths:
+      - 'match-data/analysis/extract_v4_study.mjs'
+      - 'match-data/analysis/summarize_v4_study.py'
+      - '.github/workflows/v4-replay-study.yml'
+permissions:
+  contents: write
+jobs:
+  analyze:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      CAMBC_CACHE: "\${{ github.workspace }}/.cambc/cache"
+      CAMBC_NO_UPDATE_CHECK: '1'
+      REPLAY_LIMIT: '1'
+      NODE_NO_WARNINGS: '1'
+    steps:
+      - name: Checkout full replay dataset
+        uses: actions/checkout@v4
+      - name: Install matching 2.2.5 client
+        run: |
+          python3 -m pip install --user cambc==2.2.5
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Initialize replay engine
+        run: |
+          CAMBC_OFFLINE=1 cambc init --yes .
+          find "$CAMBC_CACHE/assets" -maxdepth 5 -type f -name 'v0_0_3-*.wasm' -print | head -3 || true
+      - name: Replay exact original inputs using 0.0.3 engine
+        run: |
+          node match-data/analysis/extract_v4_study.mjs match-data/v4 results/v4-native
+      - name: Analyze all extracted games
+        run: |
+          python3 match-data/analysis/summarize_v4_study.py results/v4-native match-data/analysis/v4-study
+      - name: Print report preview
+        run: |
+          head -80 match-data/analysis/v4-study/REPORT.md
+      - name: Upload numeric evidence (also on failure)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v4-replay-study
+          path: |
+            results/v4-native/index.json
+            match-data/analysis/v4-study/REPORT.md
+            match-data/analysis/v4-study/metrics.json
+          retention-days: 30
+      - name: Publish reproducible study on study branch
+        if: success()
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add match-data/analysis/v4-study/REPORT.md match-data/analysis/v4-study/metrics.json
+          git commit -m "analysis: persist v4 replay study outputs" || exit 0
+          git push origin HEAD:develop/v5-week2
