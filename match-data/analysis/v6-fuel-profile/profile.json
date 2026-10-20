@@ -1,0 +1,42 @@
+{
+  "engine": "CAMBC 3.0.1",
+  "base_v66_commit": "4d38b1b5b9697783d555e76797e1adc78e36637a",
+  "v66_bot_cpp_sha256": "321480f1f3bc4548f448f554b787c686bed8b86403d35e9208a76d2aa3a2eac3",
+  "frozen_v4_archive_sha256": "b296e83d43e8b16709e655ee4470a526e9e84160ee02fbad0e8c483661e1a062",
+  "maps": [
+    "01big-world",
+    "01concentrated-wealth",
+    "00contest"
+  ],
+  "sealed_maps_excluded": [
+    "00lanes",
+    "01corridors",
+    "01hooks",
+    "01islands"
+  ],
+  "total_spills": 399,
+  "by_action": {
+    "navigate walk": 347,
+    "scout": 49,
+    "navigate crystal": 3
+  },
+  "per_game": {
+    "01big-world-A": {
+      "navigate walk": 169,
+      "scout": 4,
+      "navigate crystal": 3
+    },
+    "01big-world-B": {
+      "navigate walk": 178,
+      "scout": 7
+    },
+    "01concentrated-wealth-A": {
+      "scout": 20
+    },
+    "01concentrated-wealth-B": {
+      "scout": 18
+    },
+    "00contest-A": {},
+    "00contest-B": {}
+  }
+}

@@ -1,0 +1,8 @@
+map,side,action,count,samples
+01big-world,A,navigate walk,169,fuel spill at navigate walk from 2 to 3 | fuel spill at navigate walk from 2 to 3 | fuel spill at navigate walk from 2 to 3
+01big-world,A,scout,4,fuel spill at scout from 2 to 3 | fuel spill at scout from 41 to 42 | fuel spill at scout from 80 to 81
+01big-world,A,navigate crystal,3,fuel spill at navigate crystal from 657 to 658 | fuel spill at navigate crystal from 853 to 854 | fuel spill at navigate crystal from 1237 to 1238
+01big-world,B,navigate walk,178,fuel spill at navigate walk from 2 to 3 | fuel spill at navigate walk from 2 to 3 | fuel spill at navigate walk from 2 to 3
+01big-world,B,scout,7,fuel spill at scout from 2 to 3 | fuel spill at scout from 41 to 42 | fuel spill at scout from 80 to 81
+01concentrated-wealth,A,scout,20,fuel spill at scout from 248 to 249 | fuel spill at scout from 250 to 251 | fuel spill at scout from 252 to 253
+01concentrated-wealth,B,scout,18,fuel spill at scout from 1413 to 1414 | fuel spill at scout from 1415 to 1416 | fuel spill at scout from 1417 to 1418
