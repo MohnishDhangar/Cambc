@@ -8,7 +8,7 @@ import {WASI} from 'node:wasi';
 const root = path.resolve(process.argv[2] ?? 'match-data/v4');
 const destination = path.resolve(process.argv[3] ?? 'results/v4-native');
 const compact = true;
-const assets = path.resolve('.cambc/cache/assets');
+const assets = path.resolve(process.env.CAMBC_CACHE ?? '.cambc/cache', 'assets');
 const assetDirectory = fs.readdirSync(assets)
   .map(name => path.join(assets, name, 'visualiser/assets'))
   .find(dir => fs.existsSync(dir) && fs.readdirSync(dir).some(name => /^v0_0_3-.*\.wasm$/.test(name)));
@@ -196,6 +196,7 @@ function crawl(folder) {
 }
 crawl(root);
 files.sort();
+if (process.env.REPLAY_LIMIT) files.splice(Number(process.env.REPLAY_LIMIT));
 const summaries = [];
 const failures = [];
 for (const [i,file] of files.entries()) {
