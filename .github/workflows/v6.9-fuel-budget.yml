@@ -5,7 +5,7 @@ on:
     paths:
       - 'bots/Bot6/src/**'
       - 'tools/benchmark_v6_9_fuel.py'
-      - '.github/workflows/v6.7-tribute-benchmark.yml'
+      - '.github/workflows/v6.9-fuel-budget.yml'
   workflow_dispatch:
 permissions:
   contents: write

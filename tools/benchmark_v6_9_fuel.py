@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prespecified v6.9 early-exit pathfinding ablation; four sealed maps are never accessed."""
+"""Prespecified v6.9 fuel-budget ablation; four sealed maps are never accessed."""
 import concurrent.futures
 import csv
 import hashlib
@@ -11,7 +11,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "match-data/analysis/v6.9-navigation-bfs"
+OUT = ROOT / "match-data/analysis/v6.9-fuel-budget"
 SPLIT = ROOT / "match-data/analysis/v6-elite-research/v6-map-split.json"
 BASE = "0ddd5338b94db824f9f53261a17f020490b7017f"
 V4_SHA = "b296e83d43e8b16709e655ee4470a526e9e84160ee02fbad0e8c483661e1a062"
