@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_ALTAR_PROGRESS 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -433,7 +434,14 @@ bool Bot::bank() {
     bitboard goals;
     for (auto p : map::altars().positions()) {
         if (dist(me.position(), p) <= constants::submit_gems_range) {
-            // submit_gems also attacks an enemy lock. Own locks permit tribute.
+#if V6_ALTAR_PROGRESS
+            // Progress must not stall just because the altar is contested.
+            // Damage alone does not interrupt tribute; enemy locks are
+            // automatically attacked by the submit_gems engine action.
+            me.submit_gems(p);
+            return true;
+#else
+            // Legacy v6.8 path retained for paired causal attribution.
             if (vision::has_altar_lock(p)) {
                 const auto lock = vision::altar_lock_at(p);
                 if (lock.is_enemy()) {
@@ -445,6 +453,7 @@ bool Bot::bank() {
                 me.submit_gems(p);
                 return true;
             }
+#endif
         }
         goals |= around(p, constants::submit_gems_range);
     }
