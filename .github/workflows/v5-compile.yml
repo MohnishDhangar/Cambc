@@ -1,7 +1,7 @@
 name: V5 compile with available CAMBC 2.2.5
 on:
   push:
-    branches: [develop/v5-week2]
+    branches: [develop/v5-week2, fix/v5-live-runtime-20261020]
     paths:
       - 'bots/Bot1/src/**'
       - 'bots/Bot1/scripts/bench_vs_v4.py'
