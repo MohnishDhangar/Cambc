@@ -1,0 +1,476 @@
+{
+  "totalPaths": 1,
+  "decoded": 1,
+  "decodeFailures": [],
+  "processed": 1,
+  "analysisFailures": [],
+  "unique": 1,
+  "duplicates": [],
+  "mislabeled": [],
+  "byCategory": {
+    "higher-elo/losses": {
+      "games": 1,
+      "groups": 1,
+      "medianRound": 650,
+      "medianA": 60,
+      "medianB": 1020,
+      "medianGoldA": 1425,
+      "medianGoldB": 3970,
+      "medianFirstTributeA": 213,
+      "medianFirstTributeB": 44,
+      "medianFirstCaptureA": 41,
+      "medianFirstCaptureB": 35,
+      "medDeathsA": 24,
+      "medDeathsB": 7,
+      "medianLostA": 120,
+      "medianLostB": 60,
+      "medianGap100": 60,
+      "medianGap200": 120,
+      "medianGap400": 360,
+      "avgCapturesA": 13.0,
+      "avgCapturesB": 17.0,
+      "stationaryCarrierGamesA": 0,
+      "stationaryCarrierGamesB": 0,
+      "medianAttacksA": 385,
+      "medianAttacksB": 611,
+      "medianCastsA": 141,
+      "medianCastsB": 318
+    }
+  },
+  "rosters": {
+    "higher-elo/losses:teamA": {
+      "Tavi": 1,
+      "Varg": 1,
+      "Vendetta": 1,
+      "Ryth": 1
+    },
+    "higher-elo/losses:teamB": {
+      "Ren": 1,
+      "Stellar": 1,
+      "Cassi": 1,
+      "Issac": 1,
+      "Ryth": 1
+    }
+  },
+  "opponentGroups": [
+    {
+      "category": "higher-elo/losses",
+      "group": "team-1",
+      "games": 1,
+      "medianRound": 650,
+      "medianScoreUs": 60,
+      "medianScoreOpp": 1020,
+      "medianGoldUs": 1425,
+      "medianGoldOpp": 3970,
+      "oppPicks": {
+        "Ren": 1,
+        "Stellar": 1,
+        "Cassi": 1,
+        "Issac": 1,
+        "Ryth": 1
+      },
+      "avgOpponentCaptures": 17.0,
+      "avgOpponentDeaths": 7.0,
+      "avgOpponentAttacks": 611.0,
+      "medianFirstTribute": 44,
+      "maps": {
+        "31x31": 1
+      }
+    }
+  ],
+  "notableMatches": {
+    "high_gold_gaps": [
+      {
+        "path": "higher-elo/losses/team-1/01-dc3936e1-8d1d-44e6-a0f6-1eff108365ce",
+        "round": 650,
+        "score": [
+          60,
+          1020
+        ],
+        "ourValue": 1425,
+        "enemyValue": 3970
+      }
+    ],
+    "high_capture_gaps": [
+      {
+        "path": "higher-elo/losses/team-1/01-dc3936e1-8d1d-44e6-a0f6-1eff108365ce",
+        "ourCaptures": 13,
+        "opponentCaptures": 17,
+        "score": [
+          60,
+          1020
+        ]
+      }
+    ],
+    "high_death_gaps": [
+      {
+        "path": "higher-elo/losses/team-1/01-dc3936e1-8d1d-44e6-a0f6-1eff108365ce",
+        "round": 650,
+        "score": [
+          60,
+          1020
+        ],
+        "ourValue": 24,
+        "enemyValue": 7
+      }
+    ],
+    "high_early_score_gaps": [
+      {
+        "path": "higher-elo/losses/team-1/01-dc3936e1-8d1d-44e6-a0f6-1eff108365ce",
+        "at": 200,
+        "us": 0,
+        "opp": 120
+      }
+    ],
+    "bank_stalls": []
+  },
+  "games": [
+    {
+      "path": "higher-elo/losses/team-1/01-dc3936e1-8d1d-44e6-a0f6-1eff108365ce",
+      "group": "team-1",
+      "category": "higher-elo/losses",
+      "sha256": "1ab9a9bff4d56a1d7bf0270e2f5b9bf3881c26d0c848c201789f2986811591f1",
+      "engine": "0.0.3",
+      "mapHash": "23e58fe8f41ff66761ade251d3d10a9c3eead864f9ad74f12ad9e34f4bece378",
+      "mapSize": "31x31",
+      "round": 650,
+      "outcome": 2,
+      "score": [
+        60,
+        1020
+      ],
+      "teamA": {
+        "score": 60,
+        "gold": 1425,
+        "spentGold": 1420,
+        "collected": 180,
+        "retained": 0,
+        "lost": 120,
+        "kills": 0,
+        "deaths": 24,
+        "champions": [
+          "Tavi",
+          "Varg",
+          "Vendetta",
+          "Ryth"
+        ],
+        "firstCapture": 41,
+        "firstTribute": 213,
+        "firstPickup": 241,
+        "tributeSizes": [
+          60
+        ],
+        "captures": [
+          {
+            "round": 41,
+            "gems": 0,
+            "gold": 105,
+            "id": 2
+          },
+          {
+            "round": 44,
+            "gems": 0,
+            "gold": 105,
+            "id": 3
+          },
+          {
+            "round": 45,
+            "gems": 0,
+            "gold": 105,
+            "id": 0
+          },
+          {
+            "round": 154,
+            "gems": 0,
+            "gold": 70,
+            "id": 0
+          },
+          {
+            "round": 177,
+            "gems": 0,
+            "gold": 105,
+            "id": 0
+          },
+          {
+            "round": 179,
+            "gems": 60,
+            "gold": 160,
+            "id": 1
+          },
+          {
+            "round": 195,
+            "gems": 0,
+            "gold": 70,
+            "id": 0
+          },
+          {
+            "round": 219,
+            "gems": 0,
+            "gold": 70,
+            "id": 0
+          },
+          {
+            "round": 241,
+            "gems": 60,
+            "gold": 160,
+            "id": 0
+          },
+          {
+            "round": 288,
+            "gems": 0,
+            "gold": 105,
+            "id": 2
+          },
+          {
+            "round": 325,
+            "gems": 60,
+            "gold": 160,
+            "id": 3
+          },
+          {
+            "round": 334,
+            "gems": 0,
+            "gold": 105,
+            "id": 2
+          },
+          {
+            "round": 424,
+            "gems": 0,
+            "gold": 105,
+            "id": 3
+          }
+        ],
+        "checkpoint": {
+          "50": {
+            "score": 0,
+            "gold": 315
+          },
+          "100": {
+            "score": 0,
+            "gold": 315
+          },
+          "150": {
+            "score": 0,
+            "gold": 315
+          },
+          "200": {
+            "score": 0,
+            "gold": 720
+          },
+          "300": {
+            "score": 60,
+            "gold": 1055
+          },
+          "400": {
+            "score": 60,
+            "gold": 1320
+          },
+          "500": {
+            "score": 60,
+            "gold": 1425
+          }
+        },
+        "combatHits": 92,
+        "damageVsChampions": 10220.5,
+        "recordedAttacks": 385,
+        "recordedCasts": 141,
+        "deathGemLoss": 120,
+        "turnsCarried": 56,
+        "deadTurns": 1332,
+        "channelTurns": 74,
+        "longestStationaryCarrier": 1,
+        "carrierStalls15": [],
+        "meanCarryDuration": 18.67,
+        "meanTributeSize": 60.0,
+        "bankRatio": 0.33
+      },
+      "teamB": {
+        "score": 1020,
+        "gold": 3970,
+        "spentGold": 3680,
+        "collected": 1080,
+        "retained": 0,
+        "lost": 60,
+        "kills": 24,
+        "deaths": 7,
+        "champions": [
+          "Ren",
+          "Stellar",
+          "Cassi",
+          "Issac",
+          "Ryth"
+        ],
+        "firstCapture": 35,
+        "firstTribute": 44,
+        "firstPickup": 251,
+        "tributeSizes": [
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60,
+          60
+        ],
+        "captures": [
+          {
+            "round": 35,
+            "gems": 60,
+            "gold": 160,
+            "id": 7
+          },
+          {
+            "round": 96,
+            "gems": 60,
+            "gold": 160,
+            "id": 6
+          },
+          {
+            "round": 113,
+            "gems": 60,
+            "gold": 160,
+            "id": 7
+          },
+          {
+            "round": 345,
+            "gems": 60,
+            "gold": 160,
+            "id": 5
+          },
+          {
+            "round": 356,
+            "gems": 60,
+            "gold": 160,
+            "id": 4
+          },
+          {
+            "round": 390,
+            "gems": 60,
+            "gold": 160,
+            "id": 7
+          },
+          {
+            "round": 405,
+            "gems": 60,
+            "gold": 160,
+            "id": 6
+          },
+          {
+            "round": 451,
+            "gems": 60,
+            "gold": 160,
+            "id": 7
+          },
+          {
+            "round": 468,
+            "gems": 60,
+            "gold": 160,
+            "id": 5
+          },
+          {
+            "round": 487,
+            "gems": 60,
+            "gold": 160,
+            "id": 6
+          },
+          {
+            "round": 500,
+            "gems": 60,
+            "gold": 160,
+            "id": 8
+          },
+          {
+            "round": 551,
+            "gems": 60,
+            "gold": 160,
+            "id": 6
+          },
+          {
+            "round": 553,
+            "gems": 0,
+            "gold": 84,
+            "id": 5
+          },
+          {
+            "round": 585,
+            "gems": 60,
+            "gold": 192,
+            "id": 4
+          },
+          {
+            "round": 591,
+            "gems": 60,
+            "gold": 160,
+            "id": 8
+          },
+          {
+            "round": 616,
+            "gems": 60,
+            "gold": 192,
+            "id": 5
+          },
+          {
+            "round": 642,
+            "gems": 60,
+            "gold": 192,
+            "id": 4
+          }
+        ],
+        "checkpoint": {
+          "50": {
+            "score": 60,
+            "gold": 160
+          },
+          "100": {
+            "score": 60,
+            "gold": 520
+          },
+          "150": {
+            "score": 120,
+            "gold": 680
+          },
+          "200": {
+            "score": 120,
+            "gold": 780
+          },
+          "300": {
+            "score": 120,
+            "gold": 930
+          },
+          "400": {
+            "score": 420,
+            "gold": 1610
+          },
+          "500": {
+            "score": 660,
+            "gold": 2610
+          }
+        },
+        "combatHits": 280,
+        "damageVsChampions": 21937.0,
+        "recordedAttacks": 611,
+        "recordedCasts": 318,
+        "deathGemLoss": 60,
+        "turnsCarried": 355,
+        "deadTurns": 420,
+        "channelTurns": 311,
+        "longestStationaryCarrier": 5,
+        "carrierStalls15": [],
+        "meanCarryDuration": 19.72,
+        "meanTributeSize": 60.0,
+        "bankRatio": 0.94
+      },
+      "classifiedCorrectly": true
+    }
+  ]
+}
