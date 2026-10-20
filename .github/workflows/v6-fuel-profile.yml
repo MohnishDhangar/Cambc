@@ -1,0 +1,51 @@
+name: Diagnose v6 fuel spills (training maps)
+on:
+  push:
+    branches: [research/v6-fuel-spill-diagnostics-20261021]
+    paths:
+      - 'tools/profile_v6_fuel.py'
+      - '.github/workflows/v6-fuel-profile.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  profile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install CAMBC 3.0.1
+        run: |
+          python3 -m pip install --user 'cambc==3.0.1'
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Initialize matching SDK and WASI
+        env:
+          CAMBC_NO_UPDATE_CHECK: '1'
+        run: |
+          CAMBC_OFFLINE=1 cambc init --yes .
+          cambc build Bot6 --release
+      - name: Run action-specific fuel profile on three training maps
+        run: python3 tools/profile_v6_fuel.py
+      - name: Preserve fuel diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6-fuel-diagnostics
+          path: |
+            match-data/analysis/v6-fuel-profile/actions.csv
+            match-data/analysis/v6-fuel-profile/profile.json
+          retention-days: 60
+      - name: Publish diagnostics to research branch
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add match-data/analysis/v6-fuel-profile/actions.csv match-data/analysis/v6-fuel-profile/profile.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research: profile action-level fuel spills on training maps"
+            git fetch origin research/v6-fuel-spill-diagnostics-20261021
+            git rebase origin/research/v6-fuel-spill-diagnostics-20261021
+            git push origin HEAD:research/v6-fuel-spill-diagnostics-20261021
+          fi
