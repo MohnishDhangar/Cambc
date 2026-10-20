@@ -36,10 +36,25 @@ The repository's existing SDK and supplied CLI identify as `cambc 2.2.5`. **That
 6. Add a bank-stall fallback to seek lower-danger altar approach or recall.
 7. Record planning version 5 in draft memory.
 
+## Available-client compile and smoke results — 20 October 2026
+
+The complete v5 branch compiled successfully with the released CAMBC 2.2.5 client and WASI SDK 33 in GitHub Actions **run 39401603392**. Build artifact: `Bot1-v5-available-client`. This is source compatibility with the available (pre-patch) SDK, **not** confirmation of compatibility with a future/updated patched server API.
+
+A subsequent run, **39401800786**, again compiled v5 and also built the frozen `bots/Bot1/Bot1-v4.zip` source as a separate `BaselineV4` opponent. Full release-mode games on the repository's `maps/packs.map26a`, using the released 2.2.5 engine:
+
+| Candidate side | v5 tributed gems | v4 tributed gems | Winner | Rounds | Bot faults |
+| --- | ---: | ---: | --- | ---: | ---: |
+| A | 804 | 1,032 | v4 | 457 | 0 both sides |
+| B | 984 | 1,032 | v4 | 479 | 0 both sides |
+
+Both matches completed; their statistics and replay bundles were uploaded as the `Bot1-v5-smoke-vs-v4` workflow artifact. The v5 WASM was uploaded as `Bot1-v5-available-client`.
+
+**Interpretation:** the candidate does not yet outperform v4 on this old map. These two games are too few to estimate a win rate and use the *pre-Week 2 engine*, so they must not be treated as evidence for the patched competitive metagame. Before deciding on v5 changes, diagnose the lost points on these replays and collect matches with the updated server rules when possible.
+
 ## Required next checks (not claimed complete)
 
 - Obtain the refreshed post-patch `cambc` binary/SDK/engine and run `cambc init` in a **separate test project**. Confirm `golem`, `heart_of_ruin` and revised dash payload are present in the generated SDK.
-- Build both patched v4 (unchanged baseline) and the v5 candidate. Do not overwrite archived v4 artifacts.
+- **Completed with available client 2.2.5:** built frozen v4 separately as `BaselineV4` and compiled v5. Repeat with the actual Week 2 engine when possible; never overwrite archived v4 artifacts.
 - Inspect and correct new-champion handling in the draft. The current draft remains the proven v4 ordering and does not yet pick Heart of Ruin.
 - Revisit all siege objective rules: range-five monoliths invalidate risk-free range-four caster cheese.
 - Validate `cam[b]c::camp::base_stats` remains valid for the updated SDK and update any renamed APIs.
