@@ -31,9 +31,14 @@ Reference pinned v6.8: 21/34 wins vs frozen v4, +91.47 average tributed gem marg
 - **v6.10** unconditionally submit at adjacent altar; 20/34 vs v4, +32.32 margin, 47 spills; direct v6.10 vs pinned v6.8 18/34. Rejected despite remedying the stalled code path; likely danger from exposing carriers, a hypothesis.
 - **v6.11** bank 4–10 gems using return distance; 19/34 vs v4, +50.06 margin, 28 spills; direct vs pinned v6.8 17/34. Rejected. Fewer fuel events alone are insufficient.
 - **v6.12** guarded moderately riskier farming only when no safe targets; 20/34 vs v4, +66.53 margin, 52 spills; direct vs pinned v6.8 17/34. Rejected.
-- **v6.13** carrier danger-aware evasion: benchmark pending at initial report authoring; inspect `develop/v6.13-carrier-threat-evasion`.
+- **v6.13** carrier danger-aware evasion: 17/34 vs v4, +9.00 margin, 14 spills; direct vs pinned v6.8 19/34. Rejected (less fuel waste, much worse competition).
+- **v6.14** early siege on objective maps: 21/34 vs v4, +103.24 margin, 52 spills; direct vs pinned v6.8 17/34, margin 0. All observed scoring differences vs v6.8 occur on permitted `00contest`: candidate team B scores 200 against v4's zero, whereas pinned control team B scores zero against v4's 200; **`01boss-battle` remains 0–0 both sides.** Not promoted; no increase in wins and fuel spills remain.
 
 Each branch retains baseline in its comparison script and compiles a pinned v6.8 control plus frozen v4. CI passing simply means complete games and successful compilation, **not** candidate promotion. No branch above was merged into frozen references or the v6.8 field-test line.
+
+## Experiment decisions and next measurements
+
+No v6.10–v6.14 candidate meets the predefined promotion gate (greater wins vs pinned v6.8, better tribute margin, no fuel spills/exception/fault). v6.14 improves single-map outcomes but does not generalize to better win rates in the current evaluation.
 
 ## Next measurements
 Decode full field-match replays through the **exact matching official CAMBC v3.0.1 simulation engine** to obtain per-round scores, captures, death-associated gem loss, contested altar time, no-op turns, and farm trip distances. Then run controlled tournaments against a diverse opponent pool using held-out-safe maps and multiple seeds. Stronger-than-v4 competitive edge is not yet established.
