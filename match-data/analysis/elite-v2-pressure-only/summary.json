@@ -3,7 +3,7 @@
   "base_v68_commit": "0ddd5338b94db824f9f53261a17f020490b7017f",
   "frozen_v4_zip_sha256": "b296e83d43e8b16709e655ee4470a526e9e84160ee02fbad0e8c483661e1a062",
   "source_hashes": {
-    "pressure_bot_sha256": "826cd1c3388c176b37a2006d188737d188148a0fff6057690d889330b91b05e9",
+    "pressure_bot_sha256": "7cdacb7863d215e345796e4ec6224d31852851db3007c89f0414cf1a5f2eca89",
     "v68_bot.cpp": "f74745b290dd9c2f9b6a6b46a1128d031ae080d5d9b024993a7b554198c5e7ac",
     "v68_bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
     "v68_draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
@@ -44,12 +44,12 @@
         0.367,
         0.685
       ],
-      "mean_gem_margin": -49.29,
+      "mean_gem_margin": 42.0,
       "side_A_wins": 6,
       "side_B_wins": 12,
       "faults": 0,
-      "exceptions": 1183,
-      "fuel_spills": 40,
+      "exceptions": 0,
+      "fuel_spills": 52,
       "failed": 0
     },
     "pinned_vs_v4": {
@@ -74,19 +74,19 @@
         0.367,
         0.685
       ],
-      "mean_gem_margin": -5.09,
-      "side_A_wins": 5,
-      "side_B_wins": 13,
+      "mean_gem_margin": 0.0,
+      "side_A_wins": 8,
+      "side_B_wins": 10,
       "faults": 0,
-      "exceptions": 1066,
-      "fuel_spills": 14,
+      "exceptions": 0,
+      "fuel_spills": 54,
       "failed": 0
     }
   },
   "paired_vs_v4": {
     "complete_pairs": 34,
     "net_wins": -3,
-    "mean_margin_delta": -140.76
+    "mean_margin_delta": -49.47
   },
   "match_count": 102,
   "promotion_gate": {
