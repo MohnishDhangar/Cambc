@@ -196,6 +196,11 @@ function crawl(folder) {
 }
 crawl(root);
 files.sort();
+if (process.env.REPLAY_SELECT) {
+  const needles = process.env.REPLAY_SELECT.split('|').filter(Boolean);
+  const chosen = files.filter(f => needles.some(needle => f.includes(needle)));
+  files.splice(0, files.length, ...chosen);
+}
 if (process.env.REPLAY_LIMIT) files.splice(Number(process.env.REPLAY_LIMIT));
 const summaries = [];
 const failures = [];
