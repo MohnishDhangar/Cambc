@@ -1,0 +1,10 @@
+{
+  "v6.8": {
+    "commit": "0ddd5338b94db824f9f53261a17f020490b7017f",
+    "sha256": "02235e5e6766954c2413c3fc6850fbee7ec3de5c7d05f56398cf54710981b6eb"
+  },
+  "v6.9-experimental": {
+    "commit": "2f4e25a4a76244ac85d79297a38af5883921dfaa",
+    "sha256": "c180cdb72acd9ab4087ce5ef04d844e59bd339e8f6c06c8f4e40697ea61e9b51"
+  }
+}
