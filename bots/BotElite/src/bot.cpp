@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define ELITE_EARLY_PRESSURE 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -661,6 +662,37 @@ void Bot::play_turn() {
         || (carrier_threat && bag>=6));
     if (should_bank && bank()) return;
     if (defend()) return;
+#if ELITE_EARLY_PRESSURE
+    // One designated roaming champion probes favorable 2v1 skirmishes.
+    // The rest of the squad keeps farming; carriers never chase.
+    if (slot == 0 && round > 25 && round < 650
+        && me.gem_count() == 0 && me.health() > me.max_health() * .80f
+        && !objective_map) {
+        std::optional<champion> picked;
+        int picked_distance = 99;
+        for (const auto& enemy : visible_enemies) {
+            if (!enemy.is_alive() || !enemy.is_visible()) continue;
+            const int d = dist(position, enemy.position());
+            if (d < 5 || d > 7) continue; // In-range attacks handled by defend().
+            int support = 0, opposition = 0;
+            for (const auto& ally : allies)
+                if (ally.is_alive() && dist(ally.position(), enemy.position()) <= 5)
+                    ++support;
+            for (const auto& other : visible_enemies)
+                if (other.is_alive() && dist(other.position(), enemy.position()) <= 5)
+                    ++opposition;
+            if (support < opposition + 1 || support < 2) continue;
+            if (enemy.gem_count() < 12 &&
+                enemy.health() > me.strength() * 2.0f) continue;
+            if (d < picked_distance) { picked = enemy; picked_distance = d; }
+        }
+        if (picked) {
+            auto approach = around(picked->position(), std::max(1,me.attack_range()))
+                          & ~terrain & ~occupied();
+            if (navigate(approach, false, false)) return;
+        }
+    }
+#endif
     if (siege_objective()) return;
     if (objective_map && target >= 0 && groups[target].major) claim(-1);
     farm();
