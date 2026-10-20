@@ -14,8 +14,7 @@ bitboard around(vec2 p, int r) {
     return b;
 }
 unsigned id(const champion& c) { return static_cast<unsigned>(static_cast<handle_champion_t>(c)); }
-// Query engine-provided camp designs. This covers Week 2 balance changes
-// and new camp types without indexing a pre-patch five-element array.
+// Always query live engine designs, including Week 2 balance and Golem.
 float camp_health(const camp& c) { return c.base_stats().base_health; }
 float camp_damage(const camp& c) { return c.base_stats().base_strength; }
 bitboard occupied() {
@@ -42,7 +41,6 @@ void Bot::initialize() {
             entry.damage += camp_damage(c);
             ++entry.members;
         }
-        // Week 2 adds a 5,000 HP Golem; treat large objectives as siege work.
         entry.major = g.gem_value() && entry.health >= 4500;
         groups.push_back(std::move(entry));
     }
@@ -112,10 +110,7 @@ void Bot::buy_items() {
     const auto type = me.champion_name();
     if (me.is_alive() && !home && type != champion_type::tavi) return;
     // A crystal is an escape from disconnected terrain and blocked corridors.
-    // Archived elite games show earlier shard investment; don't spend the
-    // first camp's gold on transport before a useful damage breakpoint.
-    if ((home || !me.is_alive()) && round >= 180
-        && me.can_buy(consumable_type::tp_crystal))
+    if ((home || !me.is_alive()) && me.can_buy(consumable_type::tp_crystal))
         me.buy(consumable_type::tp_crystal);
     auto counts = me.item_count();
     while (me.gold_count() >= 30 && fuel_remaining() > 15000) {
@@ -163,6 +158,7 @@ int Bot::select_camp() {
     if (counts[item_type::jungle_emblem_of_strength]) incoming_multiplier *= .7f;
     if (counts[item_type::durability_emblem_of_strength]) incoming_multiplier *= .9f;
     const auto health_reserve = me.health() - std::max(120.f, me.max_health() * .18f);
+    const auto strength = me.strength();
     const auto enemy_spawn = map::spawn_region(team::enemy).positions().front();
     distance_field travel;
     bitboard visited;
@@ -187,10 +183,8 @@ int Bot::select_camp() {
         if (pass == 0 ? assigned != 0 : (assigned == 0 || g.state != 0)) continue;
         const float damage = g.state == 1 ? 0 : expected_damage(g) / ((assigned + 1) * (assigned + 1));
         if (damage > health_reserve) continue;
-        // The old selector ranked camps using basic Strength even for casters.
-        // Use the *same* estimated DPS as the survivability calculation.
-        float work = g.state == 1 ? 0.f : g.health / std::max(1.f, farm_dps);
-        if (splash) work /= std::min(3, std::max(1, g.members));
+        float work = g.state == 1 ? 0 : g.health / std::max(1.f, strength * 1.25f);
+        if (me.champion_name() == champion_type::varg) work /= std::min(3, std::max(1, g.members));
         const float bank_trip = altar_distance.get(g.centre) == distance_field::unreachable ? 100.f : altar_distance.get(g.centre);
         const float value = g.camp.gem_value() + g.camp.gold_value() * (round < 700 ? .32f : .12f);
         float score = value / (distance + wait + work / (assigned + 1) + 6 + bank_trip * .35f);
@@ -349,27 +343,18 @@ bool Bot::defend() {
     action = "defend";
     auto& me = self();
     std::optional<champion> victim;
-    float best = -1e9f;
+    float score = -1;
     for (const auto& c : visible_enemies) {
         if (!c.is_visible() || !c.is_alive()) continue;
         const int d = dist(me.position(), c.position());
         if (d > 4) continue;
-        // Opponents frequently concentrate damage on isolated champions.
-        // Fight back only when our local team can contest the position, or a
-        // vulnerable carrier can actually be finished.
-        int friends = 0, foes = 0;
-        for (const auto& a : allies)
-            if (a.is_alive() && dist(a.position(), c.position()) <= 4) ++friends;
-        for (const auto& e : visible_enemies)
-            if (e.is_alive() && dist(e.position(), c.position()) <= 4) ++foes;
-        const bool finish = c.health() <= me.strength() * 1.6f;
-        if (friends < foes && !finish) continue;
-        if (me.health() < me.max_health() * .35f && !finish) continue;
-        float value = c.gem_count() * .18f + 2500.f / (c.health() + 200.f)
-            + (friends - foes) * 1.2f - d * .35f;
-        if (value > best) { best = value; victim = c; }
+        // Fight nearby threats and secure exposed carriers, without chasing.
+        float value = 2000.f / (c.health() + 100) + c.gem_count() * .05f - d * .1f;
+        if (value > score) { score = value; victim = c; }
     }
-    return victim && fight(*victim, true);
+    if (!victim) return false;
+    if (me.health() < me.max_health() * .35f && victim->health() > me.strength() * 2) return false;
+    return fight(*victim, true);
 }
 
 void Bot::recover() {
@@ -398,34 +383,13 @@ bool Bot::bank() {
                 const auto lock = vision::altar_lock_at(p);
                 if (lock.is_enemy()) {
                     if (me.can_attack()) me.attack(lock);
-                    // Attack-reset champions can remove five-hit Week 2
-                    // altar locks faster, without spending another turn.
-                    for (const auto& a : me.abilities()) {
-                        if (!me.can_attack() && a.is_attack_reset() && a.is_ready() && a.use()) {
-                            if (me.can_attack()) me.attack(lock);
-                            break;
-                        }
-                    }
                     return true;
                 }
             }
-            const float incoming = danger(me.position());
-            const int duration = std::max(1, int(std::ceil(me.gem_count() / 10.f)));
-            if (incoming * (duration + 1) + 60.f < me.health() || incoming <= 0.f) {
+            if (danger(me.position()) < me.health() / (std::ceil(me.gem_count() / 10.f) + 2)) {
                 me.submit_gems(p);
                 return true;
             }
-            // If an occupied altar approach looks lethal, attempt a safe
-            // approach rather than idling forever on the goal tile.
-            bitboard safe_approaches;
-            for (auto altar : map::altars().positions())
-                for (auto q : (around(altar, constants::submit_gems_range) & ~terrain).positions())
-                    if (danger(q) < incoming * .25f) safe_approaches.set(q, true);
-            safe_approaches.set(me.position(), false);
-            if (!safe_approaches.is_empty() && navigate(safe_approaches, true)) return true;
-            returning = true;
-            recover();
-            return true;
         }
         goals |= around(p, constants::submit_gems_range);
     }
@@ -500,21 +464,8 @@ bool Bot::siege_objective() {
             if (dx * dx + dy * dy <= 16) firing.set(q, true);
         }
     }
-    // Week 2 expands Elk/Monolith ranges and adds Golems. Some objectives
-    // have no risk-free spell tile; never abandon all gem income in that case.
-    const bool has_safe_firing = !firing.is_empty();
-    if (!has_safe_firing) {
-        for (const auto& c : g.camp) {
-            const auto p = c.spawn_position();
-            if (visible.is_set(p) && !live.is_set(p)) continue;
-            for (auto q : (around(p, 4) & ~terrain).positions()) {
-                const int dx = q.x - p.x, dy = q.y - p.y;
-                if (dx * dx + dy * dy <= 16) firing.set(q, true);
-            }
-        }
-    }
     if (firing.is_empty()) return false;
-    if (!firing.is_set(me.position())) { navigate(firing, has_safe_firing); return true; }
+    if (!firing.is_set(me.position())) { navigate(firing, true); return true; }
     if (g.state == 2) return true;
     bool visible_target = false;
     for (const auto& c : g.camp) {
@@ -626,26 +577,17 @@ void Bot::play_turn() {
         returning = false;
         if (me.health() < me.max_health() * .98f) return; // Healing occurs at turn end.
     }
-    // Bring forward the first meaningful shop visit when near home. On large
-    // maps, waiting for more gold is cheaper than a long return journey.
-    const bool early_shop = round < 230 && me.gold_count() >= 90
-        && home_distance.get(position) <= 13 && round > last_shop_round + 35;
     if (!home && (me.health() < std::max(180.f, me.max_health() * .28f)
-        || (me.champion_name() != champion_type::tavi && me.gem_count() == 0
-            && round > last_shop_round + 35
-            && (me.gold_count() >= 180 || early_shop)))) returning = true;
+        || (me.champion_name() != champion_type::tavi && me.gold_count() >= 180
+            && round > last_shop_round + 40 && me.gem_count() == 0))) returning = true;
     if (returning) { recover(); return; }
     if (stalled > 14 && target >= 0 && groups[target].state != 1 && !(objective_map && groups[target].major)) {
         groups[target].avoid_until = round + 35;
         claim(-1);
         stalled = 0;
     }
-    // Ordinary damage does not cancel tribute. Avoid discretionary PvP while
-    // carrying gems: secure the bag before looking for combat opportunities.
-    // Protect the bank route when safe, but do not ignore a lethal enemy
-    // attacking us while carrying. An advantaged local fight may be necessary.
-    if (me.gem_count() && danger(me.position()) < me.health() * .12f && bank()) return;
     if (defend()) return;
+    if (bank()) return;
     if (siege_objective()) return;
     if (objective_map && target >= 0 && groups[target].major) claim(-1);
     farm();
