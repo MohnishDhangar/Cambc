@@ -1,0 +1,47 @@
+name: V4 replay opponent analysis
+on:
+  workflow_dispatch:
+    inputs:
+      sample_limit:
+        description: 'Number of replay files per category (0 means all)'
+        required: false
+        default: '2'
+  push:
+    branches: [develop/v5-week2]
+    paths:
+      - 'match-data/analysis/extract_v4_native.mjs'
+      - '.github/workflows/v4-opponent-analysis.yml'
+
+jobs:
+  extract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        category:
+          - higher-elo/losses
+          - same-elo/losses
+          - same-elo/wins
+    env:
+      CAMBC_NO_UPDATE_CHECK: '1'
+      CAMBC_SAMPLE_LIMIT: ${{ github.event.inputs.sample_limit || '2' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install client and initialize official engine assets
+        run: |
+          python3 -m pip install --user cambc==2.2.5
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          "$HOME/.local/bin/cambc" init --yes .
+          find .cambc/cache -maxdepth 4 -iname '*PanelChrome*' -o -iname '*v0_0_3*' | head
+      - name: Extract authoritative game states, actions and statistics
+        run: |
+          node --version
+          node --no-warnings match-data/analysis/extract_v4_native.mjs "match-data/v4/${{ matrix.category }}" "results/v4-opponent-analysis/${{ matrix.category }}"
+      - name: Upload extraction evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v4-analysis-${{ strategy.job-index }}
+          path: results/v4-opponent-analysis/
+          retention-days: 14
