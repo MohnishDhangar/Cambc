@@ -1,5 +1,6 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
+#define V6_EARLY_EXIT_PATH 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -271,9 +272,17 @@ bool Bot::navigate(bitboard goals, bool escape, bool use_dash) {
     if (goals.is_empty()) return false;
     distance_field field;
     bitboard visited;
-    // Compute the complete field so dash/crystal destinations in a separate
-    // component can be evaluated too.
+    // Early exit after finding our position: every strictly downhill square
+    // needed for forward progress has already been reached by the BFS.
+    // Escape retains the full field to allow moving temporarily uphill.
+    // If the start is unreachable, compute_to explores the whole reachable
+    // goal component, preserving the existing dash/crystal rescue behavior.
+#if V6_EARLY_EXIT_PATH
+    if (escape) field.compute(blocked, goals, visited);
+    else field.compute_to(blocked, goals, around(me.position(), 0), visited);
+#else
     field.compute(blocked, goals, visited);
+#endif
     auto origin = me.position();
     float current = field.get(origin);
     if (escape) current += danger(origin) * 2;
