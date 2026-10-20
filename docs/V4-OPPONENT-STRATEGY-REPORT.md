@@ -216,5 +216,6 @@ Source: [V4 combat, banking, farming and navigation implementation](../bots/Bot1
 - [Replay study generated metrics](../match-data/analysis/v4-study/metrics.json)
 - [Full first-pass report](../match-data/analysis/v4-study/REPORT.md)
 - [Native extraction workflow](../.github/workflows/v4-replay-study.yml)
+- [Nine full tactical case studies](../match-data/analysis/v4-study/TACTICS.md)
 - [Selected-case tactics extraction workflow](../.github/workflows/v4-tactics.yml)
-- [The October 20 Week 2 patch notes supplied in this discussion](https://2026a.battlecode.co.uk/game/patch-notes/2e172875-2)
+- October 20 Week 2 patch notes PDF supplied in this discussion (the uploaded copy is the reference for post-patch changes).
