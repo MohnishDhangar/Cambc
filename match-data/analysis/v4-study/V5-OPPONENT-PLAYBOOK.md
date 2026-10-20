@@ -4,11 +4,13 @@
 
 ## Source of evidence and reliability
 
+**Reconciliation completed:** Team A's v4 identity was verified for every replay and the engine outcome was checked across all 245 matches. The definitive [corrected match manifest](reconciliation/manifest.csv) and [audit](reconciliation/RECONCILIATION.md) supersede score-comparison labels; original category aggregates in REPORT.md remain historical.
+
 The repository contains a **complete extracted v4 replay analysis**, including:
 - [Quantitative report](REPORT.md), [metrics.json](metrics.json) and [turn-level opponent case studies](TACTICS.md).
 - 245/245 unique replay files decoded and analyzed; zero decode failures.
 - 120 high-Elo-labelled losses, 75 same-Elo-labelled losses, 50 same-Elo-labelled wins.
-- **44 folder outcome mismatches**. This is material: category labels are not trustworthy match outcomes. Recompute categories using actual replay outcome before comparing win/loss policies. The analysis assumes team A = Bot1 v4 based on checked stdout samples; verify for every replay.
+- **46 engine-verified folder outcome mismatches**. This is material: category labels are not trustworthy match outcomes. Recompute categories using actual replay outcome before comparing win/loss policies. The analysis assumes team A = Bot1 v4 based on checked stdout samples; verify for every replay.
 - Many "stationary carrying" episodes of ~1,932 turns accompany final 0–0 scores. **Do not use them as proven deadlocks** without reviewing state semantics and trace generation.
 
 All claims below are *recorded observations*, not proof of opponent intent or proof they generalize across map or post-patch balance.
@@ -55,7 +57,7 @@ All claims below are *recorded observations*, not proof of opponent intent or pr
 
 ## Major vulnerabilities of Bot1 v4 exposed by the data
 
-1. **Win/loss metadata unreliable:** 44 replay-folder outcome mismatches, including games marked as losses where Bot1 won and vice versa. Any optimizer using folder labels will be biased.
+1. **Win/loss metadata unreliable:** 46 replay-folder outcome mismatches, including games marked as losses where Bot1 won and vice versa. Any optimizer using folder labels will be biased.
 2. **Early tempo collapses:** the largest deficits emerge well before round 200; investigate wrong first objective, delayed shards, and unproductive deaths.
 3. **Elite PvP pressure:** in several high-loss matches enemies inflict far more champion damage, exploit multi-attacker focus and accumulate dozens of kills while Bot1 repeatedly respawns.
 4. **Capture throughput gaps:** opponent objective-event volume dwarfs Bot1 in some large-objective matches; require event semantics verification.
@@ -78,7 +80,7 @@ All claims below are *recorded observations*, not proof of opponent intent or pr
 
 ## Data work that remains before treating this as definitive
 
-- Verify team identity and actual recorded winner for all 245 files; correct 44 label mismatches.
+- Verify team identity and actual recorded winner for all 245 files; correct 46 label mismatches.
 - Audit sampled extreme 0–0 and 1,932-turn episodes for trace semantics.
 - Define event taxonomy for actual camp reward captures versus interim captures/progress.
 - Run additional *case-level* reviews on wins and counterexamples, not just opponent-dominant losses.
