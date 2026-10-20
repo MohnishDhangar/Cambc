@@ -1,0 +1,121 @@
+name: Build and test v6 macro prototype (CAMBC 3.0.1)
+on:
+  push:
+    branches: [develop/v6-macro-v0]
+    paths:
+      - 'bots/Bot6/**'
+      - 'tools/test_bot6.py'
+      - 'tools/package_bot6.py'
+      - '.github/workflows/v6-build-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  test-and-package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout v6 candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check out frozen v5 source separately
+        uses: actions/checkout@v4
+        with:
+          ref: frozen/v5-hotfix-20261021
+          path: historical-v5
+
+      - name: Restore frozen v4 archive and v5 source
+        run: |
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          archive=Path("bots/Bot1/Bot1-v4.zip")
+          with ZipFile(archive) as z:
+              members=[p for p in z.namelist() if p.endswith((".cpp",".h"))]
+              assert len(members)==6, members
+              for source in members:
+                  target=Path("bots/Bot4Frozen")/("src/"+Path(source).name)
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  target.write_bytes(z.read(source))
+          src=Path("historical-v5/bots/Bot1/src")
+          for name in ("bot.cpp","bot.h","draft.cpp","draft.h","main.cpp","random.h"):
+              p=Path("bots/Bot5Frozen/src")/name
+              p.parent.mkdir(parents=True,exist_ok=True)
+              p.write_bytes((src/name).read_bytes())
+          PY
+          rm -rf historical-v5
+          test -f bots/Bot4Frozen/src/bot.cpp
+          test -f bots/Bot5Frozen/src/bot.cpp
+
+      - name: Install CAMBC 3.0.1
+        run: |
+          python3 -m pip install --user 'cambc==3.0.1'
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Initialize SDK and build release WASM
+        env:
+          CAMBC_NO_UPDATE_CHECK: '1'
+        run: |
+          cambc --version
+          CAMBC_OFFLINE=1 cambc init --yes .
+          cambc build Bot6 --release --output "$RUNNER_TEMP/Bot6-v6.0-macro.wasm"
+          cambc build starter-cpp --release
+          cambc build Bot4Frozen --release
+          cambc build Bot5Frozen --release
+          sha256sum "$RUNNER_TEMP/Bot6-v6.0-macro.wasm"
+
+      - name: Six opening matches on unsealed maps vs starter
+        run: |
+          python3 tools/test_bot6.py --opponents starter-cpp \
+            --maps 00ambush 00contest 01gold-rush \
+            --output "$RUNNER_TEMP/v6-starter"
+
+      - name: Six paired training-map matches vs frozen v4
+        run: |
+          python3 tools/test_bot6.py --opponents Bot4Frozen \
+            --maps 00ambush 00contest 01gold-rush \
+            --output "$RUNNER_TEMP/v6-v4"
+
+      - name: Two paired training-map matches vs frozen v5
+        run: |
+          python3 tools/test_bot6.py --opponents Bot5Frozen \
+            --maps 00ambush \
+            --output "$RUNNER_TEMP/v6-v5"
+
+      - name: Package exactly six submission source files
+        run: |
+          python3 tools/package_bot6.py
+          ls -l submissions/Bot6-v6.0-macro.zip
+
+      - name: Upload playable wasm and source package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Bot6-v6.0-macro-tested
+          path: |
+            ${{ runner.temp }}/Bot6-v6.0-macro.wasm
+            submissions/Bot6-v6.0-macro.zip
+            submissions/Bot6-v6.0-macro.manifest.json
+          retention-days: 30
+
+      - name: Upload paired game stats
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Bot6-v6.0-macro-games
+          path: |
+            ${{ runner.temp }}/v6-starter/summary.json
+            ${{ runner.temp }}/v6-v4/summary.json
+            ${{ runner.temp }}/v6-v5/summary.json
+          retention-days: 30
+
+      - name: Commit verified submission package to v6 branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add submissions/Bot6-v6.0-macro.zip submissions/Bot6-v6.0-macro.manifest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "build: publish compiled and smoke-tested Bot6 source ZIP"
+            git push origin HEAD:develop/v6-macro-v0
+          fi
