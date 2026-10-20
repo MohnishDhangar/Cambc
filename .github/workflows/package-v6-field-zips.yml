@@ -1,0 +1,49 @@
+name: Package v6.8 and v6.9 field source archives
+on:
+  push:
+    branches: [develop/v6.9-adaptive-bank-distance]
+    paths: ['.github/workflows/package-v6-field-zips.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Package exact six source files
+        run: |
+          python3 - <<'PY'
+          import pathlib, subprocess, zipfile, hashlib, json
+          p=pathlib.Path("releases"); p.mkdir(exist_ok=True)
+          files=["bot.cpp","bot.h","draft.cpp","draft.h","main.cpp","random.h"]
+          revisions={"v6.8":"0ddd5338b94db824f9f53261a17f020490b7017f","v6.9-experimental":"2f4e25a4a76244ac85d79297a38af5883921dfaa"}
+          report={}
+          for label,rev in revisions.items():
+            f=p/("Bot6-"+label+"-sources.zip")
+            with zipfile.ZipFile(f,"w",zipfile.ZIP_DEFLATED) as z:
+              for name in files:
+                z.writestr(name,subprocess.check_output(["git","show",rev+":bots/Bot6/src/"+name]))
+            with zipfile.ZipFile(f) as z:
+              assert sorted(z.namelist())==sorted(files)
+              assert z.testzip() is None
+            report[label]={"commit":rev,"sha256":hashlib.sha256(f.read_bytes()).hexdigest()}
+          (p/"field-zips-manifest.json").write_text(json.dumps(report,indent=2)+"\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v6.8-v6.9-source-zips
+          path: releases/
+      - name: Commit archives
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add releases/
+          if ! git diff --cached --quiet; then
+            git commit -m 'release: pin v6.8 and experimental v6.9 source archives'
+            git fetch origin develop/v6.9-adaptive-bank-distance
+            git rebase origin/develop/v6.9-adaptive-bank-distance
+            git push origin HEAD:develop/v6.9-adaptive-bank-distance
+          fi
