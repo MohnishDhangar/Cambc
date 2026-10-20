@@ -39,7 +39,7 @@ class Bot {
         float farm_bonus = 1.0f;
         float objective_bonus = 1.0f;
         float health_reserve = 0.26f;
-        int bank_gems = 22;
+        int bank_gems = 8;
         int shop_gold = 180;
         int max_danger_distance = 5;
     };
