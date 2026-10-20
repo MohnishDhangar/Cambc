@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:
-      CAMBC_CACHE: "\${{ github.workspace }}/.cambc/cache"
+      CAMBC_CACHE: "${{ github.workspace }}/.cambc/cache"
       CAMBC_NO_UPDATE_CHECK: '1'
       REPLAY_LIMIT: '1'
       NODE_NO_WARNINGS: '1'
