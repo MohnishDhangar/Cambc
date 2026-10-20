@@ -16,7 +16,6 @@ jobs:
     env:
       CAMBC_CACHE: "${{ github.workspace }}/.cambc/cache"
       CAMBC_NO_UPDATE_CHECK: '1'
-      REPLAY_LIMIT: '1'
       NODE_NO_WARNINGS: '1'
     steps:
       - name: Checkout full replay dataset
