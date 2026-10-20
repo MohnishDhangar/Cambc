@@ -4,6 +4,7 @@ on:
     branches: [develop/v5-week2]
     paths:
       - 'bots/Bot1/src/**'
+      - 'bots/Bot1/scripts/bench_vs_v4.py'
       - '.github/workflows/v5-compile.yml'
   workflow_dispatch:
 
@@ -53,6 +54,20 @@ jobs:
               for c in d["champions"]:
                   print(c["team"],c["name"],"gems",c["metrics"]["submittedGems"],"deaths",c["metrics"]["deaths"])
           PY
+
+      - name: Run nine-map two-side regression suite
+        env:
+          CAMBC_NO_UPDATE_CHECK: '1'
+        run: |
+          python3 bots/Bot1/scripts/bench_vs_v4.py "$RUNNER_TEMP/v5-benchmark"
+
+      - name: Upload full benchmark
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Bot1-v5-nine-map-regression
+          path: ${{ runner.temp }}/v5-benchmark/
+          retention-days: 14
 
       - name: Upload match statistics
         if: always()
