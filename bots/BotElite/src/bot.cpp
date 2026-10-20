@@ -612,8 +612,8 @@ void Bot::scout() {
     // Elite replays show heavier ward activity. Optimize coverage rather
     // than blindly replicating action counts or sticking to bush tiles.
     if (fuel_remaining() < 32000) return;
-    auto choices = me.ward_placement_tiles() & ~map::walls()
-                   & ~vision::ward_tiles(team::ally);
+    auto choices = me.ward_placement_tiles() & map::bushes()
+                   & ~map::walls() & ~vision::ward_tiles(team::ally);
     if (choices.is_empty()) return;
     auto fog = ~vision::visible_tiles();
     std::optional<vec2> best;
