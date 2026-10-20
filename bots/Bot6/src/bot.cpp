@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_SCORE_AWARE_CONTROLLER 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -30,13 +31,12 @@ bitboard occupied() {
 
 float v6_macro_adjust(float score, float value, float gold, int distance,
                       float work, float bank_trip, float danger_cost,
-                      unsigned round, bool major) {
+                      unsigned round, bool major, int override_mode = -1) {
 #ifndef V6_MACRO_MODE
 #define V6_MACRO_MODE 5
 #endif
-    // 0: exact v4 reward, 1: economy, 2: tempo, 3: contest,
-    // 4: objective, 5: adaptive. One compile-time policy per tournament bot.
-    int mode=V6_MACRO_MODE;
+    // Legacy modes remain intact. Team-level controller can override per turn.
+    int mode = override_mode >= 0 ? override_mode : V6_MACRO_MODE;
     if (mode==5) {
         const auto me=cambc::self();
         if (round<300 && me.gold_count()<150) mode=1;
@@ -204,6 +204,18 @@ int Bot::select_camp() {
     travel.compute(terrain, around(me.position(), 0), visited);
     float best = -1;
     int choice = -1;
+#if V6_SCORE_AWARE_CONTROLLER
+    // Public scoreboard makes every champion select the same macro phase.
+    // ECON preserves the proven v6.8 camp-scoring policy; TEMPO is activated
+    // only when we are losing the race, not unconditionally.
+    const unsigned ours = global_submitted_gems(team::ally);
+    const unsigned theirs = global_submitted_gems(team::enemy);
+    const bool urgent = (theirs >= 750) ||
+        (round >= 700 && theirs >= 350 && theirs > ours + 150);
+    const int policy = urgent ? 2 : 1;
+#else
+    const int policy = -1;
+#endif
     for (int pass = 0; pass < 2 && choice < 0; ++pass)
     for (int i = 0; i < static_cast<int>(groups.size()); ++i) {
         if (fuel_remaining() < 33000) break;
@@ -229,7 +241,7 @@ int Bot::select_camp() {
         float score = value / (distance + wait + work / (assigned + 1) + 6 + bank_trip * .35f);
         const float cost = expected_damage(g)/std::max(1.f,me.health());
         score=v6_macro_adjust(score,value,g.camp.gold_value()*.32f,distance,
-                              work,bank_trip,cost,round,g.major);
+                              work,bank_trip,cost,round,g.major,policy);
         if (dist(g.centre, enemy_spawn) + 4 < home_distance.get(g.centre)) score *= .65f;
         if (i == target) score *= 1.3f;
         if (score > best) { best = score; choice = i; }
@@ -661,6 +673,29 @@ void Bot::play_turn() {
         || (carrier_threat && bag>=6));
     if (should_bank && bank()) return;
     if (defend()) return;
+#if V6_SCORE_AWARE_CONTROLLER
+    // A single nominated champion can peel an enemy gem carrier when the
+    // enemy is near victory. All other champions keep harvesting resources.
+    // Pursue only *visible*, genuinely loaded opponents; otherwise farm.
+    if (slot == 0 && !bag && round >= 300 &&
+        me.health() > me.max_health() * .65f &&
+        global_submitted_gems(team::enemy) >= 600) {
+        std::optional<champion> carrier;
+        int nearest = 1000;
+        for (const auto& e : visible_enemies) {
+            if (!e.is_visible() || !e.is_alive() || e.gem_count() < 8) continue;
+            const int d = dist(me.position(), e.position());
+            if (d <= 10 && d < nearest) { nearest = d; carrier = e; }
+        }
+        if (carrier) {
+            if (nearest <= 4 && fight(*carrier, true)) return;
+            // Reserve a clean approach without standing on the target.
+            bitboard intercept = around(carrier->position(), std::max(1, me.attack_range()));
+            intercept &= ~around(carrier->position(), 0);
+            if (navigate(intercept, false, false)) return;
+        }
+    }
+#endif
     if (siege_objective()) return;
     if (objective_map && target >= 0 && groups[target].major) claim(-1);
     farm();
