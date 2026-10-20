@@ -1,3 +1,5 @@
+#define V6_MACRO_MODE 1
+#define V6_BANK_THRESHOLD 0
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
