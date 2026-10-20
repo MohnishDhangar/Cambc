@@ -1,5 +1,25 @@
 # V5 Week 2 development log — 20 October 2026
 
+## Field candidate built and ready (20 October, 12:00 UTC)
+
+**Stable source commit:** `a07672eab23dfb5b956e5426b32ccb09e5dff7ac`
+
+**Build/test run:** https://github.com/MohnishDhangar/Cambc/actions/runs/39418781975
+
+**WASM download:** https://github.com/MohnishDhangar/Cambc/actions/runs/39418781975/artifacts/12263131345
+
+**Binary SHA256:** `33a6fb5cb5ae058527ffc15d9b4afa53be83b9fc39336cec45bba53e7e5428ee`
+
+The binary comes from released CAMBC 2.2.5 + WASI SDK 33.0. The nine-map, both-sides regression suite completed **18/18 matches**, **9 v5 wins**, **zero bot faults**, **mean gem margin 0.0** against the archived v4 executable/source. The 9–9 symmetry indicates no evidence of a gain or loss on the old engine.
+
+Experiments that were rejected and reverted: mixed early-shop/combat/camp utility (0/18, -385.89 average margin), E01 early 90-gold shopping near home (8/18, -38.44), E04 increased altar-return penalty (7/18, -19.89). Do not include those changes in a field upload.
+
+Current field candidate retains v4 strategic selection, plus dynamic camp HP/damage, major camp classification, actual camp attack range, and a fallback when no risk-free spellcasting tile exists (the latter is needed for Golem/Monolith on Week 2 maps, but cannot be validated under old 0.0.3 maps). Stdout marker now says `Bot1 strategy v5 Week2 (SDK 2.2.5)`.
+
+**Next gate:** upload compiled WASM to the live 2026a website and collect at least 20 consecutive games, preserving exact match IDs and replay data. See [V5-FIELD-TEST.md](V5-FIELD-TEST.md).
+
+
+
 ## Basis and compatibility
 
 Primary source: **Patch Notes – Week 2**, posted 20 October 2026. Do not use previous rules or pre-patch replay outcomes as proof of patched-game performance.
