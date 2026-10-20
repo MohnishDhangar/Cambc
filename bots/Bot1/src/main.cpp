@@ -6,7 +6,7 @@
 
 int main() {
     Bot bot;
-    std::cout << "Bot1 strategy v4 (SDK 2.2.5)" << std::endl;
+    std::cout << "Bot1 strategy v5 Week2 (SDK 2.2.5)" << std::endl;
     while (true) {
         const auto started = cambc::round_number();
         try {
