@@ -52,7 +52,7 @@ def prepare():
     assert bot.startswith("#define V6_MACRO_MODE 1\n#define V6_BANK_THRESHOLD 0\n")
     hashes = {"elite_bot_sha256": sha(bot.encode())}
     for name in FILES:
-        old = subprocess.check_output(["git", "show", BASE + ":bots/Bot6/src/" + name], cwd=ROOT)
+        old = subprocess.check_output(["git", "show", BASE + ":bots/BotElite/src/" + name], cwd=ROOT)
         present = (src / name).read_bytes()
         if name != "bot.cpp":
             assert old == present, "Unexpected modified source file: " + name
