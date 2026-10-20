@@ -1,0 +1,388 @@
+{
+  "engine": "CAMBC 3.0.1",
+  "source_sha256": "321480f1f3bc4548f448f554b787c686bed8b86403d35e9208a76d2aa3a2eac3",
+  "draft_sha256": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
+  "selection_maps": [
+    "00ambush",
+    "00collision",
+    "00contest",
+    "00corners",
+    "00eight",
+    "00elkring",
+    "00expanse",
+    "00fragment"
+  ],
+  "validation_maps": [
+    "00interlock",
+    "00monolith",
+    "01big-world",
+    "01boss-battle",
+    "01broken-curve",
+    "01concentrated-wealth",
+    "01elk-arena",
+    "01fracture",
+    "01gold-rush"
+  ],
+  "sealed_maps_never_used": [
+    "00lanes",
+    "01corridors",
+    "01hooks",
+    "01islands"
+  ],
+  "modes": {
+    "0": "v4 utility",
+    "1": "economy",
+    "2": "tempo",
+    "3": "contest",
+    "4": "objective",
+    "5": "adaptive"
+  },
+  "bank_thresholds": [
+    0,
+    8
+  ],
+  "ranked_after_selection": [
+    "Bot6P1B0",
+    "Bot6P3B8",
+    "Bot6P4B8",
+    "Bot6P0B8",
+    "Bot6P3B0",
+    "Bot6P4B0",
+    "Bot6P0B0",
+    "Bot6P1B8",
+    "Bot6P5B0",
+    "Bot6P5B8",
+    "Bot6P2B8",
+    "Bot6P2B0"
+  ],
+  "validated": [
+    "Bot6P1B0",
+    "Bot6P3B8",
+    "Bot6P4B8",
+    "Bot6P0B8"
+  ],
+  "screened": 192,
+  "validation_games": 72,
+  "results": {
+    "Bot6P0B0": {
+      "selection": {
+        "games": 16,
+        "wins": 10,
+        "mean_margin": 154.75,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 5,
+        "B_wins": 5,
+        "wilson95": [
+          0.386,
+          0.815
+        ]
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6P0B8": {
+      "selection": {
+        "games": 16,
+        "wins": 11,
+        "mean_margin": 200.19,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 5,
+        "B_wins": 6,
+        "wilson95": [
+          0.444,
+          0.858
+        ]
+      },
+      "validation": {
+        "games": 18,
+        "wins": 9,
+        "mean_margin": 0.61,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 371,
+        "A_wins": 4,
+        "B_wins": 5,
+        "wilson95": [
+          0.29,
+          0.71
+        ]
+      },
+      "combined": {
+        "games": 34,
+        "wins": 20,
+        "mean_margin": 94.53,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 371,
+        "A_wins": 9,
+        "B_wins": 11,
+        "wilson95": [
+          0.422,
+          0.736
+        ]
+      }
+    },
+    "Bot6P1B0": {
+      "selection": {
+        "games": 16,
+        "wins": 11,
+        "mean_margin": 207.62,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 5,
+        "B_wins": 6,
+        "wilson95": [
+          0.444,
+          0.858
+        ]
+      },
+      "validation": {
+        "games": 18,
+        "wins": 10,
+        "mean_margin": -29.0,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 399,
+        "A_wins": 4,
+        "B_wins": 6,
+        "wilson95": [
+          0.337,
+          0.754
+        ]
+      },
+      "combined": {
+        "games": 34,
+        "wins": 21,
+        "mean_margin": 82.35,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 399,
+        "A_wins": 9,
+        "B_wins": 12,
+        "wilson95": [
+          0.45,
+          0.761
+        ]
+      }
+    },
+    "Bot6P1B8": {
+      "selection": {
+        "games": 16,
+        "wins": 9,
+        "mean_margin": 130.31,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 4,
+        "B_wins": 5,
+        "wilson95": [
+          0.332,
+          0.769
+        ]
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6P2B0": {
+      "selection": {
+        "games": 16,
+        "wins": 5,
+        "mean_margin": -68.69,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 2,
+        "B_wins": 3,
+        "wilson95": [
+          0.142,
+          0.556
+        ]
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6P2B8": {
+      "selection": {
+        "games": 16,
+        "wins": 7,
+        "mean_margin": -32.5,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 3,
+        "B_wins": 4,
+        "wilson95": [
+          0.231,
+          0.668
+        ]
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6P3B0": {
+      "selection": {
+        "games": 16,
+        "wins": 10,
+        "mean_margin": 161.31,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 5,
+        "B_wins": 5,
+        "wilson95": [
+          0.386,
+          0.815
+        ]
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6P3B8": {
+      "selection": {
+        "games": 16,
+        "wins": 11,
+        "mean_margin": 206.75,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 5,
+        "B_wins": 6,
+        "wilson95": [
+          0.444,
+          0.858
+        ]
+      },
+      "validation": {
+        "games": 18,
+        "wins": 9,
+        "mean_margin": -10.94,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 322,
+        "A_wins": 4,
+        "B_wins": 5,
+        "wilson95": [
+          0.29,
+          0.71
+        ]
+      },
+      "combined": {
+        "games": 34,
+        "wins": 20,
+        "mean_margin": 91.5,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 322,
+        "A_wins": 9,
+        "B_wins": 11,
+        "wilson95": [
+          0.422,
+          0.736
+        ]
+      }
+    },
+    "Bot6P4B0": {
+      "selection": {
+        "games": 16,
+        "wins": 10,
+        "mean_margin": 156.12,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 5,
+        "B_wins": 5,
+        "wilson95": [
+          0.386,
+          0.815
+        ]
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6P4B8": {
+      "selection": {
+        "games": 16,
+        "wins": 11,
+        "mean_margin": 201.25,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 5,
+        "B_wins": 6,
+        "wilson95": [
+          0.444,
+          0.858
+        ]
+      },
+      "validation": {
+        "games": 18,
+        "wins": 9,
+        "mean_margin": 16.06,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 390,
+        "A_wins": 4,
+        "B_wins": 5,
+        "wilson95": [
+          0.29,
+          0.71
+        ]
+      },
+      "combined": {
+        "games": 34,
+        "wins": 20,
+        "mean_margin": 103.21,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 390,
+        "A_wins": 9,
+        "B_wins": 11,
+        "wilson95": [
+          0.422,
+          0.736
+        ]
+      }
+    },
+    "Bot6P5B0": {
+      "selection": {
+        "games": 16,
+        "wins": 9,
+        "mean_margin": 120.19,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 3,
+        "B_wins": 6,
+        "wilson95": [
+          0.332,
+          0.769
+        ]
+      },
+      "validation": null,
+      "combined": null
+    },
+    "Bot6P5B8": {
+      "selection": {
+        "games": 16,
+        "wins": 8,
+        "mean_margin": 122.25,
+        "faults": 0,
+        "errors": 0,
+        "fuel_spills": 0,
+        "A_wins": 3,
+        "B_wins": 5,
+        "wilson95": [
+          0.28,
+          0.72
+        ]
+      },
+      "validation": null,
+      "combined": null
+    }
+  }
+}
