@@ -24,3 +24,6 @@ Workflow: `.github/workflows/v6.9-scout-budget.yml`.
 Evidence: `match-data/analysis/v6.9-scout-budget/`.
 
 v6.8 stays unchanged for real-opponent testing; field feedback is a separate evidence channel.
+
+## Actual result — REJECTED
+102 games completed: 20/34 wins against frozen v4 (v6.8: 21/34), mean gem margin +45.76 (v6.8: +91.47), 46 round-change log events (v6.8: 52), no engine faults or caught exceptions; head-to-head 17/34 against exact v6.8. The guard hurts tournament strength. The legacy log label 'fuel spill' reflects a round-number change during `play_turn`, not a direct fuel meter. Evidence: `match-data/analysis/v6.9-scout-budget/summary.json`. Do not promote.
