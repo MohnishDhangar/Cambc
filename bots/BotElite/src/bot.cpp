@@ -676,7 +676,8 @@ void Bot::play_turn() {
             if (d < 5 || d > 7) continue; // In-range attacks handled by defend().
             int support = 0, opposition = 0;
             for (const auto& ally : allies)
-                if (ally.is_alive() && dist(ally.position(), enemy.position()) <= 5)
+                if (ally.is_alive() && ally.is_visible() &&
+                    dist(ally.position(), enemy.position()) <= 5)
                     ++support;
             for (const auto& other : visible_enemies)
                 if (other.is_alive() && dist(other.position(), enemy.position()) <= 5)
