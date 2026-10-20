@@ -31,6 +31,37 @@ jobs:
           ls -lh "$RUNNER_TEMP/Bot1-v5.wasm"
           sha256sum "$RUNNER_TEMP/Bot1-v5.wasm"
 
+      - name: Smoke-test v5 against frozen v4 (both sides)
+        env:
+          CAMBC_OFFLINE: '1'
+          CAMBC_NO_UPDATE_CHECK: '1'
+        run: |
+          mkdir -p bots/BaselineV4
+          unzip -q bots/Bot1/Bot1-v4.zip -d bots/BaselineV4
+          cambc build BaselineV4 --release
+          mkdir -p "$RUNNER_TEMP/v5-smoke"
+          cambc run Bot1 BaselineV4 --release --map maps/packs.map26a --out-dir "$RUNNER_TEMP/v5-smoke/as-A" --statistics "$RUNNER_TEMP/v5-smoke/as-A.json" --json
+          cambc run BaselineV4 Bot1 --release --map maps/packs.map26a --out-dir "$RUNNER_TEMP/v5-smoke/as-B" --statistics "$RUNNER_TEMP/v5-smoke/as-B.json" --json
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"v5-smoke"
+          for side in ("A","B"):
+              d=json.loads((root/f"as-{side}.json").read_text())
+              print(side, "outcome", d["match"]["outcome"], "rounds", d["match"]["roundsStarted"])
+              print("bot faults", d["diagnostics"]["botFaults"])
+              for c in d["champions"]:
+                  print(c["team"],c["name"],"gems",c["metrics"]["submittedGems"],"deaths",c["metrics"]["deaths"])
+          PY
+
+      - name: Upload match statistics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Bot1-v5-smoke-vs-v4
+          path: ${{ runner.temp }}/v5-smoke/
+          retention-days: 7
+
       - name: Upload compiled v5
         if: success()
         uses: actions/upload-artifact@v4
