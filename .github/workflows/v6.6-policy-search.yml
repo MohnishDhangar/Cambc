@@ -26,6 +26,7 @@ jobs:
         run: |
           cambc --version
           CAMBC_OFFLINE=1 cambc init --yes .
+          cambc build Bot6 --release
       - name: Stage-1 selection and stage-2 validation (17 training maps)
         run: |
           python3 tools/search_v6_policy_6_6.py
