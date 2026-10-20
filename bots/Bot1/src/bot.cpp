@@ -577,14 +577,9 @@ void Bot::play_turn() {
         returning = false;
         if (me.health() < me.max_health() * .98f) return; // Healing occurs at turn end.
     }
-    // E01: test whether an early upgrade trip near home compounds faster.
-    // Do not recall distant farmers prematurely; keep the old 180-gold rule.
-    const bool early_shop = round <= 200 && me.gold_count() >= 90
-        && home_distance.get(position) <= 9 && round > last_shop_round + 40;
     if (!home && (me.health() < std::max(180.f, me.max_health() * .28f)
-        || (me.champion_name() != champion_type::tavi && me.gem_count() == 0
-            && round > last_shop_round + 40
-            && (me.gold_count() >= 180 || early_shop)))) returning = true;
+        || (me.champion_name() != champion_type::tavi && me.gold_count() >= 180
+            && round > last_shop_round + 40 && me.gem_count() == 0))) returning = true;
     if (returning) { recover(); return; }
     if (stalled > 14 && target >= 0 && groups[target].state != 1 && !(objective_map && groups[target].major)) {
         groups[target].avoid_until = round + 35;
