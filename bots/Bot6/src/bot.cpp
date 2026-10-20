@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_FUEL_BUDGET_GUARD 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -262,7 +263,12 @@ float Bot::danger(vec2 tile) const {
 
 bool Bot::navigate(bitboard goals, bool escape, bool use_dash) {
     action = "navigate";
+#if V6_FUEL_BUDGET_GUARD
+    // Guard the whole navigation transaction, including SDK candidate expansion.
+    if (fuel_remaining() < 32000) return false;
+#else
     if (fuel_remaining() < 18000) return false;
+#endif
     auto& me = self();
     if (goals.is_set(me.position())) return false;
     auto units = occupied();
@@ -601,7 +607,12 @@ void Bot::farm() {
 
 void Bot::scout() {
     action = "scout";
+#if V6_FUEL_BUDGET_GUARD
+    // Ward placement must never consume the last fuel needed to exit safely.
+    if (fuel_remaining() < 32000) return;
+#else
     if (fuel_remaining() < 16000) return;
+#endif
     auto& me = self();
     if (!me.is_alive() || me.is_teleporting() || me.is_recalling()
         || me.is_submitting_gems()) return;
