@@ -822,5 +822,51 @@
       "map_hash": "53086e249294aed6f427fe647d578303589a081e953c62a0ff8f20cade9993fa",
       "round": 2000
     }
-  ]
-}
+  ],
+  "correctedCategories": {
+    "higher-elo/losses": {
+      "games": 111,
+      "median_our_gems": 328.0,
+      "median_opponent_gems": 1020.0,
+      "median_our_gold": 2240.0,
+      "median_opponent_gold": 3970.0,
+      "median_our_deaths": 9.0,
+      "median_opponent_deaths": 0.0,
+      "median_score_gap_at_200_opponent_minus_us": 130.0,
+      "matches_with_round200": 111
+    },
+    "higher-elo/wins": {
+      "games": 9,
+      "median_our_gems": 1008.0,
+      "median_opponent_gems": 456.0,
+      "median_our_gold": 4415.0,
+      "median_opponent_gold": 2490.0,
+      "median_our_deaths": 3.0,
+      "median_opponent_deaths": 1.0,
+      "median_score_gap_at_200_opponent_minus_us": 0.0,
+      "matches_with_round200": 9
+    },
+    "same-elo/losses": {
+      "games": 72,
+      "median_our_gems": 360.0,
+      "median_opponent_gems": 1020.0,
+      "median_our_gold": 2511.5,
+      "median_opponent_gold": 3975.0,
+      "median_our_deaths": 10.0,
+      "median_opponent_deaths": 2.0,
+      "median_score_gap_at_200_opponent_minus_us": 67.0,
+      "matches_with_round200": 72
+    },
+    "same-elo/wins": {
+      "games": 53,
+      "median_our_gems": 1028.0,
+      "median_opponent_gems": 702.0,
+      "median_our_gold": 4575.0,
+      "median_opponent_gold": 3120.0,
+      "median_our_deaths": 3.0,
+      "median_opponent_deaths": 1.0,
+      "median_score_gap_at_200_opponent_minus_us": 0.0,
+      "matches_with_round200": 53
+    }
+  }
+}\n
