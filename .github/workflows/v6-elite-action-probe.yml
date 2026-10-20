@@ -1,0 +1,27 @@
+name: V6 elite replay action probe
+on:
+  push:
+    branches: [research/v6-elite-strategy-audit]
+    paths:
+      - 'tools/probe_v6_elite_actions.py'
+      - '.github/workflows/v6-elite-action-probe.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate action record decoding
+        run: python3 tools/probe_v6_elite_actions.py
+      - name: Store audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add match-data/analysis/v6-elite-research/probe.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research: record v1.0.0 replay stream validation"
+            git push origin HEAD:research/v6-elite-strategy-audit
+          fi
