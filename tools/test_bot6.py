@@ -54,8 +54,8 @@ def main():
                     record["rounds"]=data["match"]["roundsStarted"]
                     record["winner"]=data["match"].get("outcome")
                     record["win"]=data["match"]["outcome"]==us
-                    record["gem_score"]=sum(x["metrics"]["submittedGems"] for x in data["champions"] if x["team"]==us)
-                    record["enemy_gems"]=sum(x["metrics"]["submittedGems"] for x in data["champions"] if x["team"]==theirs)
+                    record["gem_score"]=sum(int(x["metrics"]["submittedGems"]) for x in data["champions"] if x["team"]==us)
+                    record["enemy_gems"]=sum(int(x["metrics"]["submittedGems"]) for x in data["champions"] if x["team"]==theirs)
                     record["faults"]=data.get("diagnostics",{}).get("botFaults",{}).get(us,0)
                     packages=list(folder.glob("*.repl26a"))
                     if packages:
