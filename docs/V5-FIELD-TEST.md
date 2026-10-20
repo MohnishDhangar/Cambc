@@ -2,13 +2,16 @@
 
 **Status:** Experimental candidate; submit to live ladder for controlled testing, not as a claim of improved win rate.
 
-## Binary provenance and build
+## Website submission format and provenance
 
-- Source branch: `develop/v5-week2`.
-- Source of truth: the GitHub Actions `V5 compile with available CAMBC 2.2.5` workflow attached to the exact source commit.
-- Download the `Bot1-v5-available-client` artifact, extract `Bot1-v5.wasm`, upload that module using the official CAMBC website.
-- Never upload the old archived v4 `.wasm` or the pre-rollback v5 binary by mistake. Check the Actions run SHA and build output hash.
-- Record the exact deployed git SHA and upload time in a field-test CSV. If the server rejects the module, do **not** continue testing; report the rejection and update the compatibility status.
+**CAMBC website submission requires a source-code ZIP, not a WASM module.** The verified submission ZIP is [`submissions/Bot1-v5-week2.zip`](../submissions/Bot1-v5-week2.zip); use GitHub's **Download raw file** action if required. GitHub Actions packaging evidence: [run 39422028330](https://github.com/MohnishDhangar/Cambc/actions/runs/39422028330).
+
+- The ZIP contains exactly `src/bot.cpp`, `src/bot.h`, `src/draft.cpp`, `src/draft.h`, `src/main.cpp`, `src/random.h`.
+- It is packaged from tested source commit `a07672eab23dfb5b956e5426b32ccb09e5dff7ac`.
+- Archive SHA-256: `b57209629cbdbcdec3123e6db87bb43d5c7c037d951259da36e52c0597727c37`.
+- To regenerate: `python3 bots/Bot1/scripts/package_v5_submission.py`; the packaging script checks archive names and CRC.
+- The 2.2.5 client-compiled WASM is an *internal testing artifact only*. **Do not upload the `.wasm`** to the source-ZIP submission form.
+- Record the tested source commit, ZIP hash, upload timestamp, and server feedback. Stop testing if the server rejects the source ZIP or reports compilation/draft failures.
 
 ## Rules caveat
 
