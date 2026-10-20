@@ -1,0 +1,33 @@
+{
+  "release": "v6.0-macro-experimental",
+  "format": "CAMBC source ZIP with exactly six src/ files",
+  "status": "requires successful current-client smoke test",
+  "files": {
+    "src/bot.cpp": {
+      "bytes": 21053,
+      "sha256": "2cbea863a57c85cb627bcbaab8e13c0577a3bc1f2bbcd2ef32ee9cbfb0d6a5a9"
+    },
+    "src/bot.h": {
+      "bytes": 2574,
+      "sha256": "9f385aab26be6b9861198214fef9d23edf33583fe1c92a1d542a38dd12556dc6"
+    },
+    "src/draft.cpp": {
+      "bytes": 2218,
+      "sha256": "f1984077ad29368cbea821339bea4f37f0954aaee3acdb8c43846333ca562476"
+    },
+    "src/draft.h": {
+      "bytes": 32,
+      "sha256": "222b53e41a0c10cd082f21c4447e771e22b5f1e2cc3d21965efc1bfa958fac40"
+    },
+    "src/main.cpp": {
+      "bytes": 566,
+      "sha256": "a2314026eb6ef51253ac4b56cd7730e2cdcd044e491b31da15c49468845c2cd8"
+    },
+    "src/random.h": {
+      "bytes": 164,
+      "sha256": "864947266e2efef757ac7bda94aa883a62341f454d03fb7b5e20a00b481fe428"
+    }
+  },
+  "archive_sha256": "7e83559ad08617e1c390363297e1c6eaafef053f3170802df2e9dd8a8ac2182d",
+  "archive_bytes": 9032
+}
