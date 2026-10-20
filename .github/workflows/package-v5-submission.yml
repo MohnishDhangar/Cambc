@@ -1,0 +1,52 @@
+name: Package CAMBC v5 source submission
+on:
+  workflow_dispatch:
+  push:
+    branches: [develop/v5-week2]
+    paths:
+      - 'bots/Bot1/scripts/package_v5_submission.py'
+      - '.github/workflows/package-v5-submission.yml'
+permissions:
+  contents: write
+
+jobs:
+  source-zip:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create exact CAMBC website source ZIP
+        run: |
+          python3 bots/Bot1/scripts/package_v5_submission.py
+          python3 - <<'PY'
+          from zipfile import ZipFile
+          from pathlib import Path
+          path=Path("submissions/Bot1-v5-week2.zip")
+          with ZipFile(path) as z:
+              expected={"src/bot.cpp","src/bot.h","src/draft.cpp","src/draft.h","src/main.cpp","src/random.h"}
+              assert set(z.namelist()) == expected, z.namelist()
+              assert z.testzip() is None
+              print("SUBMISSION ZIP MEMBERS:", *z.namelist(), sep="\n")
+              print("ARCHIVE BYTES:", path.stat().st_size)
+          PY
+
+      - name: Commit submission ZIP and manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add submissions/Bot1-v5-week2.zip submissions/Bot1-v5-week2.manifest.json
+          if ! git diff --staged --quiet; then
+            git commit -m "build: publish tested v5 website source ZIP"
+            git push origin HEAD:develop/v5-week2
+          fi
+
+      - name: Upload source ZIP as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CAMBC-v5-source-submission
+          path: submissions/Bot1-v5-week2.zip
+          retention-days: 30
