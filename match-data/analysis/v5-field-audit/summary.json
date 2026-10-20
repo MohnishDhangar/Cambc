@@ -1,0 +1,246 @@
+{
+  "total": 55,
+  "by_folder_label": {
+    "losses": 45,
+    "wins": 10
+  },
+  "by_team_side": {
+    "a": 45,
+    "b": 10
+  },
+  "by_folder_label_and_side": {
+    "('losses', 'a')": 40,
+    "('losses', 'b')": 5,
+    "('wins', 'a')": 5,
+    "('wins', 'b')": 5
+  },
+  "replay_engine_headers": {
+    "010000000003": 55
+  },
+  "all_v5_markers_present": true,
+  "replay_sha256_unique": 50,
+  "duplicate_groups": [
+    {
+      "sha256": "b99d3a73d1838ac194432cb838b6959e3331e71ccc2b91e7ac8d39c712e5d661",
+      "folders": [
+        "match-data/v5/similar-elo-teams/losses/team-8/01-0f78505e-4fd4-4bc8-8561-39080a4e1c50/replay.repl26a",
+        "match-data/v5/similar-elo-teams/wins/team-1/01-0f78505e-4fd4-4bc8-8561-39080a4e1c50/replay.repl26a"
+      ],
+      "labels": [
+        "losses",
+        "wins"
+      ]
+    },
+    {
+      "sha256": "9093a817207bc4e78e9f439faac25f7a6a7b46869a7dce57ea1599fac3225fe5",
+      "folders": [
+        "match-data/v5/similar-elo-teams/losses/team-8/02-27ada525-e2f3-4174-837a-892118bfb65c/replay.repl26a",
+        "match-data/v5/similar-elo-teams/wins/team-1/02-27ada525-e2f3-4174-837a-892118bfb65c/replay.repl26a"
+      ],
+      "labels": [
+        "losses",
+        "wins"
+      ]
+    },
+    {
+      "sha256": "e49e378009a4a860c747cbcef37d17c3af91c6088ee8a0ed365ef4848a77a2ab",
+      "folders": [
+        "match-data/v5/similar-elo-teams/losses/team-8/03-ac4e0ffa-d53c-4822-91fc-35b765967381/replay.repl26a",
+        "match-data/v5/similar-elo-teams/wins/team-1/03-ac4e0ffa-d53c-4822-91fc-35b765967381/replay.repl26a"
+      ],
+      "labels": [
+        "losses",
+        "wins"
+      ]
+    },
+    {
+      "sha256": "1cb7b9cdc0083fe064e5dbb5d3197079b88eca0ec69dfb747cc209ab636c7927",
+      "folders": [
+        "match-data/v5/similar-elo-teams/losses/team-8/04-52d7865b-0cc2-4fbb-9f57-c21fd2943997/replay.repl26a",
+        "match-data/v5/similar-elo-teams/wins/team-1/04-52d7865b-0cc2-4fbb-9f57-c21fd2943997/replay.repl26a"
+      ],
+      "labels": [
+        "losses",
+        "wins"
+      ]
+    },
+    {
+      "sha256": "9ea90373332b8a857fe69ca328e2b8d83256095073b55d2d09e13a7f292c639b",
+      "folders": [
+        "match-data/v5/similar-elo-teams/losses/team-8/05-5d8d234c-2973-46bb-b22c-f4b075a441db/replay.repl26a",
+        "match-data/v5/similar-elo-teams/wins/team-1/05-5d8d234c-2973-46bb-b22c-f4b075a441db/replay.repl26a"
+      ],
+      "labels": [
+        "losses",
+        "wins"
+      ]
+    }
+  ],
+  "duplicate_folders_excess": 5,
+  "bot_error_matches": 5,
+  "bot_error_lines": 5,
+  "sample_bot_errors": [
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-3/02-44ccce3c-e505-4a0e-b1d0-cf7411aef149/replay.repl26a",
+      "error": "bot error at scout: engine error 123: Champion is teleporting."
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-5/02-a8551c49-a5f8-4d2d-bfa7-3c199087f548/replay.repl26a",
+      "error": "bot error at scout: engine error 123: Champion is teleporting."
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-8/02-27ada525-e2f3-4174-837a-892118bfb65c/replay.repl26a",
+      "error": "bot error at navigate walk: engine error 22: Known occupied destination."
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/wins/team-1/02-27ada525-e2f3-4174-837a-892118bfb65c/replay.repl26a",
+      "error": "bot error at navigate walk: engine error 22: Known occupied destination."
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/wins/team-2/01-e5cb7039-8904-406d-9b91-7cb80be092a1/replay.repl26a",
+      "error": "bot error at navigate walk: engine error 22: Known occupied destination."
+    }
+  ],
+  "spilling_matches": 10,
+  "total_stdout_spill_messages": 284,
+  "spilling_matches_by_label": {
+    "losses": 8,
+    "wins": 2
+  },
+  "spill_first_actions": {
+    "navigate walk": 6,
+    "initialize": 3,
+    "scout": 1
+  },
+  "heaviest_spill_games": [
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-8/02-27ada525-e2f3-4174-837a-892118bfb65c/replay.repl26a",
+      "spills": 69,
+      "first_round": 2
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/wins/team-1/02-27ada525-e2f3-4174-837a-892118bfb65c/replay.repl26a",
+      "spills": 69,
+      "first_round": 2
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-1/02-ed3322a6-a6c3-42ac-9b4d-ed4b3b9d5ccd/replay.repl26a",
+      "spills": 39,
+      "first_round": 2
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/wins/team-2/01-e5cb7039-8904-406d-9b91-7cb80be092a1/replay.repl26a",
+      "spills": 34,
+      "first_round": 2
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-2/01-332bc691-d8b9-4f03-9066-cecef0ffe6fe/replay.repl26a",
+      "spills": 30,
+      "first_round": 2
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-6/03-f31d25ab-6797-4a1e-b936-92c16e782685/replay.repl26a",
+      "spills": 16,
+      "first_round": 2
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-4/02-373d67be-6765-41fb-a413-09cf712797f4/replay.repl26a",
+      "spills": 12,
+      "first_round": 668
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-3/04-4e3a1037-5553-4e60-ad50-cf3a040112f5/replay.repl26a",
+      "spills": 5,
+      "first_round": 1
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-4/05-18e09de6-c327-4efb-87ff-54ccde9321d3/replay.repl26a",
+      "spills": 5,
+      "first_round": 1
+    },
+    {
+      "replay": "match-data/v5/similar-elo-teams/losses/team-9/04-2e34c63c-d707-4196-bbf2-89bf910ffb82/replay.repl26a",
+      "spills": 5,
+      "first_round": 1
+    }
+  ],
+  "by_group": [
+    {
+      "folder_label": "losses",
+      "group": "team-1",
+      "matches": 5,
+      "spill_matches": 1,
+      "stdout_error_matches": 0
+    },
+    {
+      "folder_label": "losses",
+      "group": "team-2",
+      "matches": 5,
+      "spill_matches": 1,
+      "stdout_error_matches": 0
+    },
+    {
+      "folder_label": "losses",
+      "group": "team-3",
+      "matches": 5,
+      "spill_matches": 1,
+      "stdout_error_matches": 1
+    },
+    {
+      "folder_label": "losses",
+      "group": "team-4",
+      "matches": 5,
+      "spill_matches": 2,
+      "stdout_error_matches": 0
+    },
+    {
+      "folder_label": "losses",
+      "group": "team-5",
+      "matches": 5,
+      "spill_matches": 0,
+      "stdout_error_matches": 1
+    },
+    {
+      "folder_label": "losses",
+      "group": "team-6",
+      "matches": 5,
+      "spill_matches": 1,
+      "stdout_error_matches": 0
+    },
+    {
+      "folder_label": "losses",
+      "group": "team-7",
+      "matches": 5,
+      "spill_matches": 0,
+      "stdout_error_matches": 0
+    },
+    {
+      "folder_label": "losses",
+      "group": "team-8",
+      "matches": 5,
+      "spill_matches": 1,
+      "stdout_error_matches": 1
+    },
+    {
+      "folder_label": "losses",
+      "group": "team-9",
+      "matches": 5,
+      "spill_matches": 1,
+      "stdout_error_matches": 0
+    },
+    {
+      "folder_label": "wins",
+      "group": "team-1",
+      "matches": 5,
+      "spill_matches": 1,
+      "stdout_error_matches": 1
+    },
+    {
+      "folder_label": "wins",
+      "group": "team-2",
+      "matches": 5,
+      "spill_matches": 1,
+      "stdout_error_matches": 1
+    }
+  ]
+}
