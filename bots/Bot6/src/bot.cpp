@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_OBJECTIVE_ROSTER_FIX 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -490,8 +491,14 @@ bool Bot::capture_group(int index) {
 
 bool Bot::siege_objective() {
     auto& me = self();
+#if V6_OBJECTIVE_ROSTER_FIX
+    // All roles contribute on objective-only maps; non-casters must not idle.
+    if (!objective_map || me.health() < me.max_health() * .45f
+        || (caster_build && round < 400 && me.focus() < 180)) return false;
+#else
     if (!objective_map || !caster_build || me.health() < me.max_health() * .45f
         || (round < 400 && me.focus() < 180)) return false;
+#endif
     if (target >= 0 && !groups[target].major && groups[target].state == 1) return false;
     int index = -1, best = 65535;
     for (int i = 0; i < static_cast<int>(groups.size()); ++i) {
@@ -519,6 +526,17 @@ bool Bot::siege_objective() {
             if (dx * dx + dy * dy <= 16) firing.set(q, true);
         }
     }
+#if V6_OBJECTIVE_ROSTER_FIX
+    if (!caster_build && firing.is_empty()) {
+        // Close-range champions can still pressure or contest an objective.
+        // Keep tiles walkable, but do not make an impossible "safe ring" mandatory.
+        for (const auto& c : g.camp) {
+            const auto p = c.spawn_position();
+            if (visible.is_set(p) && !live.is_set(p)) continue;
+            firing |= (around(p, std::max(1, me.attack_range())) & ~terrain & ~live);
+        }
+    }
+#endif
     if (firing.is_empty()) return false;
     if (!firing.is_set(me.position())) { navigate(firing, true); return true; }
     if (g.state == 2) return true;
