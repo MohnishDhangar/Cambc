@@ -14,14 +14,10 @@ bitboard around(vec2 p, int r) {
     return b;
 }
 unsigned id(const champion& c) { return static_cast<unsigned>(static_cast<handle_champion_t>(c)); }
-float camp_health(camp_type kind) {
-    constexpr float values[]{1350, 2400, 500, 500, 20000};
-    return values[static_cast<int>(kind)];
-}
-float camp_damage(camp_type kind) {
-    constexpr float values[]{20, 60, 0, 0, 200};
-    return values[static_cast<int>(kind)];
-}
+// SDK v3.0.1 adds Golem and changes monster stats. Never index stale
+// five-camp arrays or infer present health/damage from old hard-coded data.
+float camp_health(const camp& c) { return c.base_stats().base_health; }
+float camp_damage(const camp& c) { return c.base_stats().base_strength; }
 bitboard occupied() {
     auto b = vision::champion_tiles() | vision::camp_tiles() | vision::teleport_tiles();
     b.set(self().position(), false);
@@ -77,8 +73,8 @@ void Bot::initialize() {
         auto tiles = g.spawn_tiles();
         Group entry{g, tiles, g.camps().front().spawn_position()};
         for (const auto& c : g) {
-            entry.health += camp_health(c.kind());
-            entry.damage += camp_damage(c.kind());
+            entry.health += camp_health(c);
+            entry.damage += camp_damage(c);
             ++entry.members;
         }
         entry.major = g.gem_value() && entry.health >= 10000;
@@ -135,8 +131,8 @@ void Bot::observe() {
             for (const auto& c : g.camp) {
                 const auto p = c.spawn_position();
                 if (visible.is_set(p) && !camp_tiles.is_set(p)) continue;
-                g.health += c.is_visible() ? c.health() : camp_health(c.kind());
-                g.damage += camp_damage(c.kind());
+                g.health += c.is_visible() ? c.health() : camp_health(c);
+                g.damage += camp_damage(c);
                 ++g.members;
             }
         }
@@ -249,7 +245,7 @@ void Bot::refresh_threats() {
     for (const auto& g : groups) {
         if (g.state != 0 || !g.visible) continue;
         for (const auto& c : g.camp)
-            if (camp_damage(c.kind()) > 0 && c.is_visible() && c.health() > 0 && c.is_awake())
+            if (camp_damage(c) > 0 && c.is_visible() && c.health() > 0 && c.is_awake())
                 threats.push_back({c.position(), c.strength(), c.attack_range()});
     }
 }
@@ -302,13 +298,18 @@ bool Bot::navigate(bitboard goals, bool escape, bool use_dash) {
             current = score(origin);
         }
     }
-    if (me.can_move()) {
-        auto candidates = blocked.reachable_tiles(origin, me.base_stats().base_move_speed).positions();
+    if (me.can_move() && !me.is_teleporting()) {
+        auto candidates = (blocked.reachable_tiles(origin, me.base_stats().base_move_speed)
+                           & ~occupied() & ~terrain).positions();
         std::sort(candidates.begin(), candidates.end(), [&](vec2 a, vec2 b) { return score(a) < score(b); });
         for (auto p : candidates) {
-            if (p == origin || score(p) >= current) continue;
+            if (p == origin || score(p) >= current || occupied().is_set(p)) continue;
             action = "navigate walk";
-            if (me.move_absolute(p)) { walked = true; return true; } // Retry on hidden occupants.
+            try {
+                if (me.move_absolute(p)) { walked = true; return true; }
+            } catch (const cambc::error& e) {
+                if (e.code() != error_code::invalid_action_move_bad_destination) throw;
+            }
         }
     }
     // A three-tick crystal is useful only when it beats walking by at least
@@ -497,7 +498,7 @@ bool Bot::siege_objective() {
     for (const auto& c : g.camp) {
         const auto p = c.spawn_position();
         if (visible.is_set(p) && !live.is_set(p)) continue;
-        if (camp_damage(c.kind()) > 0) unsafe |= around(p, 3);
+        if (camp_damage(c) > 0) unsafe |= around(p, 3);
     }
     for (const auto& c : g.camp) {
         const auto p = c.spawn_position();
@@ -589,8 +590,10 @@ void Bot::farm() {
 
 void Bot::scout() {
     action = "scout";
-    if (fuel_remaining() < 12000) return;
+    if (fuel_remaining() < 16000) return;
     auto& me = self();
+    if (!me.is_alive() || me.is_teleporting() || me.is_recalling()
+        || me.is_submitting_gems()) return;
     if (me.ward_cooldown() > 0 || me.restrictions().contains(buff_restrictions::ward)) return;
     // Put vision into the bush ahead without occupying the destination.
     auto choices = me.ward_placement_tiles() & map::bushes() & ~map::walls() & ~vision::ward_tiles(team::ally);
@@ -629,8 +632,10 @@ void Bot::play_turn() {
         claim(-1);
         stalled = 0;
     }
+    // Gems carried into PvP are directly at risk; bank first. Combat without
+    // gems is still opportunistic as in the v4 tactical executor.
+    if (me.gem_count() && bank()) return;
     if (defend()) return;
-    if (bank()) return;
     if (siege_objective()) return;
     if (objective_map && target >= 0 && groups[target].major) claim(-1);
     farm();
