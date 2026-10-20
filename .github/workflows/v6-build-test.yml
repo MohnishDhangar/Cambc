@@ -117,5 +117,9 @@ jobs:
           git add submissions/Bot6-v6.0-macro.zip submissions/Bot6-v6.0-macro.manifest.json
           if ! git diff --cached --quiet; then
             git commit -m "build: publish compiled and smoke-tested Bot6 source ZIP"
+            # Other analysis/doc commits may have landed during the match suite.
+            # Rebase the verified package onto the latest non-force-pushed head.
+            git fetch origin develop/v6-macro-v0
+            git rebase origin/develop/v6-macro-v0
             git push origin HEAD:develop/v6-macro-v0
           fi
