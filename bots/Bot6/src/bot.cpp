@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_CONTROLLED_FALLBACK 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -204,7 +205,7 @@ int Bot::select_camp() {
     travel.compute(terrain, around(me.position(), 0), visited);
     float best = -1;
     int choice = -1;
-    for (int pass = 0; pass < 2 && choice < 0; ++pass)
+    for (int pass = 0; pass < (V6_CONTROLLED_FALLBACK ? 3 : 2) && choice < 0; ++pass)
     for (int i = 0; i < static_cast<int>(groups.size()); ++i) {
         if (fuel_remaining() < 33000) break;
         const auto& g = groups[i];
@@ -219,9 +220,16 @@ int Bot::select_camp() {
             for (int j = 0; j < static_cast<int>(allies.size()) && j < 8; ++j)
                 if (j != slot && claims[j] == i + 1) ++assigned;
         // Do not interrupt a teammate's capture or duplicate its farming route.
-        if (pass == 0 ? assigned != 0 : (assigned == 0 || g.state != 0)) continue;
+        if (pass == 0 ? assigned != 0 :
+            (pass == 1 ? (assigned == 0 || g.state != 0) : assigned != 0)) continue;
+#if V6_CONTROLLED_FALLBACK
+        // Only if every strictly safe pass failed: cautiously test camps
+        // slightly above conservative damage estimates, avoiding gem loss.
+        if (pass == 2 && (me.gem_count() || me.health() < me.max_health() * .90f
+                          || round > 1600)) continue;
+#endif
         const float damage = g.state == 1 ? 0 : expected_damage(g) / ((assigned + 1) * (assigned + 1));
-        if (damage > health_reserve) continue;
+        if (damage > health_reserve * (pass == 2 ? 1.20f : 1.f)) continue;
         float work = g.state == 1 ? 0 : g.health / std::max(1.f, strength * 1.25f);
         if (me.champion_name() == champion_type::varg) work /= std::min(3, std::max(1, g.members));
         const float bank_trip = altar_distance.get(g.centre) == distance_field::unreachable ? 100.f : altar_distance.get(g.centre);
