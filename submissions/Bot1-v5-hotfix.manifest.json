@@ -1,0 +1,34 @@
+{
+  "source_ref": "48c72e9a1edf71b1697d0ce90709f6d65602c8bd",
+  "archive": "Bot1-v5-hotfix.zip",
+  "archive_sha256": "69ce6ce76f288d00f48347aabc8a8494ffa4d02c2f6200f845a3f46ade571f24",
+  "format": "CAMBC 2026a source ZIP: six files immediately inside src/",
+  "files": {
+    "src/bot.cpp": {
+      "bytes": 27482,
+      "sha256": "7298ab7a119c599a271c3b26c52f8848958ff3dc0007b63b61427d838da310eb"
+    },
+    "src/bot.h": {
+      "bytes": 2072,
+      "sha256": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159"
+    },
+    "src/draft.cpp": {
+      "bytes": 2437,
+      "sha256": "82af69177eb52b0b23759eba3bf175fb0ac9b5e873c97d4f6987f61e215bbdec"
+    },
+    "src/draft.h": {
+      "bytes": 33,
+      "sha256": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd"
+    },
+    "src/main.cpp": {
+      "bytes": 916,
+      "sha256": "03df6065517f40a3c51a3da6e221e7a84f3467e87b19e9484b87515b8e200be7"
+    },
+    "src/random.h": {
+      "bytes": 742,
+      "sha256": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+    }
+  },
+  "note": "Official site accepts this source ZIP; no WASM upload required.",
+  "test_evidence": "https://github.com/MohnishDhangar/Cambc/actions/runs/39418781975"
+}
