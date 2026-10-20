@@ -24,6 +24,7 @@ jobs:
         run: |
           CAMBC_OFFLINE=1 cambc init --yes .
           cambc --version
+          cambc build Bot6 --release
       - name: Build and trace pinned bots
         run: python3 tools/profile_v6_objectives.py
       - uses: actions/upload-artifact@v4
