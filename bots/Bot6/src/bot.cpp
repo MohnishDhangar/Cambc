@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_SCOUT_FUEL_FLOOR 48000
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -601,7 +602,7 @@ void Bot::farm() {
 
 void Bot::scout() {
     action = "scout";
-    if (fuel_remaining() < 16000) return;
+    if (fuel_remaining() < V6_SCOUT_FUEL_FLOOR) return;
     auto& me = self();
     if (!me.is_alive() || me.is_teleporting() || me.is_recalling()
         || me.is_submitting_gems()) return;
@@ -611,6 +612,7 @@ void Bot::scout() {
     if (choices.is_empty()) return;
     const auto unseen = choices & ~vision::visible_tiles();
     if (!unseen.is_empty()) choices = unseen;
+    if (fuel_remaining() < 16000) return; // Avoid expensive late-turn ward action.
     me.place_ward(choices.positions().front());
 }
 
