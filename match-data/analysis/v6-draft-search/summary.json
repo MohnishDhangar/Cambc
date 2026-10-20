@@ -1,0 +1,172 @@
+{
+  "engine_client": "cambc 3.0.1 from pinned CI environment",
+  "map_split": "first eight alphabetic training maps; four sealed maps never used",
+  "frozen_opponent": "Bot4Frozen from frozen v4 archive",
+  "candidate_source_sha256": "c31fcb0135e02f848bb150490bb01d7c2bafe34c521a2bb9416f78ef227cfc3d",
+  "draft_source_sha256": "a7564587afbb50c86969a6f4d0c6e4c788858ca2c604c4742627e4a0577a33ee",
+  "games": 112,
+  "modes": {
+    "Bot6D0": {
+      "label": "v4-draft",
+      "wins": 5,
+      "games": 16,
+      "win_fraction": 0.3125,
+      "wilson95": [
+        0.1416,
+        0.556
+      ],
+      "avg_gem_margin": -170.69,
+      "side": {
+        "A": {
+          "wins": 3,
+          "games": 8
+        },
+        "B": {
+          "wins": 2,
+          "games": 8
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6D1": {
+      "label": "vesper-varg-tavi",
+      "wins": 5,
+      "games": 16,
+      "win_fraction": 0.3125,
+      "wilson95": [
+        0.1416,
+        0.556
+      ],
+      "avg_gem_margin": -165.56,
+      "side": {
+        "A": {
+          "wins": 1,
+          "games": 8
+        },
+        "B": {
+          "wins": 4,
+          "games": 8
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6D2": {
+      "label": "heart-varg-tavi",
+      "wins": 4,
+      "games": 16,
+      "win_fraction": 0.25,
+      "wilson95": [
+        0.1018,
+        0.495
+      ],
+      "avg_gem_margin": -290.31,
+      "side": {
+        "A": {
+          "wins": 1,
+          "games": 8
+        },
+        "B": {
+          "wins": 3,
+          "games": 8
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6D3": {
+      "label": "heart-vesper-tavi",
+      "wins": 6,
+      "games": 16,
+      "win_fraction": 0.375,
+      "wilson95": [
+        0.1848,
+        0.6136
+      ],
+      "avg_gem_margin": -84.25,
+      "side": {
+        "A": {
+          "wins": 3,
+          "games": 8
+        },
+        "B": {
+          "wins": 3,
+          "games": 8
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6D4": {
+      "label": "marcella-varg-tavi",
+      "wins": 7,
+      "games": 16,
+      "win_fraction": 0.4375,
+      "wilson95": [
+        0.231,
+        0.6682
+      ],
+      "avg_gem_margin": -103.88,
+      "side": {
+        "A": {
+          "wins": 3,
+          "games": 8
+        },
+        "B": {
+          "wins": 4,
+          "games": 8
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6D5": {
+      "label": "stellar-prism-tavi",
+      "wins": 10,
+      "games": 16,
+      "win_fraction": 0.625,
+      "wilson95": [
+        0.3864,
+        0.8152
+      ],
+      "avg_gem_margin": 234.5,
+      "side": {
+        "A": {
+          "wins": 4,
+          "games": 8
+        },
+        "B": {
+          "wins": 6,
+          "games": 8
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6D6": {
+      "label": "vesper-varg-vendetta",
+      "wins": 6,
+      "games": 16,
+      "win_fraction": 0.375,
+      "wilson95": [
+        0.1848,
+        0.6136
+      ],
+      "avg_gem_margin": -111.0,
+      "side": {
+        "A": {
+          "wins": 1,
+          "games": 8
+        },
+        "B": {
+          "wins": 5,
+          "games": 8
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    }
+  },
+  "no_fatal_errors": true
+}
