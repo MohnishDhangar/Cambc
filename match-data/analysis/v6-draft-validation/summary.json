@@ -1,0 +1,103 @@
+{
+  "engine_client": "cambc 3.0.1 from pinned CI environment",
+  "map_split": "nine remaining training maps; four sealed maps never used",
+  "frozen_opponent": "Bot4Frozen from frozen v4 archive",
+  "candidate_source_sha256": "229a209abf2b0fe582157ff5f7aaec43407d5fdac7756dce5d87d30d71bf226d",
+  "draft_source_sha256": "a7564587afbb50c86969a6f4d0c6e4c788858ca2c604c4742627e4a0577a33ee",
+  "games": 72,
+  "modes": {
+    "Bot6V0": {
+      "label": "v4-draft",
+      "wins": 3,
+      "games": 18,
+      "win_fraction": 0.1667,
+      "wilson95": [
+        0.0584,
+        0.3922
+      ],
+      "avg_gem_margin": -147.94,
+      "side": {
+        "A": {
+          "wins": 1,
+          "games": 9
+        },
+        "B": {
+          "wins": 2,
+          "games": 9
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6V3": {
+      "label": "heart-vesper-tavi",
+      "wins": 11,
+      "games": 18,
+      "win_fraction": 0.6111,
+      "wilson95": [
+        0.3862,
+        0.797
+      ],
+      "avg_gem_margin": 20.78,
+      "side": {
+        "A": {
+          "wins": 6,
+          "games": 9
+        },
+        "B": {
+          "wins": 5,
+          "games": 9
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6V4": {
+      "label": "marcella-varg-tavi",
+      "wins": 5,
+      "games": 18,
+      "win_fraction": 0.2778,
+      "wilson95": [
+        0.125,
+        0.5087
+      ],
+      "avg_gem_margin": -66.5,
+      "side": {
+        "A": {
+          "wins": 2,
+          "games": 9
+        },
+        "B": {
+          "wins": 3,
+          "games": 9
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6V5": {
+      "label": "stellar-prism-tavi",
+      "wins": 8,
+      "games": 18,
+      "win_fraction": 0.4444,
+      "wilson95": [
+        0.2456,
+        0.6628
+      ],
+      "avg_gem_margin": -134.0,
+      "side": {
+        "A": {
+          "wins": 4,
+          "games": 9
+        },
+        "B": {
+          "wins": 4,
+          "games": 9
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    }
+  },
+  "no_fatal_errors": true
+}
