@@ -39,12 +39,12 @@ void play_draft() {
     if (objective && monolith)
         order = {C::stellar, C::prism, C::tavi, C::ren, C::varg,
             C::cassi_and_issac, C::ryth, C::vendetta, C::vesper_vale, C::marcella, C::willow};
-    // Screened on 8 training maps and validated on the other 9 (11/18 wins
-    // versus frozen v4). Preserve the prior siege draft on objective maps.
+    // Screened as R09 on 6 maps and validated on 11 different training maps
+    // (21/34 wins vs frozen v4, 82.4 mean gem margin). Preserve the prior siege draft on objective maps.
     // Independent combination test required with current economy policy.
-    if (!objective) order = {C::heart_of_ruin, C::vesper_vale, C::tavi,
+    if (!objective) order = {C::prism, C::tavi, C::vesper_vale,
         C::varg, C::vendetta, C::ryth, C::marcella, C::ren,
-        C::stellar, C::prism, C::willow};
+        C::stellar, C::heart_of_ruin, C::willow};
     for (auto choice : order) {
         if (std::find(picked.begin(), picked.end(), choice) != picked.end()) continue;
         // A small auditable map plan; gameplay still checks current live state.
