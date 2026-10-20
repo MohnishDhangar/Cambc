@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "policy": "user_reserved_map_holdout_and_connected_component_quarantine",
+  "reserved_map_names": [
+    "00lanes",
+    "01corridors",
+    "01hooks",
+    "01islands"
+  ],
+  "training_map_names": [
+    "00ambush",
+    "00collision",
+    "00contest",
+    "00corners",
+    "00eight",
+    "00elkring",
+    "00expanse",
+    "00fragment",
+    "00interlock",
+    "00monolith",
+    "01big-world",
+    "01boss-battle",
+    "01broken-curve",
+    "01concentrated-wealth",
+    "01elk-arena",
+    "01fracture",
+    "01gold-rush"
+  ],
+  "source_match_records": 500,
+  "source_distinct_replay_contents": 179,
+  "split_counts": {
+    "train": {
+      "records": 450,
+      "distinct_replay_contents": 161,
+      "distinct_maps": 17,
+      "opponents": {
+        "error404": 50,
+        "hello": 100,
+        "houseofcoders": 100,
+        "pentakill": 100,
+        "sssa": 100
+      },
+      "sides": {
+        "B": 250,
+        "A": 200
+      }
+    },
+    "quarantine": {
+      "records": 49,
+      "distinct_replay_contents": 17,
+      "distinct_maps": 17,
+      "opponents": {
+        "error404": 49
+      },
+      "sides": {
+        "A": 49
+      }
+    },
+    "sealed_test": {
+      "records": 1,
+      "distinct_replay_contents": 1,
+      "distinct_maps": 1,
+      "opponents": {
+        "error404": 1
+      },
+      "sides": {
+        "A": 1
+      }
+    }
+  },
+  "connected_components_quarantined": 1,
+  "validation": {
+    "no_heldout_maps_in_train": true,
+    "no_train_test_replay_overlap": true,
+    "no_train_test_five_game_bundle_overlap": true,
+    "no_train_test_connected_leakage_group_overlap": true
+  },
+  "note": "Never use sealed_test or quarantine records for model selection. Original source and prepared dataset are untouched. Replay engine version 1.0.0 is recording metadata, not the installed Linux CLI version."
+}
