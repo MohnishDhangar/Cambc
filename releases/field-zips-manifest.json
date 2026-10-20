@@ -1,10 +1,44 @@
 {
   "v6.8": {
     "commit": "0ddd5338b94db824f9f53261a17f020490b7017f",
-    "sha256": "02235e5e6766954c2413c3fc6850fbee7ec3de5c7d05f56398cf54710981b6eb"
+    "sha256": "22eef3060f232a8822f119b565fc885c9c9233aad8eb418f86897d4ee94f64a3",
+    "entries": [
+      "src/bot.cpp",
+      "src/bot.h",
+      "src/draft.cpp",
+      "src/draft.h",
+      "src/main.cpp",
+      "src/random.h"
+    ],
+    "source_sha256": {
+      "src/bot.cpp": "f74745b290dd9c2f9b6a6b46a1128d031ae080d5d9b024993a7b554198c5e7ac",
+      "src/bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
+      "src/draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
+      "src/draft.h": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd",
+      "src/main.cpp": "5cf147c942f6404849e5f5dbd1516e9e651a5c08be91102ed27c500e0571c559",
+      "src/random.h": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+    },
+    "cambc_layout": "src/*.cpp and src/*.h"
   },
   "v6.9-experimental": {
     "commit": "2f4e25a4a76244ac85d79297a38af5883921dfaa",
-    "sha256": "c180cdb72acd9ab4087ce5ef04d844e59bd339e8f6c06c8f4e40697ea61e9b51"
+    "sha256": "09035bab3e6bf05228e8cc42da6419994df13d36ea5f356ff7ac561584b8e660",
+    "entries": [
+      "src/bot.cpp",
+      "src/bot.h",
+      "src/draft.cpp",
+      "src/draft.h",
+      "src/main.cpp",
+      "src/random.h"
+    ],
+    "source_sha256": {
+      "src/bot.cpp": "f38fd58d228a2a221e363f84d3d7ca9d220e570379ec7bfc5042918ff66a346e",
+      "src/bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
+      "src/draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
+      "src/draft.h": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd",
+      "src/main.cpp": "5cf147c942f6404849e5f5dbd1516e9e651a5c08be91102ed27c500e0571c559",
+      "src/random.h": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+    },
+    "cambc_layout": "src/*.cpp and src/*.h"
   }
 }
