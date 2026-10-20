@@ -33,8 +33,14 @@ def read(data,map_file, limit=None):
     return {"recorded_count":expected,"parsed_count":n,"end_aligned":p==len(data),"actions":subs,"kinds":kinds,"first16":dump,"rest_bytes":len(data)-p}
 def main():
     with (PREP/"matches.csv").open() as h:rows=list(csv.DictReader(h))
+    split_file=ROOT/"match-data/analysis/v6-elite-research/v6-map-split.csv"
+    if not split_file.exists(): raise RuntimeError("Run python3 tools/build_v6_map_split.py first")
+    with split_file.open() as h:
+        training_ids={r["match_id"] for r in csv.DictReader(h) if r["v6_split"]=="train"}
     seen=set();selected=[]
     for r in rows:
+        if r["match_id"] not in training_ids: continue
+        if r["map_name"] in {"01islands","01hooks","00lanes","01corridors"}: raise AssertionError("Holdout leakage")
         if r["replay_sha256"] not in seen:
             seen.add(r["replay_sha256"])
             selected.append(r)
@@ -58,6 +64,7 @@ def main():
             v={"id":r["match_id"],"error":str(e)}
         report.append(v)
     good=[r for r in report if r.get("valid")]
+    assert len(report)==161,f"Unexpected training-only replay count {len(report)}"
     print(json.dumps({"total":len(report),"valid":len(good),"invalid_examples":[r for r in report if not r.get("valid")][:5],
                       "examples":good[:3]},indent=2)[:13000])
     out=ROOT/"match-data/analysis/v6-elite-research";out.mkdir(parents=True,exist_ok=True)
