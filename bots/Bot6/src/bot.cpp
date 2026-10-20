@@ -346,18 +346,33 @@ bool Bot::navigate(bitboard goals,bool flee) {
     const float here=field.get(origin);
     if (here>=distance_field::unreachable) return false;
     bitboard legal=(blocked.reachable_tiles(origin,me.base_stats().base_move_speed) & ~blocked);
-    vec2 chosen=origin;
-    float low=here + (flee?danger(origin)*.13f:0.f);
+    const float limit=here + (flee?danger(origin)*.13f:0.f);
+    std::vector<std::pair<float,vec2>> options;
     for (auto tile:legal.positions()) {
-        if (tile==origin || occupied().is_set(tile)) continue;
-        float remaining=field.get(tile);
+        if (tile==origin || occupied().is_set(tile) || terrain.is_set(tile)) continue;
+        const float remaining=field.get(tile);
         if (remaining>=distance_field::unreachable) continue;
-        float value=remaining+(flee?danger(tile)*.13f:0.f);
-        if (value < low-.005f) {low=value;chosen=tile;}
+        const float value=remaining+(flee?danger(tile)*.13f:0.f);
+        if (value<limit-.005f) options.emplace_back(value,tile);
     }
-    if (chosen==origin) return false;
-    action="walk";
-    if (me.move_absolute(chosen)) {walked=true;return true;}
+    std::sort(options.begin(),options.end(),[](const auto& x,const auto& y) {
+        return x.first<y.first;
+    });
+    // SDK reachable_tiles can suggest occupied landings. Error 22 is a
+    // recoverable destination rejection (seen in live v5 and v6 smoke logs).
+    // Try alternatives; propagate other engine errors rather than hiding bugs.
+    for (const auto& option:options) {
+        if (fuel_remaining()<18000) break;
+        const vec2 tile=option.second;
+        if (occupied().is_set(tile) || terrain.is_set(tile)) continue;
+        action="walk";
+        try {
+            if (me.move_absolute(tile)) {walked=true;return true;}
+        } catch (const cambc::error& e) {
+            if (e.code()!=error_code::invalid_action_move_bad_destination)
+                throw;
+        }
+    }
     return false;
 }
 
