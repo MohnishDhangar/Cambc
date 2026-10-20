@@ -15,7 +15,7 @@ SEALED = {"00lanes", "01corridors", "01hooks", "01islands"}
 ROOT = Path(__file__).resolve().parents[1]
 
 def blob_sha(data):
-    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\\0" + data).hexdigest()
+    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
 
 def index_maps():
     result = {}
@@ -57,9 +57,9 @@ def process(files):
                             if mapname in SEALED:
                                 counts[(label, "heldout_excluded")] += 1
                                 continue
-                            stdout = game.read("team-a.stdout").replace(b"\\0", b"").decode(errors="replace")
+                            stdout = game.read("team-a.stdout").replace(b"\0", b"").decode(errors="replace")
                             actions = collections.Counter(x.split(" from ")[0]
-                                for x in re.findall(r"fuel spill at ([^\\n]+)", stdout, re.I))
+                                for x in re.findall(r"fuel spill at ([^\n]+)", stdout, re.I))
                             rows.append({"version": label, "map": mapname, "game": match[:2],
                                          "sha256_prefix": digest[:12], "fuel_spills": sum(actions.values()),
                                          "last_action_markers": dict(actions)})
@@ -74,7 +74,7 @@ def main():
     if len(sys.argv) < 3:
         raise SystemExit("usage: python tools/inspect_field_exports.py v6.8.zip v6.9.zip")
     report = process([("v6.8", sys.argv[1]), ("v6.9", sys.argv[2])])
-    Path("field-diagnostics-nonheldout.json").write_text(json.dumps(report, indent=2) + "\\n")
+    Path("field-diagnostics-nonheldout.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report["counts"], indent=2))
 if __name__ == "__main__":
     main()
