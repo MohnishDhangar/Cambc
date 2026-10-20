@@ -1,0 +1,35 @@
+name: Analyze v5 live replay logs
+on:
+  push:
+    branches: [analysis/v5-live-20261020]
+    paths:
+      - 'match-data/analysis/audit_v5_live.py'
+      - '.github/workflows/v5-live-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit all live v5 replays and output metadata
+        run: |
+          python3 match-data/analysis/audit_v5_live.py
+          cat match-data/analysis/v5-field-audit/REPORT.md
+      - name: Save results on analysis branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add match-data/analysis/v5-field-audit
+          if ! git diff --cached --quiet; then
+            git commit -m "analysis: report initial 55-game v5 live diagnostics"
+            git push origin HEAD:analysis/v5-live-20261020
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: V5-live-initial-audit
+          path: match-data/analysis/v5-field-audit/
+          retention-days: 14
