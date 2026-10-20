@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_NONBLOCKING_BANK 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -448,8 +449,15 @@ bool Bot::bank() {
         }
         goals |= around(p, constants::submit_gems_range);
     }
+#if V6_NONBLOCKING_BANK
+    // A blocked altar ring produces zero viable goals; the navigation
+    // attempt returns false. Don't let such a trip consume the full turn:
+    // allow defend(), siege_objective(), and farm() to continue working.
+    return navigate(goals, me.health() < me.max_health() * .5f);
+#else
     navigate(goals, me.health() < me.max_health() * .5f);
     return true;
+#endif
 }
 
 bool Bot::capture_group(int index) {
