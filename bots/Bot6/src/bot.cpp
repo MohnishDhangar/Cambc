@@ -632,9 +632,23 @@ void Bot::play_turn() {
         claim(-1);
         stalled = 0;
     }
-    // Gems carried into PvP are directly at risk; bank first. Combat without
-    // gems is still opportunistic as in the v4 tactical executor.
-    if (me.gem_count() && bank()) return;
+    // Economic batching: cash in multiple camp rewards per altar trip, but
+    // prioritize survival, nearby altars, and end-of-game conversion.
+#ifndef V6_BANK_THRESHOLD
+#define V6_BANK_THRESHOLD 12
+#endif
+    const unsigned bag=me.gem_count();
+    int threshold=V6_BANK_THRESHOLD;
+    if (round>1100) threshold=std::min(threshold,8);
+    if (round>1600) threshold=1; // Never finish with unbanked small bags.
+    bool carrier_threat=false;
+    for (const auto& enemy:visible_enemies)
+        if (enemy.is_alive() && enemy.is_visible()
+            && dist(position,enemy.position())<=5) carrier_threat=true;
+    const bool should_bank = bag && (bag>=static_cast<unsigned>(threshold)
+        || altar_distance.get(position)<=2 || me.health()<me.max_health()*.50f
+        || (carrier_threat && bag>=6));
+    if (should_bank && bank()) return;
     if (defend()) return;
     if (siege_objective()) return;
     if (objective_map && target >= 0 && groups[target].major) claim(-1);
