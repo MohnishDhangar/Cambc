@@ -23,10 +23,9 @@ jobs:
       - name: Compile official release WASM
         env:
           CAMBC_NO_UPDATE_CHECK: '1'
-          CAMBC_OFFLINE: '1'
         run: |
           cambc --version
-          cambc init --yes .
+          CAMBC_OFFLINE=1 cambc init --yes .
           cambc build Bot6 --release --output "$RUNNER_TEMP/Bot6-v6.8-CAMBC3.0.1.wasm"
           test -s "$RUNNER_TEMP/Bot6-v6.8-CAMBC3.0.1.wasm"
           sha256sum "$RUNNER_TEMP/Bot6-v6.8-CAMBC3.0.1.wasm"
