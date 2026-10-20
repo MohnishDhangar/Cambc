@@ -80,13 +80,13 @@ for g in games:
        corrected_result_assuming_team_A_is_Bot1=result,team_a_identity=identity_by_match[g["path"]],status=status,
        map_hash=g["mapHash"],round=g["round"]
     ))
-csv_path=DEST/"manifest-provisional.csv"
+csv_path=DEST/"manifest.csv"
 with csv_path.open("w",newline="") as f:
     writer=csv.DictWriter(f,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
 summary=dict(total=len(rows),teamAIdentity=dict(identity_counts),outcomesByScore=[dict(outcome=x[0][0],scoreLeader=x[0][1],games=x[1]) for x in sorted(outcome_cross.items())],
               resolution=dict(outcome_winner=outcome_winner,classificationCounts={str(k):v for k,v in sorted(counts.items())}),
               mismatches=[r for r in rows if r["status"]!="agreement"])
-(DEST/"summary-provisional.json").write_text(json.dumps(summary,indent=2)+"\n")
+(DEST/"summary.json").write_text(json.dumps(summary,indent=2)+"\n")
 print("AFTER_ENGINE_OUTCOME",dict(sorted(((str(k),v) for k,v in counts.items()))))
 print("CORRECTIONS_NEEDED",sum(r["status"]=="wrong_folder" for r in rows))
 print("UNRESOLVED",sum(r["status"]=="unresolved" for r in rows))
@@ -120,6 +120,8 @@ for category in sorted({r['category'] for r in rows}):
     subset=[r for r in rows if r['category']==category]
     report.append(f"| {category} | {sum(r['status']=='agreement' for r in subset)} | {sum(r['status']=='wrong_folder' for r in subset)} |")
 report += ["", "A full per-match manifest is in [manifest-provisional.csv](manifest-provisional.csv)."]
-(DEST/"RECONCILIATION.md").write_text("\\n".join(report)+"\\n")
+(DEST/"RECONCILIATION.md").write_text("\n".join(report)+"\n")
 if identity_counts["verified"] != len(rows):
     raise SystemExit("Not all Team A identities verified; do not finalize outcome labels.")
+if len(rows) != 245 or len(outcome_winner) != 2:
+    raise SystemExit("Unexpected dataset size or unresolved engine outcome mapping.")
