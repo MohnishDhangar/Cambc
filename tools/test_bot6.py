@@ -61,7 +61,9 @@ def main():
                     if packages:
                         with zipfile.ZipFile(packages[0]) as z:
                             stream=z.read("team-"+side.lower()+".stdout").replace(b"\0",b"").decode(errors="replace")
-                        record["errors"]=[x[:150] for x in stream.splitlines() if "v6 error" in x]
+                        record["errors"]=[x[:150] for x in stream.splitlines()
+                                          if "v6 error" in x.lower() or "bot error" in x.lower()
+                                          or "fuel spill at" in x.lower()]
                         record["logs"]=len(stream.splitlines())
                         (folder/"bot6.stdout").write_text(stream)
                     else:record["errors"]=["No replay log found"]
