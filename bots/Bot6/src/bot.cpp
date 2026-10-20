@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_CARRIER_THREAT_EVASION 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -448,7 +449,20 @@ bool Bot::bank() {
         }
         goals |= around(p, constants::submit_gems_range);
     }
+#if V6_CARRIER_THREAT_EVASION
+    // Keep a valuable bag away from visible interceptors en route to an
+    // altar; legacy routing walks directly along the shortest path.
+    bool enemy_interceptor = false;
+    if (me.gem_count() >= 3)
+        for (const auto& enemy : visible_enemies)
+            if (dist(me.position(), enemy.position()) <= enemy.attack_range() + 2) {
+                enemy_interceptor = true;
+                break;
+            }
+    navigate(goals, me.health() < me.max_health() * .5f || enemy_interceptor);
+#else
     navigate(goals, me.health() < me.max_health() * .5f);
+#endif
     return true;
 }
 
