@@ -48,3 +48,25 @@ The CI workflow `.github/workflows/v6-build-test.yml` restores v4/v5 from pinned
 This is a new strategy architecture, **not trained nor optimized**. A successful compile and completed match indicates engine compatibility only. Win rate, gem scores, and zero-fault behavior against diverse opponents must determine any upgrade. A weak v6.0 is still a useful experimental foundation if it produces stable modular experiments.
 
 The first two priorities after the baseline release are: (1) state-aware zero-command-turn diagnosis and team-level assignment, (2) Bayesian/evolutionary comparisons among five fixed macro modes on training maps. Only after this should we attempt adaptive policy learning and final withheld-map evaluation.
+
+## First verified run — 21 October 2026
+
+**Test evidence:** https://github.com/MohnishDhangar/Cambc/actions/runs/39489048624
+
+The current-client CI runner installed CAMBC **3.0.1**, initialized its SDK, and release-compiled Bot6, frozen Bot4, frozen Bot5 and starter-cpp. All 14 non-held-out test matches completed, with **zero Bot6 engine faults and zero logged Bot6 exceptions**. The paired test suite used both starting sides.
+
+| Opponent | Maps | Games | V6 wins | Notes |
+|---|---|---:|---:|---|
+| starter-cpp | `00ambush`, `00contest`, `01gold-rush` | 6 | 4 | Lost both Ambush starts |
+| Bot4Frozen | `00ambush`, `00contest`, `01gold-rush` | 6 | 0 | 00contest ties in submitted gems still resulted in losses on tiebreaks |
+| Bot5Frozen | `00ambush` | 2 | 0 | Lost both starts |
+
+**Therefore v6.0 does not outperform the frozen baseline.** It is a modular candidate framework for phase-two strategy development, not a promoted tournament entry. The default bank threshold was lowered from 22 to 8 in one recorded experiment, but **this did not improve wins** in the matched suite (4/6 against starter; 0/6 against v4; 0/2 against v5). These settings are experimental and should be optimized with more representative scoring/risk telemetry.
+
+### Reproducible source archive
+
+`submissions/Bot6-v6.0-macro.zip` is exactly six source files immediately inside `src/`. Its SHA256 is `7e83559ad08617e1c390363297e1c6eaafef053f3170802df2e9dd8a8ac2182d`, with per-file SHA256 values in `submissions/Bot6-v6.0-macro.manifest.json`. A compiled WASM was also uploaded as a GitHub Actions artifact, but the CAMBC website expects the **source ZIP**.
+
+### Next phase — diagnosed performance, not blind parameter tweaking
+
+The highest-priority problems to investigate are repeated low/zero successful gem submissions on `00ambush`, insufficient objective turnover versus v4, and lack of a proper task-assignment auction and sustained action planning. Decode state transitions from current-engine match replays before changing several policy variables. Do not touch four held-out maps.
