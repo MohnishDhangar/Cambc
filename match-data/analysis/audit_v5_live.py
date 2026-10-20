@@ -41,7 +41,12 @@ for folder in folders:
         draft_picks="|".join(re.findall(r"draft (\d+)",prefix)),
     ))
 assert len(rows)==55,f"Expected 55 matches, got {len(rows)}"
-assert len({r["replay_sha256"] for r in rows})==len(rows),"Duplicate replay bytes"
+fingerprint_groups=defaultdict(list)
+for row in rows:
+    fingerprint_groups[row["replay_sha256"]].append(row)
+duplicates=[{"sha256":sha,"folders":[str(r["replay_path"]) for r in rs],
+             "labels":[r["folder_label"] for r in rs]}
+            for sha,rs in fingerprint_groups.items() if len(rs)>1]
 with (OUT/"match-audit.csv").open("w",newline="") as fd:
     writer=csv.DictWriter(fd,fieldnames=list(rows[0]))
     writer.writeheader()
@@ -63,7 +68,9 @@ summary={
     "by_folder_label_and_side":{str(k):v for k,v in sorted(by_side_label.items())},
     "replay_engine_headers":dict(by_engine),
     "all_v5_markers_present":all(r["v5_log_identity"]=="yes" for r in rows),
-    "replay_sha256_unique":len({r["replay_sha256"] for r in rows}),
+    "replay_sha256_unique":len(fingerprint_groups),
+    "duplicate_groups":duplicates,
+    "duplicate_folders_excess":sum(len(d["folders"])-1 for d in duplicates),
     "bot_error_matches":len(error_rows),
     "bot_error_lines":sum(r["bot_error_lines"] for r in rows),
     "sample_bot_errors":[{"replay":r["replay_path"],"error":r["sample_error"]} for r in error_rows[:15]],
@@ -85,6 +92,7 @@ f"- Complete replay folders: **{len(rows)}**, with **{len({r['replay_sha256'] fo
 f"- Folder labels: **{by_label.get('losses',0)} losses**, **{by_label.get('wins',0)} wins**. **Not engine-verified:** previous v4 labels were wrong in some matches.",
 f"- Recorded v5 team side: **{by_side.get('a',0)} Team A**, **{by_side.get('b',0)} Team B**; a cross-tab is below.",
 f"- Bot stdout identity markers: **{sum(r['v5_log_identity']=='yes' for r in rows)}/{len(rows)}**.",
+ f"- Identical replay-content duplicate groups: **{len(duplicates)}**, excess folders: **{summary['duplicate_folders_excess']}**. These are repeated observations, not independent games.",
 f"- Replay engine header bytes: `{dict(by_engine)}` (header alone does not validate game scores or outcomes).",
 f"- 'fuel spill at' stdout messages: **{summary['total_stdout_spill_messages']}** across **{len(spill_rows)}** matches.",
 f"- 'bot error' stdout lines: **{summary['bot_error_lines']}** across **{len(error_rows)}** matches.",
@@ -93,6 +101,9 @@ f"- 'bot error' stdout lines: **{summary['bot_error_lines']}** across **{len(err
 "| Folder result | Bot team A | Bot team B |", "|---|---:|---:|"]
 for label in ("wins","losses"):
     lines.append(f"| {label} | {by_side_label.get((label,'a'),0)} | {by_side_label.get((label,'b'),0)} |")
+lines += ["","## Duplicate replay contents", "", "| SHA-256 prefix | Folder paths |","|---|---|"]
+for d in duplicates:
+    lines.append(f"| \`{d['sha256'][:12]}\` | " + ", ".join(f"\`{Path(p).parent.relative_to(ROOT)}\`" for p in d["folders"]) + " |")
 lines += ["","## Qualification","","Folder results are provisional until reconciled with official server winner or matching replay decoder. Each match uses whichever of `team-a.stdout` or `team-b.stdout` is present, to avoid assuming Bot1 is always Team A. A printed `fuel spill at` message is a bot diagnostic; **it is not by itself proof of an engine-reported fault**. Inspect full replay and fuel trace to determine any performance impact.","",
 "## Most diagnostic logs", "",
 "| Labeled result | Match | Spill messages | First spill round |","|---|---|---:|---:|"]
