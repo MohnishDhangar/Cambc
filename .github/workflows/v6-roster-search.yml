@@ -1,0 +1,64 @@
+name: V6 roster search, 22 compositions versus frozen v4
+on:
+  push:
+    branches: [develop/v6-macro-v0]
+    paths:
+      - tools/search_bot6_rosters.py
+      - .github/workflows/v6-roster-search.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  roster-search:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Materialize hash-pinned v4 opponent
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,zipfile
+          p=Path('bots/Bot1/Bot1-v4.zip')
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='b296e83d43e8b16709e655ee4470a526e9e84160ee02fbad0e8c483661e1a062'
+          with zipfile.ZipFile(p) as z:
+              for f in z.namelist():
+                  if f.endswith(('.cpp','.h')):
+                      target=Path('bots/Bot4Frozen/src')/Path(f).name
+                      target.parent.mkdir(parents=True,exist_ok=True)
+                      target.write_bytes(z.read(f))
+          PY
+      - name: Install pinned CAMBC 3.0.1 and initialize WASI SDK
+        run: |
+          python3 -m pip install --user 'cambc==3.0.1'
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Initialize engine and build reference
+        env:
+          CAMBC_NO_UPDATE_CHECK: '1'
+        run: |
+          cambc --version
+          CAMBC_OFFLINE=1 cambc init --yes .
+          cambc build Bot4Frozen --release
+      - name: Two-stage 22-roster composition search on development maps
+        run: |
+          python3 tools/search_bot6_rosters.py --workers 3
+      - name: Upload experiment report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: V6-roster-two-stage-search
+          path: match-data/analysis/v6-roster-search/
+          retention-days: 30
+      - name: Preserve raw score and seed-pair records
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add match-data/analysis/v6-roster-search/games.csv match-data/analysis/v6-roster-search/summary.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'analysis: archive two-stage team composition search across training maps'
+            git fetch origin develop/v6-macro-v0
+            git rebase origin/develop/v6-macro-v0
+            git push origin HEAD:develop/v6-macro-v0
+          fi
