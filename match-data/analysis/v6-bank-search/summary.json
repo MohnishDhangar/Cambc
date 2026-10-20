@@ -1,0 +1,171 @@
+{
+  "engine_client": "cambc 3.0.1 from pinned CI environment",
+  "map_split": "17 training maps; four reserved maps never used",
+  "frozen_opponent": "Bot4Frozen from frozen v4 archive",
+  "candidate_source_sha256": "229a209abf2b0fe582157ff5f7aaec43407d5fdac7756dce5d87d30d71bf226d",
+  "games": 238,
+  "modes": {
+    "Bot6B0": {
+      "label": "bank-every-camp",
+      "wins": 11,
+      "games": 34,
+      "win_fraction": 0.3235,
+      "wilson95": [
+        0.1913,
+        0.4916
+      ],
+      "avg_gem_margin": -136.56,
+      "side": {
+        "A": {
+          "wins": 4,
+          "games": 17
+        },
+        "B": {
+          "wins": 7,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6B4": {
+      "label": "bank-4",
+      "wins": 11,
+      "games": 34,
+      "win_fraction": 0.3235,
+      "wilson95": [
+        0.1913,
+        0.4916
+      ],
+      "avg_gem_margin": -136.56,
+      "side": {
+        "A": {
+          "wins": 4,
+          "games": 17
+        },
+        "B": {
+          "wins": 7,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6B8": {
+      "label": "bank-8",
+      "wins": 11,
+      "games": 34,
+      "win_fraction": 0.3235,
+      "wilson95": [
+        0.1913,
+        0.4916
+      ],
+      "avg_gem_margin": -97.38,
+      "side": {
+        "A": {
+          "wins": 5,
+          "games": 17
+        },
+        "B": {
+          "wins": 6,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6B12": {
+      "label": "bank-12",
+      "wins": 8,
+      "games": 34,
+      "win_fraction": 0.2353,
+      "wilson95": [
+        0.1244,
+        0.4
+      ],
+      "avg_gem_margin": -198.15,
+      "side": {
+        "A": {
+          "wins": 3,
+          "games": 17
+        },
+        "B": {
+          "wins": 5,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6B16": {
+      "label": "bank-16",
+      "wins": 8,
+      "games": 34,
+      "win_fraction": 0.2353,
+      "wilson95": [
+        0.1244,
+        0.4
+      ],
+      "avg_gem_margin": -209.91,
+      "side": {
+        "A": {
+          "wins": 1,
+          "games": 17
+        },
+        "B": {
+          "wins": 7,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6B24": {
+      "label": "bank-24",
+      "wins": 9,
+      "games": 34,
+      "win_fraction": 0.2647,
+      "wilson95": [
+        0.146,
+        0.4312
+      ],
+      "avg_gem_margin": -213.74,
+      "side": {
+        "A": {
+          "wins": 3,
+          "games": 17
+        },
+        "B": {
+          "wins": 6,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    },
+    "Bot6B32": {
+      "label": "bank-32",
+      "wins": 8,
+      "games": 34,
+      "win_fraction": 0.2353,
+      "wilson95": [
+        0.1244,
+        0.4
+      ],
+      "avg_gem_margin": -225.38,
+      "side": {
+        "A": {
+          "wins": 3,
+          "games": 17
+        },
+        "B": {
+          "wins": 5,
+          "games": 17
+        }
+      },
+      "faults": 0,
+      "errors": 0
+    }
+  },
+  "no_fatal_errors": true
+}
