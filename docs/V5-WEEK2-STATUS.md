@@ -1,5 +1,7 @@
 # V5 Week 2 development log — 20 October 2026
 
+> **Submission format correction:** The CAMBC website accepts a source ZIP containing exactly six files under `src/`, not a WASM module. The uploadable file is [`submissions/Bot1-v5-week2.zip`](../submissions/Bot1-v5-week2.zip) (SHA-256 `b57209629cbdbcdec3123e6db87bb43d5c7c037d951259da36e52c0597727c37`). This ZIP is generated from the last regression-tested source commit. See [V5-FIELD-TEST.md](V5-FIELD-TEST.md). The WASM artifact below is for internal compilation/testing only.
+
 ## Field candidate built and ready (20 October, 12:00 UTC)
 
 **Stable source commit:** `a07672eab23dfb5b956e5426b32ccb09e5dff7ac`
@@ -16,7 +18,7 @@ Experiments that were rejected and reverted: mixed early-shop/combat/camp utilit
 
 Current field candidate retains v4 strategic selection, plus dynamic camp HP/damage, major camp classification, actual camp attack range, and a fallback when no risk-free spellcasting tile exists (the latter is needed for Golem/Monolith on Week 2 maps, but cannot be validated under old 0.0.3 maps). Stdout marker now says `Bot1 strategy v5 Week2 (SDK 2.2.5)`.
 
-**Next gate:** upload compiled WASM to the live 2026a website and collect at least 20 consecutive games, preserving exact match IDs and replay data. See [V5-FIELD-TEST.md](V5-FIELD-TEST.md).
+**Next gate:** upload the verified source ZIP to the live 2026a website and collect at least 20 consecutive games, preserving exact match IDs and replay data. See [V5-FIELD-TEST.md](V5-FIELD-TEST.md).
 
 
 
