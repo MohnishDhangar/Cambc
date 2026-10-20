@@ -20,11 +20,11 @@ jobs:
         run: CAMBC_OFFLINE=1 "$HOME/.local/bin/cambc" init --yes .
       - name: Analyze selected replays
         env:
-          REPLAY_SELECT: "team-9/04-734168de|team-24/01-b7512a73|team-19/02-dcaaeae5"
+          REPLAY_SELECT: "team-9/04-734168de|team-24/01-b7512a73|team-19/02-dcaaeae5|team-16/05-09970453|team-22/04-4fa29193|team-2/01-0348f9da|team-13/02-de69888e|same-elo/wins/team-1/01-aba45329|same-elo/losses/team-10/02-c7e7028a"
         run: |
           node match-data/analysis/extract_v4_study.mjs match-data/v4 results/v4-tactics
           python3 match-data/analysis/study_v4_tactics.py results/v4-tactics match-data/analysis/v4-study/TACTICS.md
-          head -75 match-data/analysis/v4-study/TACTICS.md
+          head -110 match-data/analysis/v4-study/TACTICS.md
       - uses: actions/upload-artifact@v4
         with:
           name: v4-tactics-case-studies
