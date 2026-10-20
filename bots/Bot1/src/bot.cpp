@@ -187,7 +187,7 @@ int Bot::select_camp() {
         if (me.champion_name() == champion_type::varg) work /= std::min(3, std::max(1, g.members));
         const float bank_trip = altar_distance.get(g.centre) == distance_field::unreachable ? 100.f : altar_distance.get(g.centre);
         const float value = g.camp.gem_value() + g.camp.gold_value() * (round < 700 ? .32f : .12f);
-        float score = value / (distance + wait + work / (assigned + 1) + 6 + bank_trip * .35f);
+        float score = value / (distance + wait + work / (assigned + 1) + 6 + bank_trip * .60f);
         if (dist(g.centre, enemy_spawn) + 4 < home_distance.get(g.centre)) score *= .65f;
         if (i == target) score *= 1.3f;
         if (score > best) { best = score; choice = i; }
