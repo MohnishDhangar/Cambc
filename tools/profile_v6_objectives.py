@@ -24,7 +24,7 @@ INSERT = r'''
 INSERT += r'''
         if (!cambc::is_draft() && cambc::round_number() == 1)
             for (auto altar : cambc::map::altars().positions())
-                std::cout << "ALTAR," << altar.x << "," << altar.y << "\\n";
+                std::cout << "ALTAR," << altar.x << "," << altar.y << "\n";
 '''
 def run(args, timeout=300):
     p = subprocess.run(args,cwd=ROOT,env=ENV,capture_output=True,text=True,timeout=timeout)
