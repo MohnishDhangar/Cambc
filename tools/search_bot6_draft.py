@@ -102,7 +102,8 @@ def main():
     report={"engine_client":"cambc 3.0.1 from pinned CI environment",
             "map_split":"first eight alphabetic training maps; four sealed maps never used",
             "frozen_opponent":"Bot4Frozen from frozen v4 archive",
-            "candidate_source_sha256":hashlib.sha256((source/"bot.cpp").read_bytes()).hexdigest(),\n            "draft_source_sha256":hashlib.sha256((source/"draft.cpp").read_bytes()).hexdigest(),
+            "candidate_source_sha256":hashlib.sha256((source/"bot.cpp").read_bytes()).hexdigest(),
+            "draft_source_sha256":hashlib.sha256((source/"draft.cpp").read_bytes()).hexdigest(),
             "games":len(results),"modes":{}, "no_fatal_errors":all(not r.get("error") and not r.get("faults") for r in results)}
     for name,label in variants.items():
         games=[r for r in results if r["mode"]==name]
