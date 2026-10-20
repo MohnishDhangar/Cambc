@@ -14,14 +14,10 @@ bitboard around(vec2 p, int r) {
     return b;
 }
 unsigned id(const champion& c) { return static_cast<unsigned>(static_cast<handle_champion_t>(c)); }
-float camp_health(camp_type kind) {
-    constexpr float values[]{1350, 2400, 500, 500, 20000};
-    return values[static_cast<int>(kind)];
-}
-float camp_damage(camp_type kind) {
-    constexpr float values[]{20, 60, 0, 0, 200};
-    return values[static_cast<int>(kind)];
-}
+// Query engine-provided camp designs. This covers Week 2 balance changes
+// and new camp types without indexing a pre-patch five-element array.
+float camp_health(const camp& c) { return c.base_stats().base_health; }
+float camp_damage(const camp& c) { return c.base_stats().base_strength; }
 bitboard occupied() {
     auto b = vision::champion_tiles() | vision::camp_tiles() | vision::teleport_tiles();
     b.set(self().position(), false);
@@ -42,11 +38,12 @@ void Bot::initialize() {
         auto tiles = g.spawn_tiles();
         Group entry{g, tiles, g.camps().front().spawn_position()};
         for (const auto& c : g) {
-            entry.health += camp_health(c.kind());
-            entry.damage += camp_damage(c.kind());
+            entry.health += camp_health(c);
+            entry.damage += camp_damage(c);
             ++entry.members;
         }
-        entry.major = g.gem_value() && entry.health >= 10000;
+        // Week 2 adds a 5,000 HP Golem; treat large objectives as siege work.
+        entry.major = g.gem_value() && entry.health >= 4500;
         groups.push_back(std::move(entry));
     }
     objective_map = std::any_of(groups.begin(), groups.end(), [](const Group& g) { return g.major; })
@@ -100,8 +97,8 @@ void Bot::observe() {
             for (const auto& c : g.camp) {
                 const auto p = c.spawn_position();
                 if (visible.is_set(p) && !camp_tiles.is_set(p)) continue;
-                g.health += c.is_visible() ? c.health() : camp_health(c.kind());
-                g.damage += camp_damage(c.kind());
+                g.health += c.is_visible() ? c.health() : camp_health(c);
+                g.damage += camp_damage(c);
                 ++g.members;
             }
         }
@@ -211,7 +208,7 @@ void Bot::refresh_threats() {
     for (const auto& g : groups) {
         if (g.state != 0 || !g.visible) continue;
         for (const auto& c : g.camp)
-            if (camp_damage(c.kind()) > 0 && c.is_visible() && c.health() > 0 && c.is_awake())
+            if (camp_damage(c) > 0 && c.is_visible() && c.health() > 0 && c.is_awake())
                 threats.push_back({c.position(), c.strength(), c.attack_range()});
     }
 }
@@ -388,13 +385,34 @@ bool Bot::bank() {
                 const auto lock = vision::altar_lock_at(p);
                 if (lock.is_enemy()) {
                     if (me.can_attack()) me.attack(lock);
+                    // Attack-reset champions can remove five-hit Week 2
+                    // altar locks faster, without spending another turn.
+                    for (const auto& a : me.abilities()) {
+                        if (!me.can_attack() && a.is_attack_reset() && a.is_ready() && a.use()) {
+                            if (me.can_attack()) me.attack(lock);
+                            break;
+                        }
+                    }
                     return true;
                 }
             }
-            if (danger(me.position()) < me.health() / (std::ceil(me.gem_count() / 10.f) + 2)) {
+            const float incoming = danger(me.position());
+            const int duration = std::max(1, int(std::ceil(me.gem_count() / 10.f)));
+            if (incoming * (duration + 1) + 60.f < me.health() || incoming <= 0.f) {
                 me.submit_gems(p);
                 return true;
             }
+            // If an occupied altar approach looks lethal, attempt a safe
+            // approach rather than idling forever on the goal tile.
+            bitboard safe_approaches;
+            for (auto altar : map::altars().positions())
+                for (auto q : (around(altar, constants::submit_gems_range) & ~terrain).positions())
+                    if (danger(q) < incoming * .25f) safe_approaches.set(q, true);
+            safe_approaches.set(me.position(), false);
+            if (!safe_approaches.is_empty() && navigate(safe_approaches, true)) return true;
+            returning = true;
+            recover();
+            return true;
         }
         goals |= around(p, constants::submit_gems_range);
     }
@@ -459,7 +477,7 @@ bool Bot::siege_objective() {
     for (const auto& c : g.camp) {
         const auto p = c.spawn_position();
         if (visible.is_set(p) && !live.is_set(p)) continue;
-        if (camp_damage(c.kind()) > 0) unsafe |= around(p, 3);
+        if (camp_damage(c) > 0) unsafe |= around(p, c.attack_range());
     }
     for (const auto& c : g.camp) {
         const auto p = c.spawn_position();
@@ -469,8 +487,21 @@ bool Bot::siege_objective() {
             if (dx * dx + dy * dy <= 16) firing.set(q, true);
         }
     }
+    // Week 2 expands Elk/Monolith ranges and adds Golems. Some objectives
+    // have no risk-free spell tile; never abandon all gem income in that case.
+    const bool has_safe_firing = !firing.is_empty();
+    if (!has_safe_firing) {
+        for (const auto& c : g.camp) {
+            const auto p = c.spawn_position();
+            if (visible.is_set(p) && !live.is_set(p)) continue;
+            for (auto q : (around(p, 4) & ~terrain).positions()) {
+                const int dx = q.x - p.x, dy = q.y - p.y;
+                if (dx * dx + dy * dy <= 16) firing.set(q, true);
+            }
+        }
+    }
     if (firing.is_empty()) return false;
-    if (!firing.is_set(me.position())) { navigate(firing, true); return true; }
+    if (!firing.is_set(me.position())) { navigate(firing, has_safe_firing); return true; }
     if (g.state == 2) return true;
     bool visible_target = false;
     for (const auto& c : g.camp) {
@@ -591,8 +622,10 @@ void Bot::play_turn() {
         claim(-1);
         stalled = 0;
     }
+    // Ordinary damage does not cancel tribute. Avoid discretionary PvP while
+    // carrying gems: secure the bag before looking for combat opportunities.
+    if (me.gem_count() && bank()) return;
     if (defend()) return;
-    if (bank()) return;
     if (siege_objective()) return;
     if (objective_map && target >= 0 && groups[target].major) claim(-1);
     farm();
