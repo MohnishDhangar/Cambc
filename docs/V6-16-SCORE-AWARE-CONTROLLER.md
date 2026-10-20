@@ -11,3 +11,12 @@ Pinned source `0ddd5338b94db824f9f53261a17f020490b7017f`. Guard all new behavior
 
 ## Evaluation
 102 matches: candidate vs frozen v4, pinned v6.8 vs frozen v4, candidate vs pinned v6.8, 17 development maps, both teams/sides. Report win rate, submitted-gem margin, zero-tribute games, number and contexts of triggers in a subsequent telemetry experiment, runtime faults, replay fuel spills. Preserve output whether accepted or rejected. Competitive upgrade only if reproducible advantage and reliability criteria achieved.
+
+## Measured result (CI run 39513192436, completed)
+
+- Candidate v6.16 vs frozen v4: **21/34 wins**, mean submitted-gem margin **+98.09**, 59 fuel-spill events, zero engine faults/exceptions.
+- Pinned v6.8 vs frozen v4: **21/34 wins**, mean margin **+91.47**, 52 fuel-spill events, zero engine faults/exceptions.
+- Candidate v6.16 vs pinned v6.8: **18/34 wins**, mean margin **−17.29**, 61 fuel-spill events.
+- All four original under-100 (actually 0) tribute matches on `00contest` and `01boss-battle` remain zero in the candidate's controlled v4 games.
+- **Verdict: DO NOT PROMOTE**. Equal v4 win count, +7 spill events, not superior in direct games by mean gem margin. In addition, activation counts for ECON/TEMPO/interceptor are not yet instrumented; cannot claim all new branches were frequently exercised.
+- Reproducible evidence: `match-data/analysis/v6.16-score-aware/summary.json` and `games.csv` in this branch, CI https://github.com/MohnishDhangar/Cambc/actions/runs/39513192436.
