@@ -3,7 +3,7 @@
   "base_v68_commit": "0ddd5338b94db824f9f53261a17f020490b7017f",
   "frozen_v4_zip_sha256": "b296e83d43e8b16709e655ee4470a526e9e84160ee02fbad0e8c483661e1a062",
   "source_hashes": {
-    "vision_bot_sha256": "39e082ff267f2be7b5b35f82af3b9c51f6ed5df699a8c13372ffe9d49c50790e",
+    "vision_bot_sha256": "70772e4b5f8ecae1e0578edc50382d940ebac918a4887e68b7af75310adeff32",
     "v68_bot.cpp": "f74745b290dd9c2f9b6a6b46a1128d031ae080d5d9b024993a7b554198c5e7ac",
     "v68_bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
     "v68_draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
@@ -39,17 +39,17 @@
   "pairings": {
     "vision_vs_v4": {
       "games": 34,
-      "wins": 15,
+      "wins": 21,
       "wilson95": [
-        0.289,
-        0.605
+        0.45,
+        0.761
       ],
-      "mean_gem_margin": -22.79,
-      "side_A_wins": 5,
-      "side_B_wins": 10,
+      "mean_gem_margin": 49.53,
+      "side_A_wins": 8,
+      "side_B_wins": 13,
       "faults": 0,
-      "exceptions": 538,
-      "fuel_spills": 29,
+      "exceptions": 0,
+      "fuel_spills": 48,
       "failed": 0
     },
     "pinned_vs_v4": {
@@ -69,24 +69,24 @@
     },
     "vision_vs_pinned": {
       "games": 34,
-      "wins": 16,
+      "wins": 17,
       "wilson95": [
-        0.315,
-        0.633
+        0.341,
+        0.659
       ],
-      "mean_gem_margin": -12.82,
-      "side_A_wins": 6,
-      "side_B_wins": 10,
+      "mean_gem_margin": 18.59,
+      "side_A_wins": 5,
+      "side_B_wins": 12,
       "faults": 0,
-      "exceptions": 415,
-      "fuel_spills": 18,
+      "exceptions": 0,
+      "fuel_spills": 11,
       "failed": 0
     }
   },
   "paired_vs_v4": {
     "complete_pairs": 34,
-    "net_wins": -6,
-    "mean_margin_delta": -114.26
+    "net_wins": 0,
+    "mean_margin_delta": -41.94
   },
   "match_count": 102,
   "promotion_gate": {
