@@ -19,6 +19,7 @@ Each row is a complete 102-game 17-training-map tournament (34 candidate vs v4, 
 | Elite v3: bush-only information-coverage warding (corrected) | 21/34 | +49.53 | 48 | 0 | 17/34 | Reject for margin regression |
 | Elite v4: 120g return-to-shop vs 180g | 10/34 | −70.62 | 35 | 0 | 15/34 | Reject |
 | Elite v5: skip banking when no reachable altar | 21/34 | +96.71 | 57 | 0 | 18/34 | Not promoted, zero-tribute failures persist |
+| Elite v6: teammates transient in BFS field | 15/34 | −26.35 | 49 | 0 | 14/34 | Reject, zero-tribute failures persist |
 
 ## Reproducible sources
 
@@ -28,7 +29,7 @@ Each row is a complete 102-game 17-training-map tournament (34 candidate vs v4, 
 - v3 `research/elite-bot-v3-vision` / `match-data/analysis/elite-v3-vision`
 - v4 `research/elite-bot-v4-shop-cycle` / `match-data/analysis/elite-v4-shop-cycle`
 - v5 `research/elite-bot-v5-productive-fallback` / `match-data/analysis/elite-v5-productive-fallback`
-- v6 `research/elite-bot-v6-allied-navigation` / `match-data/analysis/elite-v6-allied-navigation` (pending isolated benchmark)
+- v6 `research/elite-bot-v6-allied-navigation` / `match-data/analysis/elite-v6-allied-navigation` (102 games completed; rejected)
 
 Each branch includes its complete `bots/BotElite/src/` six-file source, a paired `tools/benchmark_*.py` and CI workflow. The independent BotElite tree does not modify frozen v4/v5 or deployed v6.8. The source ZIPs under `releases/elite/` contain exactly `src/*.cpp`/`src/*.h`, tested by GitHub CI.
 
@@ -40,3 +41,7 @@ Each branch includes its complete `bots/BotElite/src/` six-file source, a paired
 4. A genuinely different elite-strength candidate must demonstrate improvements in complete capture-to-bank conversion, productive map goals, coordinated fights, and safe resource logistics — not merely added commands.
 
 **Promotion status: no elite-derived candidate is currently proven superior to pinned v6.8.** All variants remain experimental until reproducibly better against multiple opponents with acceptable runtime reliability.
+
+## Follow-up bottleneck hypothesis after v6
+
+Both no-reachable-altar fallback (v5) and ally-through-BFS (v6) failed to produce any gem tributes on training maps `00contest`/`01boss-battle`. Avoid repeating guesses about pathfinding. Instrument map altar count and each champion's distance-field reachability, goals, terrain component, selection target and bank action outcomes at key intervals, then reproduce a single frozen scenario. Test coordinated capture + bank logistics only after root cause is observed. For real high-Elo transfer, first confirm elite replay outcomes and correlate successful combat/ward/recall actions with gem-scoring trajectories rather than superficial action counts.
