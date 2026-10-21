@@ -1,0 +1,53 @@
+name: Elite v4 earlier shopping interval paired tournament
+on:
+  push:
+    branches: [research/elite-bot-v4-shop-cycle]
+    paths:
+      - 'bots/BotElite/src/**'
+      - 'tools/benchmark_elite_v4_shop.py'
+      - '.github/workflows/elite-v4-shop-cycle.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install current CAMBC
+        run: |
+          python3 -m pip install --user 'cambc==3.0.1'
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Provision CAMBC SDK and WASI
+        env:
+          CAMBC_NO_UPDATE_CHECK: '1'
+        run: |
+          cambc --version
+          CAMBC_OFFLINE=1 cambc init --yes .
+          cambc build BotElite --release
+      - name: Build candidates and conduct 102 paired training games
+        run: python3 tools/benchmark_elite_v4_shop.py
+      - name: Archive experiment evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: elite-v4-shop-cycle-evidence
+          path: |
+            match-data/analysis/elite-v4-shop-cycle/games.csv
+            match-data/analysis/elite-v4-shop-cycle/summary.json
+          retention-days: 60
+      - name: Publish verified experiment results
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add match-data/analysis/elite-v4-shop-cycle/games.csv match-data/analysis/elite-v4-shop-cycle/summary.json
+          if ! git diff --cached --quiet; then
+            git commit -m "experiment: elite v4 102-game paired training results"
+            git fetch origin research/elite-bot-v4-shop-cycle
+            git rebase origin/research/elite-bot-v4-shop-cycle
+            git push origin HEAD:research/elite-bot-v4-shop-cycle
+          fi

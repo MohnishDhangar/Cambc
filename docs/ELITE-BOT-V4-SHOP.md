@@ -1,0 +1,5 @@
+# EliteBot v4 — earlier shopping return (single-variable ablation)
+
+Elite recorded opponents attempted +59.1% item purchases and +59.7% recalls relative to frozen v4 on the 161 unique permitted replay episodes. These are merely attempt frequencies; they do not establish that early shopping is optimal. Our v6.8 field economy only recalls for shopping after accumulating >=180 gold, when outside home with no unbanked gems, subject to 40-round cooldown. This branch tests 120 gold as a distinct ROI schedule and keeps *all other source files* byte-identical to pinned v6.8 `0ddd5338b94db824f9f53261a17f020490b7017f`.
+
+Change under `ELITE_SHOP_TRIGGER 120`; baseline source uses 180. The shop build itself is unchanged. Compile with CAMBC 3.0.1; 102 paired games v4 candidate vs frozen v4, pinned v6.8 vs frozen v4, candidate vs pinned v6.8 on 17 approved training maps both sides. Judge wins, tribute, deaths/faults/fuel; reject if worse. No tuning or peeking at sealed `00lanes`, `01corridors`, `01hooks`, `01islands`.
