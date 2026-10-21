@@ -1,0 +1,38 @@
+{
+  "v6.8-pinned": {
+    "source_commit": "0ddd5338b94db824f9f53261a17f020490b7017f",
+    "archive_sha256": "53763b26794cba099a4f2916478ba25682b92b0fc7519890530f3223f9b68665",
+    "files": {
+      "src/bot.cpp": "f74745b290dd9c2f9b6a6b46a1128d031ae080d5d9b024993a7b554198c5e7ac",
+      "src/bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
+      "src/draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
+      "src/draft.h": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd",
+      "src/main.cpp": "5cf147c942f6404849e5f5dbd1516e9e651a5c08be91102ed27c500e0571c559",
+      "src/random.h": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+    }
+  },
+  "elite-v3-vision-experimental": {
+    "source_commit": "3a409aa2ece9c7e2da7b386c291674a8acfa042c",
+    "archive_sha256": "a7de72c590084a88b12fc76ed87aa189374deb8f7c1a269713af240fc5855ec6",
+    "files": {
+      "src/bot.cpp": "70772e4b5f8ecae1e0578edc50382d940ebac918a4887e68b7af75310adeff32",
+      "src/bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
+      "src/draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
+      "src/draft.h": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd",
+      "src/main.cpp": "5cf147c942f6404849e5f5dbd1516e9e651a5c08be91102ed27c500e0571c559",
+      "src/random.h": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+    }
+  },
+  "elite-v5-fallback-experimental": {
+    "source_commit": "d19380133235cec2e02a05ce8c6a3209dbf7b82e",
+    "archive_sha256": "4b2ef91c38df1bb1bf7c6c6d8b95ec2a1c38125c84b382d3d372c461a5a250e9",
+    "files": {
+      "src/bot.cpp": "e19a0581bb50dc7a2ed894fe22d3032c0572ddab3bccbea2e8ff1f3986d64fae",
+      "src/bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
+      "src/draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
+      "src/draft.h": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd",
+      "src/main.cpp": "5cf147c942f6404849e5f5dbd1516e9e651a5c08be91102ed27c500e0571c559",
+      "src/random.h": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+    }
+  }
+}
