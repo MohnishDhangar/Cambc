@@ -2,6 +2,7 @@
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
 #define V6_ALTAR_ENTRANCE_CLEAR 1
+#define V6_GROUP_BOSS_RAID 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -532,8 +533,17 @@ bool Bot::capture_group(int index) {
 
 bool Bot::siege_objective() {
     auto& me = self();
+#if V6_GROUP_BOSS_RAID
+    // Objective-only maps need a team commitment, not independent casters
+    // suiciding against a 20k-HP, 200-damage monolith.
+    const bool collective_raid = objective_map && round >= 350 && !me.gem_count();
+    if (!objective_map || (!caster_build && !collective_raid) ||
+        me.health() < me.max_health() * (collective_raid ? .65f : .45f)
+        || (!collective_raid && round < 400 && me.focus() < 180)) return false;
+#else
     if (!objective_map || !caster_build || me.health() < me.max_health() * .45f
         || (round < 400 && me.focus() < 180)) return false;
+#endif
     if (target >= 0 && !groups[target].major && groups[target].state == 1) return false;
     int index = -1, best = 65535;
     for (int i = 0; i < static_cast<int>(groups.size()); ++i) {
@@ -546,6 +556,22 @@ bool Bot::siege_objective() {
     auto& g = groups[index];
     claim(index);
     if (g.state == 1) return capture_group(index);
+#if V6_GROUP_BOSS_RAID
+    if (collective_raid && g.state == 0) {
+        int supporting = 0;
+        for (const auto& ally : allies)
+            if (ally.is_visible() && ally.is_alive() &&
+                ally.health() > ally.max_health() * .55f &&
+                dist(ally.position(), g.centre) <= 8) ++supporting;
+        // Stage two healthy bodies outside known monster range, then
+        // concentrate damage; all heroes choose the same static boss group.
+        if (supporting < 2) {
+            auto stage = around(g.centre, 7) & ~around(g.centre, 5) & ~terrain & ~occupied();
+            navigate(stage, true);
+            return true;
+        }
+    }
+#endif
     bitboard unsafe, firing;
     const auto visible = vision::visible_tiles(), live = vision::camp_tiles();
     for (const auto& c : g.camp) {
@@ -561,6 +587,17 @@ bool Bot::siege_objective() {
             if (dx * dx + dy * dy <= 16) firing.set(q, true);
         }
     }
+#if V6_GROUP_BOSS_RAID
+    if (collective_raid && !caster_build) {
+        // Melee fighters can tank and deal adjacent damage once the
+        // squad is assembled; original caster firing lane stays unchanged.
+        for (const auto& c : g.camp) {
+            const auto p = c.spawn_position();
+            if (visible.is_set(p) && !live.is_set(p)) continue;
+            firing |= around(p, std::max(1, me.attack_range())) & ~terrain & ~live;
+        }
+    }
+#endif
     if (firing.is_empty()) return false;
     if (!firing.is_set(me.position())) { navigate(firing, true); return true; }
     if (g.state == 2) return true;
