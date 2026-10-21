@@ -1,0 +1,3 @@
+# Allowed-map `00contest` siege diagnostics
+
+Pin v6.8 (commit `0ddd5338b94db824f9f53261a17f020490b7017f`) and frozen v4; two starting sides of permitted development map `00contest`. The earlier 102-game benchmarks show that every v6.8 test match here has zero submitted gems; counterpart v4 reached 200 on side A. This probe records the objective_map and caster classification, gem group health/damage, the champion's target/returns, and whether `siege_objective` can produce legal firing tiles. Tracing changes stdout/instrumentation but not intended strategy. The four sealed maps are excluded from this and all later tuning. Results will determine whether to correct objective classification, equipment readiness, firing lanes or team coordination.
