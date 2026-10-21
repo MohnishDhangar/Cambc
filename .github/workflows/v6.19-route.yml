@@ -1,0 +1,53 @@
+name: V6.19 blocked-altar route clearing paired tournament
+on:
+  push:
+    branches: [develop/v6.19-route-clearing]
+    paths:
+      - 'bots/Bot6/src/**'
+      - 'tools/benchmark_v6_19_route.py'
+      - '.github/workflows/v6.19-route.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install current CAMBC
+        run: |
+          python3 -m pip install --user 'cambc==3.0.1'
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Provision CAMBC SDK and WASI
+        env:
+          CAMBC_NO_UPDATE_CHECK: '1'
+        run: |
+          cambc --version
+          CAMBC_OFFLINE=1 cambc init --yes .
+          cambc build Bot6 --release
+      - name: Build candidates and conduct 102 paired training games
+        run: python3 tools/benchmark_v6_19_route.py
+      - name: Archive experiment evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6-19-route-evidence
+          path: |
+            match-data/analysis/v6.19-route-clearing/games.csv
+            match-data/analysis/v6.19-route-clearing/summary.json
+          retention-days: 60
+      - name: Publish verified experiment results
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add match-data/analysis/v6.19-route-clearing/games.csv match-data/analysis/v6.19-route-clearing/summary.json
+          if ! git diff --cached --quiet; then
+            git commit -m "experiment: v6.19 102-game paired training results"
+            git fetch origin develop/v6.19-route-clearing
+            git rebase origin/develop/v6.19-route-clearing
+            git push origin HEAD:develop/v6.19-route-clearing
+          fi

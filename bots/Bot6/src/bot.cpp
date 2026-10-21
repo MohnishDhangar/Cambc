@@ -2,6 +2,7 @@
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
 #define V6_BANK_PROGRESS_RECOVERY 1
+#define V6_ROUTE_CLEARING 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -461,6 +462,30 @@ bool Bot::bank() {
         bank_attempt_stall = 0;
         bank_detour_until = round + 22;
         action = "bank blocked detour";
+#if V6_ROUTE_CLEARING
+        // Static altar gradient ignores live camp bodies. A nearby live camp
+        // closer to an altar on that gradient may be blocking the approach.
+        // Prefer a clearable small group, or an already defeated reward.
+        if (fuel_remaining() > 35000 && me.health() > me.max_health() * .62f) {
+            const int here = altar_distance.get(me.position());
+            float best = 1e9f;
+            int choice = -1;
+            for (int i = 0; i < static_cast<int>(groups.size()); ++i) {
+                const auto& g = groups[i];
+                if (!g.visible || g.state == 2 || g.avoid_until > round) continue;
+                const int d = dist(me.position(), g.centre);
+                const int to_altar = altar_distance.get(g.centre);
+                if (d > 12 || to_altar == distance_field::unreachable ||
+                    (here != distance_field::unreachable && to_altar >= here)) continue;
+                if (g.state == 0 &&
+                    (g.health > 4000.f || g.damage > me.max_health() * .30f)) continue;
+                const float score = d + to_altar * .35f +
+                    (g.state == 1 ? -10.f : g.health / std::max(1.f, me.strength()) * .7f);
+                if (score < best) { best = score; choice = i; }
+            }
+            if (choice >= 0) claim(choice);
+        }
+#endif
         // Return control to farm/defend; a camp cleared during the detour
         // may open a blocked corridor. The original gem bag is retained.
         return false;
