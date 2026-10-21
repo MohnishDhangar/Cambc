@@ -1,0 +1,99 @@
+{
+  "engine": "CAMBC 3.0.1",
+  "base_v68_commit": "0ddd5338b94db824f9f53261a17f020490b7017f",
+  "frozen_v4_zip_sha256": "b296e83d43e8b16709e655ee4470a526e9e84160ee02fbad0e8c483661e1a062",
+  "source_hashes": {
+    "fast_bot_sha256": "a4988e85005e697584faed00d7324fc18bce0c702de33ed8ba2e27c86d25f7c0",
+    "v68_bot.cpp": "f74745b290dd9c2f9b6a6b46a1128d031ae080d5d9b024993a7b554198c5e7ac",
+    "v68_bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
+    "v68_draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
+    "v68_draft.h": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd",
+    "v68_main.cpp": "5cf147c942f6404849e5f5dbd1516e9e651a5c08be91102ed27c500e0571c559",
+    "v68_random.h": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+  },
+  "training_maps": [
+    "00ambush",
+    "00collision",
+    "00contest",
+    "00corners",
+    "00eight",
+    "00elkring",
+    "00expanse",
+    "00fragment",
+    "00interlock",
+    "00monolith",
+    "01big-world",
+    "01boss-battle",
+    "01broken-curve",
+    "01concentrated-wealth",
+    "01elk-arena",
+    "01fracture",
+    "01gold-rush"
+  ],
+  "sealed_maps_excluded": [
+    "00lanes",
+    "01corridors",
+    "01hooks",
+    "01islands"
+  ],
+  "pairings": {
+    "recovery_vs_v4": {
+      "games": 34,
+      "wins": 21,
+      "wilson95": [
+        0.45,
+        0.761
+      ],
+      "mean_gem_margin": 103.53,
+      "side_A_wins": 9,
+      "side_B_wins": 12,
+      "faults": 0,
+      "exceptions": 0,
+      "fuel_spills": 53,
+      "failed": 0
+    },
+    "pinned_vs_v4": {
+      "games": 34,
+      "wins": 21,
+      "wilson95": [
+        0.45,
+        0.761
+      ],
+      "mean_gem_margin": 91.47,
+      "side_A_wins": 9,
+      "side_B_wins": 12,
+      "faults": 0,
+      "exceptions": 0,
+      "fuel_spills": 52,
+      "failed": 0
+    },
+    "recovery_vs_pinned": {
+      "games": 34,
+      "wins": 18,
+      "wilson95": [
+        0.367,
+        0.685
+      ],
+      "mean_gem_margin": 0.32,
+      "side_A_wins": 8,
+      "side_B_wins": 10,
+      "faults": 0,
+      "exceptions": 0,
+      "fuel_spills": 27,
+      "failed": 0
+    }
+  },
+  "paired_vs_v4": {
+    "complete_pairs": 34,
+    "net_wins": 0,
+    "mean_margin_delta": 12.06
+  },
+  "match_count": 102,
+  "promotion_gate": {
+    "all_games_complete": true,
+    "candidate_zero_faults": false,
+    "higher_win_count_vs_v4": false,
+    "better_gem_margin_vs_v4": true,
+    "note": "All gates needed; CI success alone does not establish a better bot."
+  }
+}
