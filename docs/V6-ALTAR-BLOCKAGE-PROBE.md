@@ -1,0 +1,3 @@
+# Objective bank-goal blockage cause probe
+
+On allowed `01boss-battle`, prior `NAVEMPTY` samples show the exact navigator guard `goals &= ~blocked; if (goals.is_empty()) return false;` firing repeatedly for gem carriers. This instrumentation pins exact v6.8 and logs the number of raw altar approach tiles, those rejected by permanent terrain, camps, champion occupancy or teleport occupancy. No gameplay changes. Only permitted training map `01boss-battle`, both A and B, against pinned v4. Do not run any of the four reserved maps or use unknown-map user field replays for parameter selection. Diagnose first, then implement a cause-specific fix.
