@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_BANK_PROGRESS_RECOVERY 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -448,8 +449,27 @@ bool Bot::bank() {
         }
         goals |= around(p, constants::submit_gems_range);
     }
+#if V6_BANK_PROGRESS_RECOVERY
+    const bool progressed = navigate(goals, me.health() < me.max_health() * .5f);
+    if (progressed) {
+        bank_attempt_stall = 0;
+        return true;
+    }
+    // Do not use a carrier's next 1000 turns trying the same blocked altar.
+    ++bank_attempt_stall;
+    if (bank_attempt_stall >= 3) {
+        bank_attempt_stall = 0;
+        bank_detour_until = round + 22;
+        action = "bank blocked detour";
+        // Return control to farm/defend; a camp cleared during the detour
+        // may open a blocked corridor. The original gem bag is retained.
+        return false;
+    }
+    return true;
+#else
     navigate(goals, me.health() < me.max_health() * .5f);
     return true;
+#endif
 }
 
 bool Bot::capture_group(int index) {
@@ -656,7 +676,17 @@ void Bot::play_turn() {
     for (const auto& enemy:visible_enemies)
         if (enemy.is_alive() && enemy.is_visible()
             && dist(position,enemy.position())<=5) carrier_threat=true;
-    const bool should_bank = bag && (bag>=static_cast<unsigned>(threshold)
+#if V6_BANK_PROGRESS_RECOVERY
+    // A visible close altar or urgent low-health threat overrides a detour;
+    // do not suppress successful deliveries while a clearing task is active.
+    const bool detouring = round < bank_detour_until &&
+        altar_distance.get(position) > 2 &&
+        me.health() >= me.max_health() * .5f &&
+        !carrier_threat;
+#else
+    const bool detouring = false;
+#endif
+    const bool should_bank = !detouring && bag && (bag>=static_cast<unsigned>(threshold)
         || altar_distance.get(position)<=2 || me.health()<me.max_health()*.50f
         || (carrier_threat && bag>=6));
     if (should_bank && bank()) return;

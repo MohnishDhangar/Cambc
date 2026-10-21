@@ -31,6 +31,9 @@ class Bot {
     int slot = 0;
     int target = -1;
     int stalled = 0;
+    unsigned bank_detour_until = 0;
+    unsigned last_banked_gems = 0;
+    int bank_attempt_stall = 0;
     cambc::vec2 previous{-1, -1};
     unsigned round = 0;
     unsigned last_shop_round = 0;
