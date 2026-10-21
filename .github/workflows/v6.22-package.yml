@@ -1,0 +1,68 @@
+name: Package v6.22 CAMBC field-test ZIP
+on:
+  push:
+    branches: [field/v6.22-coordinated-raid]
+    paths:
+      - '.github/workflows/v6.22-package.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up CAMBC 3.0.1
+        run: |
+          python3 -m pip install --user 'cambc==3.0.1'
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Compile candidate for Linux/WASM
+        env:
+          CAMBC_NO_UPDATE_CHECK: 1
+        run: |
+          cambc --version
+          CAMBC_OFFLINE=1 cambc init --yes .
+          cambc build Bot6 --release
+      - name: Package six sources at archive root src/
+        run: |
+          python3 - <<'PY'
+          import pathlib,zipfile,hashlib,json,subprocess
+          revision="aba4cd4afe270d9da94ad5af5736b767739d8447"
+          names=["bot.cpp","bot.h","draft.cpp","draft.h","main.cpp","random.h"]
+          path=pathlib.Path("releases/Bot6-v6.22-coordinated-raid.zip")
+          path.parent.mkdir(parents=True,exist_ok=True)
+          digest={}
+          with zipfile.ZipFile(path,"w",zipfile.ZIP_DEFLATED) as z:
+              for name in names:
+                  data=subprocess.check_output(["git","show",revision+":bots/Bot6/src/"+name])
+                  z.writestr("src/"+name,data)
+                  digest["src/"+name]=hashlib.sha256(data).hexdigest()
+          with zipfile.ZipFile(path) as z:
+              assert sorted(z.namelist())==sorted("src/"+n for n in names)
+              assert z.testzip() is None
+              for name in names:
+                  assert z.read("src/"+name)==subprocess.check_output(["git","show",revision+":bots/Bot6/src/"+name])
+          manifest={"engine":"CAMBC 3.0.1","source_commit":revision,"archive_sha256":hashlib.sha256(path.read_bytes()).hexdigest(),"source_files_sha256":digest,"verification":"compile release and validate src/ entry list"}
+          pathlib.Path("releases/Bot6-v6.22-manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
+          print(manifest["archive_sha256"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Bot6-v6.22-CAMBC-zip
+          path: |
+            releases/Bot6-v6.22-coordinated-raid.zip
+            releases/Bot6-v6.22-manifest.json
+          retention-days: 90
+      - name: Publish pinned source archives
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add releases/
+          if ! git diff --cached --quiet; then
+            git commit -m 'release: verified v6.22 coordinated-raid field-test source ZIP'
+            git fetch origin field/v6.22-coordinated-raid
+            git rebase origin/field/v6.22-coordinated-raid
+            git push origin HEAD:field/v6.22-coordinated-raid
+          fi
