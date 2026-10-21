@@ -1,0 +1,59 @@
+name: Package independently pinned BotElite upload archives
+on:
+  push:
+    branches: [field/elite-bot-experiment-kits]
+    paths: ['.github/workflows/elite-upload-kits.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify and package six C++ sources under src/
+        run: |
+          python3 - <<'PY'
+          import zipfile, pathlib, subprocess, hashlib, json
+          dest=pathlib.Path("releases/elite"); dest.mkdir(parents=True,exist_ok=True)
+          names=("bot.cpp","bot.h","draft.cpp","draft.h","main.cpp","random.h")
+          revisions={
+            "v6.8-pinned":("0ddd5338b94db824f9f53261a17f020490b7017f","bots/Bot6/src"),
+            "elite-v3-vision-experimental":("3a409aa2ece9c7e2da7b386c291674a8acfa042c","bots/BotElite/src"),
+            "elite-v5-fallback-experimental":("d19380133235cec2e02a05ce8c6a3209dbf7b82e","bots/BotElite/src"),
+          }
+          report={}
+          for name,(revision,prefix) in revisions.items():
+            path=dest/("Bot-"+name+".zip")
+            h={}
+            with zipfile.ZipFile(path,"w",zipfile.ZIP_DEFLATED) as out:
+              for basename in names:
+                source=subprocess.check_output(["git","show",revision+":"+prefix+"/"+basename])
+                entry="src/"+basename
+                out.writestr(entry,source)
+                h[entry]=hashlib.sha256(source).hexdigest()
+            with zipfile.ZipFile(path) as archive:
+              assert sorted(archive.namelist())==sorted("src/"+x for x in names)
+              assert archive.testzip() is None
+            report[name]={"source_commit":revision,"archive_sha256":hashlib.sha256(path.read_bytes()).hexdigest(),"files":h}
+          (dest/"manifest.json").write_text(json.dumps(report,indent=2)+"\n")
+          print(json.dumps({k:v["archive_sha256"] for k,v in report.items()},indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pinned-CAMBC-elite-source-upload-kits
+          path: releases/elite/
+          retention-days: 90
+      - name: Commit reproducible archives
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add releases/elite/
+          if ! git diff --cached --quiet; then
+            git commit -m 'release: verify elite experiment src-layout upload archives'
+            git fetch origin field/elite-bot-experiment-kits
+            git rebase origin/field/elite-bot-experiment-kits
+            git push origin HEAD:field/elite-bot-experiment-kits
+          fi
