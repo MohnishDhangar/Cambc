@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_ALTAR_ENTRANCE_CLEAR 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -448,6 +449,47 @@ bool Bot::bank() {
         }
         goals |= around(p, constants::submit_gems_range);
     }
+#if V6_ALTAR_ENTRANCE_CLEAR
+    // On some objective maps, the altar has only one terrain-legal
+    // approach and a monster occupies it. Filtering all occupied goals
+    // makes every carrying champion bank-loop forever. Identify that
+    // bottleneck from static camp-spawn geometry and clear it instead.
+    if (fuel_remaining() > 28000) {
+        const auto walkable_goals = goals & ~terrain;
+        const auto free_goals = walkable_goals & ~occupied();
+        if (free_goals.is_empty() && !walkable_goals.is_empty()) {
+            std::optional<camp> blocker;
+            vec2 bottleneck{-1, -1};
+            float best = 1e9f;
+            for (auto q : walkable_goals.positions()) {
+                for (const auto& g : groups) {
+                    if (!g.tiles.is_set(q)) continue;
+                    for (const auto& c : g.camp) {
+                        if (c.spawn_position() != q) continue;
+                        const float s = dist(me.position(), q);
+                        if (s < best) { best = s; blocker = c; bottleneck = q; }
+                    }
+                }
+            }
+            if (blocker) {
+                action = "bank clear camp entrance";
+                if (blocker->is_visible() && blocker->health() > 0)
+                    if (fight(*blocker, false)) return true;
+                // The ordinary move is still subject to the true, occupied
+                // movement mask. A potential ranged approach is enough to
+                // begin clearing the camp, even when the altar itself cannot
+                // yet be reached.
+                int range = std::max(1, me.attack_range());
+                if (caster_build) range = std::max(range, 4);
+                auto firing = around(bottleneck, range) & ~terrain & ~occupied();
+                if (navigate(firing, false, true)) return true;
+                // Let the remaining turn be used for productive economy
+                // rather than reserving it for a known-impossible bank move.
+                return false;
+            }
+        }
+    }
+#endif
     navigate(goals, me.health() < me.max_health() * .5f);
     return true;
 }
