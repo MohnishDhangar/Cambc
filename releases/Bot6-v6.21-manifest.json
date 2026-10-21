@@ -1,0 +1,14 @@
+{
+  "engine": "CAMBC 3.0.1",
+  "source_commit": "91ac83fb14a76c52d8eed6e0dfaf71a7ce97c911",
+  "archive_sha256": "7f4b3abd84eafe05e29bcdb2cb6a7ea80a93785a267eddd8a11e3aa95e81b75f",
+  "source_files_sha256": {
+    "src/bot.cpp": "e941217e9de5042d7ead770751fde126953820b9b384c3da548d48ead62e10b1",
+    "src/bot.h": "9c3d887ea3a5a8fc23dd20d962c37ddc34db3ac2d6a5ee788876ae682bcdd159",
+    "src/draft.cpp": "dd09df01a9a33883f589face4ff556152d64fb463855bea9e7e6509a45f12cdb",
+    "src/draft.h": "15ddeaeb4ab39f6e3e80647fad56de9c0da7fc728d4c24ca83475060703a7bfd",
+    "src/main.cpp": "5cf147c942f6404849e5f5dbd1516e9e651a5c08be91102ed27c500e0571c559",
+    "src/random.h": "5ae547e5a1686c12e00be206016fef798691db1da563adb3ed83fce355284910"
+  },
+  "verification": "compile release and validate src/ entry list"
+}
