@@ -1,6 +1,7 @@
 #define V6_MACRO_MODE 1
 #define V6_BANK_THRESHOLD 0
 #define V6_EARLY_EXIT_PATH 1
+#define V6_SUPPORTED_COMBAT 1
 #include "bot.h"
 #include <algorithm>
 #include <cmath>
@@ -405,6 +406,24 @@ bool Bot::defend() {
         if (d > 4) continue;
         // Fight nearby threats and secure exposed carriers, without chasing.
         float value = 2000.f / (c.health() + 100) + c.gem_count() * .05f - d * .1f;
+#if V6_SUPPORTED_COMBAT
+        // Use visible, *reachable* nearby help, not invisible ally locations.
+        // Proactively avoid an unfavorable skirmish when it has no carrier
+        // denial reward; otherwise focus a common low-health enemy.
+        int nearby_allies = 1, nearby_enemies = 0;
+        for (const auto& ally : allies)
+            if (ally != me && ally.is_visible() && ally.is_alive() &&
+                dist(ally.position(), c.position()) <= 4) ++nearby_allies;
+        for (const auto& other : visible_enemies)
+            if (other.is_visible() && other.is_alive() &&
+                dist(other.position(), c.position()) <= 4) ++nearby_enemies;
+        if (nearby_allies < nearby_enemies &&
+            c.gem_count() < 10 && c.health() > me.strength() * 1.7f) continue;
+        if (me.health() < me.max_health() * .60f &&
+            nearby_allies <= nearby_enemies && c.gem_count() == 0) continue;
+        value += (nearby_allies - nearby_enemies) * .25f;
+        value += (me.strength() * (nearby_allies + 1)) / (c.health() + 120.f);
+#endif
         if (value > score) { score = value; victim = c; }
     }
     if (!victim) return false;
